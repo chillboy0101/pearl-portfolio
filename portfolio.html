@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Work | Pearl Amissah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a4365;
+            --secondary: #c05621;
+            --light: #f7fafc;
+            --dark: #1a202c;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            color: var(--primary);
+            background: transparent;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .portfolio-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-header p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .portfolio-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-info {
+            padding: 20px;
+        }
+        
+        .portfolio-info h3 {
+            margin: 0 0 10px;
+            color: var(--primary);
+        }
+        
+        .portfolio-info p {
+            margin: 0 0 15px;
+            color: var(--dark);
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(42, 67, 101, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pearl Amissah</a>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </header>
+    
+    <main>
+        <div class="portfolio-container">
+            <div class="portfolio-header">
+                <h1>My Creative Portfolio</h1>
+                <p>A showcase of my professional projects and creative works across various disciplines.</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Adinkra Brand Identity">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Adinkra Cultural Branding</h3>
+                        <p>Complete brand identity for a Ghanaian cultural center, incorporating traditional Adinkra symbols with modern design principles.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Brand Identity</span>
+                            <span class="tag">Graphic Design</span>
+                            <span class="tag">Cultural Heritage</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1636&q=80" alt="E-commerce Website">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>AfroChic E-commerce Platform</h3>
+                        <p>Designed and developed a responsive e-commerce website for an African fashion retailer, increasing conversions by 40%.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Web Design</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">Development</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Corporate Photography">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Corporate Headshot Series</h3>
+                        <p>Portrait photography series for executives at a pan-African financial services company.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Photography</span>
+                            <span class="tag">Portraiture</span>
+                            <span class="tag">Lighting</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Social Media Campaign">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>#GhanaInnovates Campaign</h3>
+                        <p>Social media strategy and content creation for a tech startup accelerator highlighting Ghanaian innovation.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Social Media</span>
+                            <span class="tag">Content Creation</span>
+                            <span class="tag">Digital Marketing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Mobile App Design">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>FarmConnect Mobile App</h3>
+                        <p>UI/UX design for an agricultural marketplace app connecting smallholder farmers with buyers.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Mobile Design</span>
+                            <span class="tag">User Experience</span>
+                            <span class="tag">Prototyping</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Editorial Design">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Afropolitan Magazine Layouts</h3>
+                        <p>Editorial design for a quarterly print magazine celebrating contemporary African culture.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Print Design</span>
+                            <span class="tag">Typography</span>
+                            <span class="tag">Layout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Pearl Amissah. All rights reserved.</p>
+        <div style="margin-top: 15px;">
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

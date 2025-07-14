@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Pearl Amissah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a4365;
+            --secondary: #c05621;
+            --light: #f7fafc;
+            --dark: #1a202c;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .services-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .services-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .services-header p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin: 0 0 15px;
+            color: var(--primary);
+        }
+        
+        .service-card p {
+            margin: 0 0 20px;
+            color: var(--dark);
+        }
+        
+        .service-features {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .service-features li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .service-features li::before {
+            content: "✓";
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(42, 67, 101, 0.05) 0%, rgba(192, 86, 33, 0.05) 100%);
+            border-radius: 10px;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            color: white;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background-size: 200% auto;
+            box-shadow: 0 4px 15px rgba(42, 67, 101, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.4);
+        }
+        
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Pearl Amissah</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="portfolio.html">Work</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="services-container">
+            <div class="services-header">
+                <h1>My Services</h1>
+                <p>Comprehensive creative solutions tailored to your brand's unique needs and vision.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Brand Identity Design</h3>
+                    <p>Create a memorable visual identity that communicates your brand's essence and values.</p>
+                    <ul class="service-features">
+                        <li>Logo design & brand marks</li>
+                        <li>Color palette development</li>
+                        <li>Typography systems</li>
+                        <li>Brand style guides</li>
+                        <li>Stationery design</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Design & Development</h3>
+                    <p>Beautiful, functional websites that engage visitors and drive conversions.</p>
+                    <ul class="service-features">
+                        <li>Responsive website design</li>
+                        <li>UI/UX optimization</li>
+                        <li>Front-end development</li>
+                        <li>E-commerce solutions</li>
+                        <li>Website maintenance</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Professional Photography</h3>
+                    <p>High-quality visual content that tells your brand's story authentically.</p>
+                    <ul class="service-features">
+                        <li>Product photography</li>
+                        <li>Corporate headshots</li>
+                        <li>Event coverage</li>
+                        <li>Lifestyle photography</li>
+                        <li>Photo editing & retouching</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Digital Marketing</h3>
+                    <p>Strategic campaigns that increase visibility and engagement.</p>
+                    <ul class="service-features">
+                        <li>Social media strategy</li>
+                        <li>Content creation</li>
+                        <li>Email marketing</li>
+                        <li>Influencer collaborations</li>
+                        <li>Analytics & reporting</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Intuitive digital experiences that delight users and meet business goals.</p>
+                    <ul class="service-features">
+                        <li>User research & personas</li>
+                        <li>Wireframing & prototyping</li>
+                        <li>Mobile app design</li>
+                        <li>User testing</li>
+                        <li>Design systems</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Print & Editorial Design</h3>
+                    <p>Tangible design solutions that make an impact in physical spaces.</p>
+                    <ul class="service-features">
+                        <li>Brochures & catalogs</li>
+                        <li>Magazine layouts</li>
+                        <li>Packaging design</li>
+                        <li>Business cards</li>
+                        <li>Annual reports</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2>Ready to bring your vision to life?</h2>
+                <p>Let's discuss how I can help with your next project.</p>
+                <a href="contact.html" class="cta-btn">Get in Touch</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Pearl Amissah. All rights reserved.</p>
+        <div style="margin-top: 15px;">
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
