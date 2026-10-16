@@ -111,8 +111,9 @@
         }
         
         .portfolio-image {
-            height: 250px;
+            aspect-ratio: 1200 / 693;
             overflow: hidden;
+            border-bottom: 1px solid rgba(42, 67, 101, 0.08);
         }
         
         .portfolio-image img {
@@ -219,18 +220,18 @@
         <div class="portfolio-container">
             <div class="portfolio-header">
                 <h1>My Work</h1>
-                <p>Systems, tools and websites I have built for the Ghana Revenue Authority and for clients across Accra. Every image is from the real project.</p>
+                <p>Systems, tools and websites I have built for the Ghana Revenue Authority and for clients across Accra. Every image is a screenshot of the real, working project.</p>
             </div>
             
             <div class="portfolio-grid">
                 <!-- Project 1 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/latewatch.jpg" alt="LateWatch" loading="lazy">
+                        <img src="images/latewatch.jpg" alt="LateWatch website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>LateWatch</h3>
-                        <p>Attendance and lateness tracking system with automated reports, used daily by the Online &amp; Production Unit at the Ghana Revenue Authority since May 2026. Staff check in from verified phones; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
+                        <p>Attendance and lateness tracking system with automated reports, used daily by the Online &amp; Production Unit at the Ghana Revenue Authority since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
                         <div class="portfolio-tags">
                             <span class="tag">Next.js</span>
                             <span class="tag">TypeScript</span>
@@ -247,20 +248,19 @@
                 <!-- Project 2 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/gra-calculators.jpg" alt="GRA Tax Calculators" loading="lazy">
+                        <img src="images/gra-calculators.jpg" alt="GRA Tax Calculators website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>GRA Tax Calculators</h3>
-                        <p>VAT, PIT and PAYE calculators on the official Ghana Revenue Authority website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
+                        <p>VAT, PIT and PAYE calculators live on the official Ghana Revenue Authority website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
                         <div class="portfolio-tags">
                             <span class="tag">WordPress</span>
                             <span class="tag">JavaScript</span>
                             <span class="tag">gra.gov.gh</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">VAT <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/gra-pit-calculator" target="_blank" rel="noopener">PIT <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/gra-paye-calculator" target="_blank" rel="noopener">PAYE <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Use it on gra.gov.gh <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                 </div>
@@ -268,7 +268,48 @@
                 <!-- Project 3 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/jovel.jpg" alt="Jovel Pharmacy" loading="lazy">
+                        <img src="images/cpa-calendar.jpg" alt="CPA Event Calendar website screenshot" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>CPA Event Calendar</h3>
+                        <p>Event planning calendar for the Communication and Public Affairs department at GRA, with role-based sign-in, event status tracking and private storage for event evidence.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">Ghana Revenue Authority</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://cpa-event-calendar-gra.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/cpa-event-calendar" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/op-awards.jpg" alt="O&P Awards website screenshot" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>O&amp;P Awards</h3>
+                        <p>Nomination and anonymous voting system for the 2026 Online &amp; Production staff awards, with phase-gated nominations and ballots, vote receipts, runoffs and certified results.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">Clerk</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">Ghana Revenue Authority</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://op-awards.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/op-awards" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/jovel.jpg" alt="Jovel Pharmacy website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>Jovel Pharmacy</h3>
@@ -286,10 +327,10 @@
                     </div>
                 </div>
                 
-                <!-- Project 4 -->
+                <!-- Project 6 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/rikonim.jpg" alt="Rikonim Enterprise" loading="lazy">
+                        <img src="images/rikonim.jpg" alt="Rikonim Enterprise website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>Rikonim Enterprise</h3>
@@ -306,10 +347,10 @@
                     </div>
                 </div>
                 
-                <!-- Project 5 -->
+                <!-- Project 7 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/kekeli.jpg" alt="Kekeli Studios" loading="lazy">
+                        <img src="images/kekeli.jpg" alt="Kekeli Studios website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>Kekeli Studios</h3>
@@ -320,20 +361,20 @@
                             <span class="tag">Tailwind CSS</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://kekelistudios.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://kekelis-studio.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
                             <a href="https://github.com/chillboy0101/kekelis-studio" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Project 6 -->
+                <!-- Project 8 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/rfid-ims.jpg" alt="RFID-IMS" loading="lazy">
+                        <img src="images/rfid-ims.jpg" alt="RFID-IMS website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>RFID-IMS</h3>
-                        <p>RFID Inventory Management System commissioned by UPSA students: RFID tag assignment, pickup authorisation and token-verified item exit, with a mobile app for stock, orders and vendors.</p>
+                        <p>RFID Inventory Management System commissioned by UPSA students and running as VDL Fulfilment Ops: RFID tag assignment, pickup authorisation and token-verified item exit, with a mobile app for stock, orders and vendors.</p>
                         <div class="portfolio-tags">
                             <span class="tag">TypeScript</span>
                             <span class="tag">React Native</span>
@@ -347,10 +388,10 @@
                     </div>
                 </div>
                 
-                <!-- Project 7 -->
+                <!-- Project 9 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/samrej.jpg" alt="SAM-ReJ Company Limited" loading="lazy">
+                        <img src="images/samrej.jpg" alt="SAM-ReJ Company Limited website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>SAM-ReJ Company Limited</h3>
@@ -367,10 +408,31 @@
                     </div>
                 </div>
                 
-                <!-- Project 8 -->
+                <!-- Project 10 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/inventorypro.jpg" alt="InventoryPro Cloud" loading="lazy">
+                        <img src="images/edinam.jpg" alt="Edinam Hospital website screenshot" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Edinam Hospital</h3>
+                        <p>Hospital website with online appointment booking, an FAQ, a 3D virtual tour, a pharmacy catalogue with cart, and a chat assistant that hands over to a doctor.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Three.js</span>
+                            <span class="tag">Healthcare</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://edinam-hospital.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/Edinam-Hospital" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 11 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/inventorypro.jpg" alt="InventoryPro Cloud website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>InventoryPro Cloud</h3>
@@ -386,10 +448,10 @@
                     </div>
                 </div>
                 
-                <!-- Project 9 -->
+                <!-- Project 12 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="images/ewe.jpg" alt="Ewe Culture" loading="lazy">
+                        <img src="images/ewe.jpg" alt="Ewe Culture website screenshot" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>Ewe Culture</h3>
