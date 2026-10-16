@@ -47,4 +47,9 @@ Deployed on Vercel - [Coming Soon]
 
 ---
 
-© 2023 Pearl Amissah. All rights reserved. 
+© 2023 Pearl Amissah. All rights reserved.
+
+## Carl Christian Quist portfolio
+
+A second portfolio, for Carl Christian Quist, lives in [`myportfolio/`](myportfolio/). It is served
+at `/myportfolio/` on this site. See [`myportfolio/README.md`](myportfolio/README.md) for details.
