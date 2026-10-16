@@ -2,210 +2,300 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carl Christian Quist | IT Officer &amp; Software Developer</title>
-    <meta name="description" content="Carl Christian Quist is an IT officer and software developer in Accra. He builds systems staff use every day at the Ghana Revenue Authority and websites for businesses across Ghana.">
-    <meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script>try{var t=localStorage.getItem("cq-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+    <meta name="description" content="Carl Christian Quist is an IT Officer and Software Developer in Accra, Ghana, building and supporting systems at the Ghana Revenue Authority.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a4365;
+            --secondary: #c05621;
+            --light: #f7fafc;
+            --dark: #1a202c;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation Buttons */
+        .nav-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 20px;
+            color: white;
+            background: rgba(42, 67, 101, 0.8);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .nav-btn.active {
+            background: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            top: -100px;
+            right: -100px;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -50px;
+            left: -50px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .hero-content {
+            padding: 40px 0;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin: 0 0 20px;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        /* Add round image style */
+        .round-image {
+            border-radius: 50% !important;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+        
+        /* View My Work Button */
+        .btn-work {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            color: white;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background-size: 200% auto;
+            box-shadow: 0 4px 15px rgba(42, 67, 101, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .btn-work:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.4);
+        }
+        
+        .btn-work:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-work::after {
+            content: '→';
+            margin-left: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-work:hover::after {
+            margin-left: 15px;
+        }
+        
+        /* Get In Touch Button */
+        .btn-contact {
+            display: inline-block;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            color: var(--primary);
+            background: transparent;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-contact:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.2);
+        }
+        
+        .btn-contact:active {
+            transform: translateY(1px);
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            color: var(--secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-image {
+                order: -1;
+                margin-bottom: 40px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .btn-work, .btn-contact {
+                display: block;
+                width: 100%;
+                max-width: 250px;
+                margin: 0 auto 15px;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                top: 15px;
+                left: 15px;
+                right: 15px;
+                justify-content: center;
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="services.html" class="nav-btn">Services</a>
+       
+    </div>
 
-    <header class="site-header">
-        <div class="wrap header-inner">
-            <a href="index.html" class="brand" aria-label="Carl Christian Quist, home">
-                <span class="brand-mark" aria-hidden="true">CQ</span>
-                <span class="brand-name">Carl Quist</span>
-            </a>
-            <nav class="site-nav" aria-label="Main">
-                <a href="index.html" aria-current="page">Home</a>
-                <a href="projects.html">Projects</a>
-                <a href="resume.html">Resume</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-            <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch between light and dark theme">
-                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-            </button>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Carl Christian Quist</h1>
+                <p class="tagline">IT Officer | Software Developer</p>
+                <p>I am an IT Management graduate (UPSA, 2025) and AI Software Engineer at the Ghana Revenue Authority, where I build and support systems staff rely on every day, including LateWatch and the VAT, PIT and PAYE calculators on the GRA website. I also build websites and web systems for businesses across Accra.</p>
+                <div class="hero-buttons">
+                    <a href="portfolio.html" class="btn-work">View My Work</a>
+                    <a href="contact.html" class="btn-contact">Get In Touch</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="profile.svg" alt="Carl Christian Quist" class="round-image">
+            </div>
         </div>
-    </header>
-
-    <main id="main">
-        <section class="hero">
-            <div class="wrap hero-grid">
-                <div class="hero-copy">
-                    <p class="eyebrow">IT Officer · Software Developer · Accra</p>
-                    <h1>Carl Christian <span class="surname">Quist</span></h1>
-                    <p class="lede">I build and support the systems staff rely on every day at the Ghana Revenue Authority, from LateWatch attendance tracking to the VAT, PIT and PAYE calculators on gra.gov.gh. I also build websites for businesses in Accra.</p>
-                    <div class="actions">
-                        <a class="btn btn-primary" href="projects.html">See my projects</a>
-                        <a class="btn btn-ghost" href="resume.html">Read my resume</a>
-                    </div>
-                    <ul class="hero-facts">
-                        <li><span>Now</span> AI Software Engineer, Ghana Revenue Authority</li>
-                        <li><span>Studied</span> BSc Information Technology Management, UPSA (2025)</li>
-                        <li><span>Stack</span> TypeScript, Next.js, React, PostgreSQL</li>
-                    </ul>
-                </div>
-
-                <figure class="patch" aria-labelledby="patch-caption">
-                    <div class="patch-bar">
-                        <span>alsa-devel · Aug 2026</span>
-                        <span class="tag-applied">Applied</span>
-                    </div>
-<pre class="patch-body"><code><span class="k">Subject:</span> [PATCH] ALSA: hda/realtek: Enable mute LED on HP Laptop 15-dy0xxx
-
-<span class="d">The LED is controlled by COEF index 0x07, bit 0.
-This was verified on the hardware with hda-verb.</span>
-
-<span class="k">Signed-off-by:</span> Carl Quist</code></pre>
-                    <blockquote class="patch-reply">
-                        <p>Applied now.</p>
-                        <cite>Takashi Iwai, Linux sound subsystem maintainer</cite>
-                    </blockquote>
-                    <figcaption id="patch-caption">A fix I wrote for the Linux kernel's sound driver, accepted upstream.</figcaption>
-                </figure>
-            </div>
-        </section>
-
-        <section class="section" aria-labelledby="focus-title">
-            <div class="wrap">
-                <div class="section-head">
-                    <p class="eyebrow">What I do</p>
-                    <h2 id="focus-title">Reliable IT for the people who use it every day</h2>
-                </div>
-                <div class="focus-grid">
-                    <article class="focus">
-                        <p class="focus-where">Ghana Revenue Authority</p>
-                        <h3>Internal systems</h3>
-                        <p>I turn manual office routines into web systems. LateWatch has run attendance and lateness tracking for the Online &amp; Production Unit since May 2026, and an Equipment Request &amp; Approval system is in development.</p>
-                    </article>
-                    <article class="focus">
-                        <p class="focus-where">gra.gov.gh and clients</p>
-                        <h3>Websites</h3>
-                        <p>I work with the GRA Webmaster to manage and update the GRA website, and I build sites and web systems for businesses such as Rikonim Enterprise, Jovel Pharmacy and Kekeli Studios.</p>
-                    </article>
-                    <article class="focus">
-                        <p class="focus-where">Desks, cables and drivers</p>
-                        <h3>IT support</h3>
-                        <p>I support staff directly, from Excel data work to terminating RJ45 network cables. On Linux I go further down the stack, with a sound-driver fix in the kernel and a Wi-Fi hotspot plugin for Omarchy.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" aria-labelledby="work-title">
-            <div class="wrap">
-                <div class="section-head">
-                    <p class="eyebrow">Selected work</p>
-                    <h2 id="work-title">Systems in daily use</h2>
-                    <p>Three projects that show the range: an internal system, public tax tools and a Linux utility.</p>
-                </div>
-
-                <div class="project-grid">
-                    <article class="project">
-                        <div class="project-meta"><span>GRA · Internal system</span><span class="badge">In daily use</span></div>
-                        <h3>LateWatch</h3>
-                        <p>Attendance and lateness management for the Online &amp; Production Unit. Staff check in from a phone that is verified by device, location and network. Admins handle permissions, leave, penalties, payments and Excel reports, and every change lands in an audit trail.</p>
-                        <ul class="stack">
-                            <li>Next.js</li><li>TypeScript</li><li>PostgreSQL</li><li>Drizzle</li><li>Clerk</li>
-                        </ul>
-                        <div class="project-links">
-                            <a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-                            <a href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-                        </div>
-                    </article>
-
-                    <article class="project">
-                        <div class="project-meta"><span>GRA · gra.gov.gh</span><span class="badge">Public</span></div>
-                        <h3>GRA tax calculators</h3>
-                        <p>VAT, PIT and PAYE calculators on the official GRA website, built as WordPress plugins. They apply the 2026 rates and bands, show the tax on each band, and run entirely in the visitor's browser, so no income figures are stored.</p>
-                        <ul class="stack">
-                            <li>WordPress</li><li>JavaScript</li><li>PHP</li>
-                        </ul>
-                        <div class="project-links">
-                            <a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">VAT</a>
-                            <a href="https://github.com/chillboy0101/gra-pit-calculator" target="_blank" rel="noopener">PIT</a>
-                            <a href="https://github.com/chillboy0101/gra-paye-calculator" target="_blank" rel="noopener">PAYE</a>
-                        </div>
-                    </article>
-
-                    <article class="project">
-                        <div class="project-meta"><span>Linux · Open source</span><span class="badge">MIT</span></div>
-                        <h3>Omarchy Hotspot</h3>
-                        <p>A one-click Wi-Fi hotspot for the Omarchy desktop bar that keeps the laptop's own Wi-Fi connected. It shows a QR code to join, lists and blocks clients, and keeps privileged actions behind a narrow polkit rule.</p>
-                        <ul class="stack">
-                            <li>QML</li><li>Shell</li><li>hostapd</li><li>dnsmasq</li><li>iptables</li>
-                        </ul>
-                        <div class="project-links">
-                            <a href="https://github.com/chillboy0101/omarchy-hotspot" target="_blank" rel="noopener">Code <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-                        </div>
-                    </article>
-                </div>
-
-                <p class="see-all"><a class="btn btn-ghost" href="projects.html">See all 16 projects</a></p>
-            </div>
-        </section>
-
-        <section class="section" aria-labelledby="tools-title">
-            <div class="wrap">
-                <div class="section-head">
-                    <p class="eyebrow">Toolbox</p>
-                    <h2 id="tools-title">Skills</h2>
-                </div>
-                <div class="toolbox">
-                    <div>
-                        <h3>IT support</h3>
-                        <ul class="stack">
-                            <li>End-user support</li><li>Microsoft Excel</li><li>Microsoft Office</li><li>Website management</li><li>RJ45 cabling</li><li>Linux</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Front end</h3>
-                        <ul class="stack">
-                            <li>TypeScript</li><li>JavaScript</li><li>React</li><li>Next.js</li><li>HTML/CSS</li><li>Tailwind CSS</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Data &amp; back end</h3>
-                        <ul class="stack">
-                            <li>PostgreSQL</li><li>Drizzle ORM</li><li>MongoDB</li><li>Supabase</li><li>Sanity CMS</li><li>WordPress</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Workflow</h3>
-                        <ul class="stack">
-                            <li>Git/GitHub</li><li>Vercel</li><li>AI-assisted development</li><li>Automated testing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta" aria-labelledby="cta-title">
-            <div class="wrap">
-                <h2 id="cta-title">Need a website or a system for work your office still does by hand?</h2>
-                <a class="btn" href="contact.html">Get in touch</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="wrap">
-            <p>&copy; 2026 Carl Christian Quist · Accra, Ghana</p>
-            <nav aria-label="Elsewhere">
-                <a href="https://github.com/chillboy0101" target="_blank" rel="noopener">GitHub</a>
-                <a href="mailto:equalizerjr@gmail.com">Email</a>
-                <a href="resume.html">Resume</a>
-            </nav>
-        </div>
-    </footer>
-
-    <script src="assets/js/main.js"></script>
+    </section>
 </body>
 </html>

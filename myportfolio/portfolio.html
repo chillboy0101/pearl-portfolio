@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Work | Carl Christian Quist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a4365;
+            --secondary: #c05621;
+            --light: #f7fafc;
+            --dark: #1a202c;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            color: var(--primary);
+            background: transparent;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .portfolio-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-header p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .portfolio-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-info {
+            padding: 20px;
+        }
+        
+        .portfolio-info h3 {
+            margin: 0 0 10px;
+            color: var(--primary);
+        }
+        
+        .portfolio-info p {
+            margin: 0 0 15px;
+            color: var(--dark);
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(42, 67, 101, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .project-links a {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        
+        .project-links a:hover {
+            color: var(--primary);
+        }
+        
+        .project-links i {
+            font-size: 0.75rem;
+        }
+        
+        .more-work {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 80px;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Carl Quist</a>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </header>
+    
+    <main>
+        <div class="portfolio-container">
+            <div class="portfolio-header">
+                <h1>My Work</h1>
+                <p>Systems, tools and websites I have built for the Ghana Revenue Authority and for clients across Accra.</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="LateWatch">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>LateWatch</h3>
+                        <p>Attendance and lateness tracking system with automated reports, used daily by the Online &amp; Production Unit at the Ghana Revenue Authority since May 2026.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="GRA Tax Calculators">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>GRA Tax Calculators</h3>
+                        <p>VAT, PIT and PAYE calculators on the official Ghana Revenue Authority website, applying the 2026 rates and bands for taxpayers.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">WordPress</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Public Service</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">VAT <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/gra-pit-calculator" target="_blank" rel="noopener">PIT <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/gra-paye-calculator" target="_blank" rel="noopener">PAYE <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1636&q=80" alt="Rikonim Enterprise">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Rikonim Enterprise</h3>
+                        <p>Company website with a content management system, so the client's team can update every page and preview changes before publishing.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">Sanity CMS</span>
+                            <span class="tag">Web Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://rikonim.com" target="_blank" rel="noopener">rikonim.com <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/rikonim-enterprise" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Jovel Pharmacy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Jovel Pharmacy</h3>
+                        <p>Website for Jovel Pharmacy, giving customers an online presence for the business and its services.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Web Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://jovelpharmacy.com" target="_blank" rel="noopener">jovelpharmacy.com <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/jovel-pharmacy" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="RFID-IMS">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>RFID-IMS</h3>
+                        <p>RFID Inventory Management System built as commissioned work for students at the University of Professional Studies, Accra.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">Inventory</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://rfid-ims.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/RFID-IMS" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Kekeli Studios">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Kekeli Studios</h3>
+                        <p>Website for Kekeli Studios, delivered as freelance work and deployed on Vercel.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Vercel</span>
+                            <span class="tag">Web Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://kekelistudios.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/kekelis-studio" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="more-work">
+                <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" class="back-btn"><i class="fab fa-github"></i> See more projects on GitHub</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2026 Carl Christian Quist. All rights reserved.</p>
+        <div style="margin-top: 15px;">
+            <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub" style="color: white; margin: 0 10px;"><i class="fab fa-github"></i></a>
+            <a href="mailto:equalizerjr@gmail.com" aria-label="Email" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+233257679050" aria-label="Phone" style="color: white; margin: 0 10px;"><i class="fas fa-phone"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

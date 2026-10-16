@@ -51,5 +51,7 @@ Deployed on Vercel - [Coming Soon]
 
 ## Carl Christian Quist portfolio
 
-A second portfolio, for Carl Christian Quist, lives in [`myportfolio/`](myportfolio/). It is served
-at `/myportfolio/` on this site. See [`myportfolio/README.md`](myportfolio/README.md) for details.
+[`myportfolio/`](myportfolio/) is a copy of this site with Carl Christian Quist's details
+(IT Officer | Software Developer). It is served at `/myportfolio/` and has the same pages:
+Home, Services, Work and Contact. To use a photo, add it to `myportfolio/` and change the
+`profile.svg` image path in `myportfolio/index.html`.
