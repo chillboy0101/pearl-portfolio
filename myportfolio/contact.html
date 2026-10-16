@@ -4,267 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Carl Christian Quist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2a4365;
-            --secondary: #c05621;
-            --light: #f7fafc;
-            --dark: #1a202c;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--dark);
-            line-height: 1.6;
-            background-color: var(--light);
-        }
-        
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        
-        .back-btn {
-            display: inline-block;
-            padding: 8px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            color: var(--primary);
-            background: transparent;
-            border: 2px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-        
-        .back-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .contact-container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        
-        .contact-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .contact-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .contact-header p {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .contact-form {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            color: white;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            background-size: 200% auto;
-            box-shadow: 0 4px 15px rgba(42, 67, 101, 0.3);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .submit-btn:hover {
-            background-position: right center;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.4);
-        }
-        
-        .contact-info {
-            margin-top: 50px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        
-        .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .info-card i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .info-card h3 {
-            margin: 0 0 10px;
-            color: var(--primary);
-        }
-        
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 80px;
-        }
-        
-        @media (max-width: 768px) {
-            .contact-header h1 {
-                font-size: 2rem;
-            }
-            
-            .contact-form {
-                padding: 25px;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Contact Carl Christian Quist, IT Officer and Software Developer in Accra, about websites, web systems, IT support or job opportunities.">
+    <meta name="theme-color" content="#13233a">
+    <link rel="icon" href="profile.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo">Carl Quist</a>
-            <a href="index.html" class="back-btn">← Back to Home</a>
+    <header class="site-nav">
+        <div class="container">
+            <a href="index.html" class="brand" aria-label="Carl Christian Quist, home"><span class="brand-mark">CQ</span>Carl Quist</a>
+            <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav class="nav-links" aria-label="Main">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="portfolio.html">Work</a>
+                <a href="contributions.html">Contributions</a>
+                <a href="contact.html" class="nav-cta" aria-current="page">Hire Me</a>
+            </nav>
         </div>
     </header>
-    
-    <main>
-        <div class="contact-container">
-            <div class="contact-header">
-                <h1>Get In Touch</h1>
-                <p>Have a job opportunity, a website or a system in mind? Send a message through the form below or contact me directly.</p>
-            </div>
-            
-            <form class="contact-form" action="mailto:equalizerjr@gmail.com" method="POST" enctype="text/plain">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
-            
-            <div class="contact-info">
-                <div class="info-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p><a href="mailto:equalizerjr@gmail.com" style="color: inherit;">equalizerjr@gmail.com</a></p>
-                </div>
-                
-                <div class="info-card">
-                    <i class="fas fa-phone"></i>
-                    <h3>Phone</h3>
-                    <p><a href="tel:+233257679050" style="color: inherit;">+233 25 767 9050</a></p>
-                </div>
-                
-                <div class="info-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Location</h3>
-                    <p>Accra, Ghana</p>
+    <section class="page-hero">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="container">
+            <span class="eyebrow reveal">Contact</span>
+            <h1 class="reveal d1">Let's Work Together</h1>
+            <p class="reveal d2">Have a job opportunity, a website or a system in mind? Send a message or reach me directly.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                <form class="form-card reveal" id="contact-form" novalidate>
+                    <div class="form-row">
+                        <div class="field"><label for="name">Your name</label><input type="text" id="name" name="name" autocomplete="name" required></div>
+                        <div class="field"><label for="email">Email address</label><input type="email" id="email" name="email" autocomplete="email" required></div>
+                    </div>
+                    <div class="field">
+                        <label for="topic">What is it about?</label>
+                        <select id="topic" name="topic">
+                            <option>Job opportunity</option>
+                            <option>Website project</option>
+                            <option>Web system or app</option>
+                            <option>IT support</option>
+                            <option>Something else</option>
+                        </select>
+                    </div>
+                    <div class="field"><label for="message">Your message</label><textarea id="message" name="message" required></textarea></div>
+                    <button type="submit" class="btn btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+                    <p class="form-note" id="form-status" role="status">This opens your email app with the message filled in, ready to send.</p>
+                </form>
+                <div class="info-stack">
+                    <a class="info reveal d1" href="mailto:equalizerjr@gmail.com"><div class="card-icon"><i class="fas fa-envelope"></i></div><div><h3>Email</h3><p>equalizerjr@gmail.com</p></div></a>
+                    <a class="info reveal d2" href="tel:+233257679050"><div class="card-icon"><i class="fas fa-phone"></i></div><div><h3>Phone</h3><p>+233 25 767 9050</p></div></a>
+                    <a class="info reveal d3" href="https://github.com/chillboy0101" target="_blank" rel="noopener"><div class="card-icon"><i class="fab fa-github"></i></div><div><h3>GitHub</h3><p>github.com/chillboy0101</p></div></a>
+                    <div class="info reveal d3"><div class="card-icon"><i class="fas fa-location-dot"></i></div><div><h3>Location</h3><p>Accra, Ghana</p></div></div>
                 </div>
             </div>
         </div>
-    </main>
-    
-    <footer>
-        <p>&copy; 2026 Carl Christian Quist. All rights reserved.</p>
-        <div style="margin-top: 15px;">
-            <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub" style="color: white; margin: 0 10px;"><i class="fab fa-github"></i></a>
-            <a href="mailto:equalizerjr@gmail.com" aria-label="Email" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+233257679050" aria-label="Phone" style="color: white; margin: 0 10px;"><i class="fas fa-phone"></i></a>
+    </section>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="brand"><span class="brand-mark">CQ</span>Carl Quist</a>
+                    <p>IT Officer and Software Developer in Accra, Ghana. Building and supporting systems people rely on every day.</p>
+                    <div class="socials">
+                        <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Pages</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Work</a></li>
+                        <li><a href="contributions.html">Contributions</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a></li>
+                        <li><a href="tel:+233257679050">+233 25 767 9050</a></li>
+                        <li>Accra, Ghana</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; <span id="year">2026</span> Carl Christian Quist. All rights reserved.</span>
+                <span>Built in Accra, Ghana.</span>
+            </div>
         </div>
     </footer>
+    <script src="assets/js/site.js"></script>
 </body>
 </html>

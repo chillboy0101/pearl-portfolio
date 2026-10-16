@@ -4,339 +4,245 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carl Christian Quist | IT Officer &amp; Software Developer</title>
-    <meta name="description" content="Carl Christian Quist is an IT Officer and Software Developer in Accra, Ghana, building and supporting systems at the Ghana Revenue Authority.">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2a4365;
-            --secondary: #c05621;
-            --light: #f7fafc;
-            --dark: #1a202c;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        /* Navigation Buttons */
-        .nav-buttons {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 20px;
-            color: white;
-            background: rgba(42, 67, 101, 0.8);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .nav-btn:hover {
-            background: var(--primary);
-            transform: translateX(5px);
-        }
-        
-        .nav-btn.active {
-            background: var(--secondary);
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            top: -100px;
-            right: -100px;
-        }
-        
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            bottom: -50px;
-            left: -50px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .hero-content {
-            padding: 40px 0;
-        }
-        
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin: 0 0 20px;
-            color: var(--primary);
-            line-height: 1.2;
-        }
-        
-        .tagline {
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-        
-        .hero-image {
-            position: relative;
-        }
-        
-        .hero-image img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transform: perspective(1000px) rotateY(-10deg);
-            transition: transform 0.5s ease;
-        }
-        
-        .hero-image:hover img {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-        
-        /* Add round image style */
-        .round-image {
-            border-radius: 50% !important;
-            object-fit: cover;
-            aspect-ratio: 1/1;
-        }
-        
-        /* View My Work Button */
-        .btn-work {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            color: white;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            background-size: 200% auto;
-            box-shadow: 0 4px 15px rgba(42, 67, 101, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            margin-right: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .btn-work:hover {
-            background-position: right center;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.4);
-        }
-        
-        .btn-work:active {
-            transform: translateY(1px);
-        }
-        
-        .btn-work::after {
-            content: '→';
-            margin-left: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-work:hover::after {
-            margin-left: 15px;
-        }
-        
-        /* Get In Touch Button */
-        .btn-contact {
-            display: inline-block;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            color: var(--primary);
-            background: transparent;
-            border: 2px solid var(--primary);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .btn-contact:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.2);
-        }
-        
-        .btn-contact:active {
-            transform: translateY(1px);
-        }
-        
-        .highlights {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .highlight {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.7);
-            color: var(--primary);
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-        }
-        
-        .highlight i {
-            color: var(--secondary);
-        }
-        
-        .social-links {
-            margin-top: 30px;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            margin-right: 15px;
-            color: var(--primary);
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            transform: translateY(-3px);
-            color: var(--secondary);
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .hero {
-                padding-top: 80px;
-            }
-            
-            .hero-image {
-                order: -1;
-                margin-bottom: 40px;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .tagline {
-                font-size: 1.2rem;
-            }
-            
-            .highlights {
-                justify-content: center;
-            }
-            
-            .btn-work, .btn-contact {
-                display: block;
-                width: 100%;
-                max-width: 250px;
-                margin: 0 auto 15px;
-            }
-            
-            .nav-buttons {
-                flex-direction: row;
-                top: 15px;
-                left: 15px;
-                right: 15px;
-                justify-content: center;
-            }
-            
-            .nav-btn {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Carl Christian Quist is an IT Officer and Software Developer in Accra, Ghana, building systems used daily at the Ghana Revenue Authority and websites for businesses.">
+    <meta name="theme-color" content="#13233a">
+    <link rel="icon" href="profile.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-    <!-- Navigation Buttons -->
-    <div class="nav-buttons">
-        <a href="services.html" class="nav-btn">Services</a>
-        <a href="portfolio.html" class="nav-btn">Work</a>
-        <a href="contributions.html" class="nav-btn">Contributions</a>
-        <a href="contact.html" class="nav-btn">Contact</a>
-       
-    </div>
-
-    <section class="hero">
+    <header class="site-nav">
         <div class="container">
-            <div class="hero-content">
-                <h1>Carl Christian Quist</h1>
-                <p class="tagline">IT Officer | Software Developer</p>
-                <p>I am an IT Management graduate (UPSA, 2025) and AI Software Engineer at the Ghana Revenue Authority, where I build and support systems staff rely on every day, including LateWatch and the VAT, PIT and PAYE calculators on the GRA website. I also build websites and web systems for businesses across Accra.</p>
-                <div class="hero-buttons">
-                    <a href="portfolio.html" class="btn-work">View My Work</a>
-                    <a href="contact.html" class="btn-contact">Get In Touch</a>
+            <a href="index.html" class="brand" aria-label="Carl Christian Quist, home"><span class="brand-mark">CQ</span>Carl Quist</a>
+            <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav class="nav-links" aria-label="Main">
+                <a href="index.html" class="active" aria-current="page">Home</a>
+                <a href="services.html">Services</a>
+                <a href="portfolio.html">Work</a>
+                <a href="contributions.html">Contributions</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </nav>
+        </div>
+    </header>
+    <section class="hero" id="top">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="grid-overlay"></div>
+        <div class="container">
+            <div>
+                <span class="eyebrow"><span class="pulse-dot"></span>IT Officer &middot; Software Developer &middot; Accra</span>
+                <h1>Carl Christian <span class="accent">Quist</span></h1>
+                <p class="typed-line">I build <strong><span data-typed='["attendance systems GRA staff use daily", "tax calculators on gra.gov.gh", "websites for growing businesses", "inventory and RFID platforms", "fixes for the Linux kernel"]'>attendance systems GRA staff use daily</span></strong><span class="typed-caret" aria-hidden="true"></span></p>
+                <p class="hero-lede">IT Management graduate (UPSA, 2025) and AI Software Engineer at the Ghana Revenue Authority. I build and support the systems staff rely on every day, and deliver websites and web systems for clients across Accra.</p>
+                <div class="hero-actions">
+                    <a href="portfolio.html" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
+                    <a href="contact.html" class="btn btn-ghost">Get In Touch</a>
                 </div>
-                <div class="highlights">
-                    <span class="highlight"><i class="fab fa-linux"></i> Linux kernel contributor</span>
-                    <span class="highlight"><i class="fas fa-landmark"></i> Systems in daily use at GRA</span>
-                    <span class="highlight"><i class="fas fa-globe"></i> 12 websites &amp; systems built</span>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                    <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                <div class="hero-badges">
+                    <span class="hero-badge"><i class="fab fa-linux"></i>Linux kernel contributor</span>
+                    <span class="hero-badge"><i class="fas fa-landmark"></i>Systems in daily use at GRA</span>
+                    <span class="hero-badge"><i class="fas fa-code-commit"></i>1,007 commits since 2025</span>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="profile.svg" alt="Carl Christian Quist" class="round-image">
+            <aside class="hero-card" aria-label="Profile summary">
+                <div class="hero-card-head">
+                    <div class="avatar">CQ</div>
+                    <div>
+                        <div class="hero-card-name">Carl Christian Quist</div>
+                        <div class="hero-card-role">IT Officer | Software Developer</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><i class="fas fa-briefcase"></i>AI Software Engineer, Ghana Revenue Authority</li>
+                    <li><i class="fas fa-graduation-cap"></i>BSc IT Management, UPSA (2025)</li>
+                    <li><i class="fab fa-linux"></i>Patch accepted into the Linux kernel</li>
+                    <li><i class="fas fa-location-dot"></i>Accra, Ghana</li>
+                </ul>
+                <div class="status"><span class="pulse-dot"></span>Open to IT roles and freelance projects</div>
+            </aside>
+        </div>
+        <a href="#stats" class="scroll-cue" aria-label="Scroll down"></a>
+    </section>
+
+    <section class="stats" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat reveal"><div class="stat-number"><span data-count="1007">1,007</span></div><div class="stat-label">Commits since April 2025</div></div>
+                <div class="stat reveal d1"><div class="stat-number"><span data-count="12">12</span></div><div class="stat-label">Live projects</div></div>
+                <div class="stat reveal d2"><div class="stat-number"><span data-count="3">3</span></div><div class="stat-label">Calculators on gra.gov.gh</div></div>
+                <div class="stat reveal d3"><div class="stat-number"><span data-count="1">1</span></div><div class="stat-label">Linux kernel patch accepted</div></div>
             </div>
         </div>
     </section>
+
+    <div class="marquee" aria-label="Technologies I work with">
+        <div class="marquee-track"><span class="chip"><i class="fab fa-react"></i>React</span><span class="chip"><i class="fas fa-n"></i>Next.js</span><span class="chip"><i class="fas fa-code"></i>TypeScript</span><span class="chip"><i class="fab fa-js"></i>JavaScript</span><span class="chip"><i class="fas fa-database"></i>PostgreSQL</span><span class="chip"><i class="fas fa-layer-group"></i>Prisma &amp; Drizzle</span><span class="chip"><i class="fas fa-wind"></i>Tailwind CSS</span><span class="chip"><i class="fab fa-wordpress"></i>WordPress</span><span class="chip"><i class="fas fa-cube"></i>Three.js</span><span class="chip"><i class="fab fa-linux"></i>Linux</span><span class="chip"><i class="fas fa-cloud"></i>Vercel</span><span class="chip"><i class="fab fa-git-alt"></i>Git &amp; GitHub</span><span class="chip"><i class="fas fa-table"></i>Microsoft Excel</span><span class="chip"><i class="fas fa-network-wired"></i>Networking</span><span class="chip"><i class="fas fa-robot"></i>AI-assisted development</span><span class="chip"><i class="fab fa-react"></i>React</span><span class="chip"><i class="fas fa-n"></i>Next.js</span><span class="chip"><i class="fas fa-code"></i>TypeScript</span><span class="chip"><i class="fab fa-js"></i>JavaScript</span><span class="chip"><i class="fas fa-database"></i>PostgreSQL</span><span class="chip"><i class="fas fa-layer-group"></i>Prisma &amp; Drizzle</span><span class="chip"><i class="fas fa-wind"></i>Tailwind CSS</span><span class="chip"><i class="fab fa-wordpress"></i>WordPress</span><span class="chip"><i class="fas fa-cube"></i>Three.js</span><span class="chip"><i class="fab fa-linux"></i>Linux</span><span class="chip"><i class="fas fa-cloud"></i>Vercel</span><span class="chip"><i class="fab fa-git-alt"></i>Git &amp; GitHub</span><span class="chip"><i class="fas fa-table"></i>Microsoft Excel</span><span class="chip"><i class="fas fa-network-wired"></i>Networking</span><span class="chip"><i class="fas fa-robot"></i>AI-assisted development</span></div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Selected work</span>
+                <h2>Systems people use every day</h2>
+                <p>From internal tools at the Ghana Revenue Authority to e-commerce for local businesses. Every screenshot is from the live project.</p>
+            </div>
+            <div class="projects-grid">
+                <article class="project reveal" data-tilt data-cat="gra">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>latewatch.vercel.app</em></div>
+                        <div class="shot"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy"></div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-meta">Ghana Revenue Authority</span>
+                        <h3>LateWatch</h3>
+                        <p>Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span></div>
+                        <div class="links"><a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
+                    </div>
+                </article>
+                <article class="project reveal d1" data-tilt data-cat="gra">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>gra.gov.gh/online-tools/tax-calculators</em></div>
+                        <div class="shot"><img src="images/gra-calculators.jpg" alt="Screenshot of GRA Tax Calculators" loading="lazy"></div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-meta">Ghana Revenue Authority</span>
+                        <h3>GRA Tax Calculators</h3>
+                        <p>VAT, PIT and PAYE calculators live on the official GRA website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
+                        <div class="tags"><span class="tag">WordPress</span><span class="tag">JavaScript</span><span class="tag">Public service</span></div>
+                        <div class="links"><a href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Use it on gra.gov.gh <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
+                    </div>
+                </article>
+                <article class="project reveal d2" data-tilt data-cat="client">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>jovelpharmacy.com</em></div>
+                        <div class="shot"><img src="images/jovel.jpg" alt="Screenshot of Jovel Pharmacy" loading="lazy"></div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-meta">Client website</span>
+                        <h3>Jovel Pharmacy</h3>
+                        <p>Full online pharmacy: product shop with cart, prescription transfer, pharmacist consultations, customer accounts and an admin dashboard.</p>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">Prisma</span><span class="tag">E-commerce</span></div>
+                        <div class="links"><a href="https://jovelpharmacy.com" target="_blank" rel="noopener">jovelpharmacy.com <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/jovel-pharmacy" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
+                    </div>
+                </article>
+            </div>
+            <div style="text-align: center; margin-top: 46px;" class="reveal">
+                <a href="portfolio.html" class="btn btn-outline">See all 12 projects <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section spotlight">
+        <div class="container">
+            <div class="split">
+                <div class="reveal">
+                    <span class="badge"><i class="fas fa-circle-check"></i>Accepted upstream &middot; August 2026</span>
+                    <h2 style="margin-top: 18px;">A fix in the Linux kernel</h2>
+                    <p>The mute LED on HP Laptop 15-dy0xxx machines never lit because the model was missing from the sound driver's quirk table. I traced the LED to a codec register with hda-verb, verified the fix on real hardware, and submitted the patch. The Linux sound maintainer applied it.</p>
+                    <div class="spot-links">
+                        <a href="https://lore.kernel.org/all/CAOtcGaxXndKxTK5MVSEcmF-LUy+V51K7fhE=qvLA+VvW5ZyCNA@mail.gmail.com/" target="_blank" rel="noopener" class="btn btn-primary">Read the patch <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://lore.kernel.org/all/87mruzeg0o.wl-tiwai@suse.de/" target="_blank" rel="noopener" class="btn btn-ghost">Maintainer's reply</a>
+                    </div>
+                </div>
+                <div class="terminal reveal d2">
+                    <div class="terminal-bar"><span></span><span></span><span></span></div>
+<pre><span class="k">Subject:</span> [PATCH] ALSA: hda/realtek: Enable mute LED on HP Laptop 15-dy0xxx
+
+<span class="d">The LED is controlled by COEF index 0x07, bit 0.
+This was verified on the hardware with hda-verb.
+
+Tested on an HP Laptop 15-dy0xxx
+(SKU 7FU54UA#ABA, board 864F, BIOS F.40).</span>
+
+<span class="k">Signed-off-by:</span> Carl Quist
+<span class="ok">Applied now.
+<span class="d">Takashi Iwai, Linux sound subsystem maintainer</span></span></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">What I do</span>
+                <h2>How I can help</h2>
+            </div>
+            <div class="cards">
+                <div class="card reveal">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Websites</h3>
+                    <p>Fast, responsive business websites with content you can update yourself.</p>
+                    <a class="card-link" href="services.html">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card reveal d1">
+                    <div class="card-icon"><i class="fas fa-server"></i></div>
+                    <h3>Web systems</h3>
+                    <p>Attendance, inventory, voting and approval systems that replace manual office work.</p>
+                    <a class="card-link" href="services.html">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card reveal d2">
+                    <div class="card-icon"><i class="fas fa-headset"></i></div>
+                    <h3>IT support</h3>
+                    <p>End-user support, networking and Excel data work that keeps teams productive.</p>
+                    <a class="card-link" href="services.html">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section tight">
+        <div class="container">
+            <div class="cta reveal">
+                <h2>Let's build something reliable together</h2>
+                <p>Whether you need a website, an internal system or dependable IT support, I'd like to hear about it.</p>
+                <a href="contact.html" class="btn btn-ghost">Get in Touch <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="brand"><span class="brand-mark">CQ</span>Carl Quist</a>
+                    <p>IT Officer and Software Developer in Accra, Ghana. Building and supporting systems people rely on every day.</p>
+                    <div class="socials">
+                        <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Pages</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Work</a></li>
+                        <li><a href="contributions.html">Contributions</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a></li>
+                        <li><a href="tel:+233257679050">+233 25 767 9050</a></li>
+                        <li>Accra, Ghana</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; <span id="year">2026</span> Carl Christian Quist. All rights reserved.</span>
+                <span>Built in Accra, Ghana.</span>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets/js/hero3d.js"></script>
+    <script src="assets/js/site.js"></script>
 </body>
 </html>

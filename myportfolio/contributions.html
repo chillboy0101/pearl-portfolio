@@ -4,606 +4,226 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contributions | Carl Christian Quist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2a4365;
-            --secondary: #c05621;
-            --light: #f7fafc;
-            --dark: #1a202c;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--dark);
-            line-height: 1.6;
-            background-color: var(--light);
-        }
-        
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .nav-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-        
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        
-        .contrib-container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        
-        .page-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .page-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .page-header p {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 30px;
-            margin-bottom: 70px;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px 25px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1.1;
-        }
-        
-        .stat-label {
-            margin-top: 8px;
-            color: var(--secondary);
-            font-weight: 600;
-        }
-        
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--primary);
-            margin: 0 0 10px;
-        }
-        
-        .section-intro {
-            margin: 0 0 30px;
-            max-width: 760px;
-        }
-        
-        .section {
-            margin-bottom: 70px;
-        }
-        
-        .feature-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            background: white;
-            border-radius: 10px;
-            padding: 40px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .feature-card h3,
-        .card h3 {
-            font-size: 1.5rem;
-            margin: 0 0 15px;
-            color: var(--primary);
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: white;
-            background: var(--secondary);
-            margin-bottom: 15px;
-        }
-        
-        .patch {
-            background: #1a202c;
-            color: #e2e8f0;
-            border-radius: 10px;
-            padding: 25px;
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-            font-size: 0.85rem;
-            line-height: 1.7;
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
-        
-        .patch .key {
-            color: #f6ad55;
-        }
-        
-        .patch .dim {
-            color: #a0aec0;
-        }
-        
-        .patch .reply {
-            display: block;
-            margin-top: 15px;
-            padding: 10px 15px;
-            border-left: 3px solid #f6ad55;
-            background: rgba(255,255,255,0.05);
-            color: white;
-        }
-        
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-            gap: 30px;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .card-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .card p {
-            margin: 0 0 15px;
-        }
-        
-        .card a,
-        .feature-card a {
-            color: var(--secondary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        
-        .card a:hover,
-        .feature-card a:hover {
-            color: var(--primary);
-        }
-        
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(42, 67, 101, 0.1);
-            color: var(--primary);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .github-graph {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .github-graph img {
-            width: 100%;
-            max-width: 900px;
-            height: auto;
-        }
-        
-        .github-graph > a {
-            display: block;
-            overflow-x: auto;
-            margin-bottom: 15px;
-        }
-        
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-            border-left: 3px solid rgba(42, 67, 101, 0.2);
-        }
-        
-        .timeline-item {
-            position: relative;
-            background: white;
-            border-radius: 10px;
-            padding: 25px 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -42px;
-            top: 30px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--secondary);
-            border: 3px solid var(--light);
-        }
-        
-        .timeline-item h3 {
-            margin: 0 0 5px;
-            color: var(--primary);
-            font-size: 1.25rem;
-        }
-        
-        .timeline-meta {
-            color: var(--secondary);
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .timeline-item ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-        
-        .cta-section {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(42, 67, 101, 0.05) 0%, rgba(192, 86, 33, 0.05) 100%);
-            border-radius: 10px;
-        }
-        
-        .cta-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            color: white;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            background-size: 200% auto;
-            box-shadow: 0 4px 15px rgba(42, 67, 101, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .cta-btn:hover {
-            background-position: right center;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.4);
-        }
-        
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 80px;
-        }
-        
-        @media (max-width: 768px) {
-            .card-grid,
-            .feature-card {
-                grid-template-columns: 1fr;
-            }
-            
-            .feature-card {
-                padding: 25px;
-            }
-            
-            .page-header h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .nav-links {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 10px 18px;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Linux kernel contribution, open-source work, Ghana Revenue Authority systems, GitHub activity and experience of Carl Christian Quist.">
+    <meta name="theme-color" content="#13233a">
+    <link rel="icon" href="profile.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo">Carl Quist</a>
-            <div class="nav-links">
+    <header class="site-nav">
+        <div class="container">
+            <a href="index.html" class="brand" aria-label="Carl Christian Quist, home"><span class="brand-mark">CQ</span>Carl Quist</a>
+            <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav class="nav-links" aria-label="Main">
                 <a href="index.html">Home</a>
                 <a href="services.html">Services</a>
                 <a href="portfolio.html">Work</a>
-                <a href="contributions.html" class="active">Contributions</a>
-                <a href="contact.html">Contact</a>
-            </div>
+                <a href="contributions.html" class="active" aria-current="page">Contributions</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </nav>
         </div>
     </header>
-    
-    <main>
-        <div class="contrib-container">
-            <div class="page-header">
-                <h1>Contributions &amp; Experience</h1>
-                <p>Open-source work, public tools and systems people rely on every day.</p>
-            </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">16</div>
-                    <div class="stat-label">Public GitHub repositories</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">938</div>
-                    <div class="stat-label">Commits in the past year</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Tax calculators on gra.gov.gh</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">1</div>
-                    <div class="stat-label">Linux kernel patch accepted</div>
-                </div>
-            </div>
-            
-            <!-- Linux kernel -->
-            <section class="section">
-                <h2 class="section-title">Linux Kernel Contribution</h2>
-                <p class="section-intro">In August 2026 I fixed a hardware bug in the Linux kernel's sound driver. The patch was reviewed and applied by the Linux sound subsystem maintainer.</p>
-                <div class="feature-card">
-                    <div>
-                        <span class="badge">Accepted upstream</span>
-                        <h3>ALSA: Mute LED fix for HP Laptop 15-dy0xxx</h3>
-                        <p>The mute LED on this HP laptop (Realtek ALC236 codec) never lit because the model had no entry in the driver's quirk table. I traced the LED to a codec register (COEF 0x07, bit 0) using hda-verb, verified it on the hardware, and submitted a one-line fix that reuses an existing driver routine.</p>
-                        <div class="tags">
-                            <span class="tag">C</span>
-                            <span class="tag">Linux kernel</span>
-                            <span class="tag">ALSA</span>
-                            <span class="tag">Hardware debugging</span>
-                        </div>
-                        <a href="https://lore.kernel.org/all/CAOtcGaxXndKxTK5MVSEcmF-LUy+V51K7fhE=qvLA+VvW5ZyCNA@mail.gmail.com/" target="_blank" rel="noopener">Read the patch on lore.kernel.org <i class="fas fa-external-link-alt"></i></a><br>
-                        <a href="https://lore.kernel.org/all/87mruzeg0o.wl-tiwai@suse.de/" target="_blank" rel="noopener">See the maintainer's "Applied" reply <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-<pre class="patch"><span class="key">Subject:</span> [PATCH] ALSA: hda/realtek: Enable mute LED on HP Laptop 15-dy0xxx
+    <section class="page-hero">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="container">
+            <span class="eyebrow reveal">Contributions</span>
+            <h1 class="reveal d1">Contributions &amp; Experience</h1>
+            <p class="reveal d2">Open-source work, public tools and systems people rely on every day.</p>
+        </div>
+    </section>
 
-<span class="dim">The LED is controlled by COEF index 0x07, bit 0.
+    <section class="stats" style="margin-top: -50px;">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat reveal"><div class="stat-number"><span data-count="1007">1,007</span></div><div class="stat-label">Commits since April 2025</div></div>
+                <div class="stat reveal d1"><div class="stat-number"><span data-count="102">102</span></div><div class="stat-label">Active coding days</div></div>
+                <div class="stat reveal d2"><div class="stat-number"><span data-count="17">17</span></div><div class="stat-label">GitHub repositories</div></div>
+                <div class="stat reveal d3"><div class="stat-number"><span data-count="1">1</span></div><div class="stat-label">Linux kernel patch accepted</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">GitHub activity</span>
+                <h2>Consistent, shipped work</h2>
+                <p>Every commit I have made since my first in April 2025, across all branches of all 17 of my repositories, including the private GRA Equipment Operations project.</p>
+            </div>
+            <div class="activity reveal">
+                <div class="activity-head">
+                    <div data-year-panel="2026"><strong>988 commits</strong> <span>in 2026 across 94 active days</span></div>
+                    <div data-year-panel="2025" hidden><strong>19 commits</strong> <span>in 2025 across 8 active days</span></div>
+                    <div class="year-tabs" role="group" aria-label="Choose year">
+                        <button type="button" data-year="2026" class="active" aria-pressed="true">2026</button>
+                        <button type="button" data-year="2025" aria-pressed="false">2025</button>
+                    </div>
+                </div>
+                <div class="activity-chart" data-year-panel="2026"><img src="images/github-activity-2026.svg" alt="Commit activity in 2026: 988 commits across 94 active days"></div>
+                <div class="activity-chart" data-year-panel="2025" hidden><img src="images/github-activity-2025.svg" alt="Commit activity in 2025: 19 commits across 8 active days"></div>
+                <p class="activity-note">Counted from each repository's full commit history up to 16 October 2026. Only commits I authored are included; work by other contributors and commits written by AI tools are left out.</p>
+                <div class="repo-bars">
+                    <div class="repo-bar"><span class="name">LateWatch</span><span class="track"><span class="fill" data-width="100%"></span></span><span class="count">420</span></div>
+                    <div class="repo-bar"><span class="name">Rikonim Enterprise</span><span class="track"><span class="fill" data-width="39%"></span></span><span class="count">165</span></div>
+                    <div class="repo-bar"><span class="name">RFID-IMS</span><span class="track"><span class="fill" data-width="38%"></span></span><span class="count">160</span></div>
+                    <div class="repo-bar"><span class="name">O&amp;P Awards</span><span class="track"><span class="fill" data-width="16%"></span></span><span class="count">67</span></div>
+                    <div class="repo-bar"><span class="name">Omarchy Hotspot</span><span class="track"><span class="fill" data-width="15%"></span></span><span class="count">62</span></div>
+                    <div class="repo-bar"><span class="name">GRA Equipment Ops (private)</span><span class="track"><span class="fill" data-width="9%"></span></span><span class="count">39</span></div>
+                    <div class="repo-bar"><span class="name">SAM-ReJ website</span><span class="track"><span class="fill" data-width="6%"></span></span><span class="count">25</span></div>
+                    <div class="repo-bar"><span class="name">GRA PAYE Calculator</span><span class="track"><span class="fill" data-width="5%"></span></span><span class="count">23</span></div>
+                    <div class="repo-bar"><span class="name">GRA PIT Calculator</span><span class="track"><span class="fill" data-width="4%"></span></span><span class="count">15</span></div>
+                    <div class="repo-bar"><span class="name">GRA VAT Calculator</span><span class="track"><span class="fill" data-width="3%"></span></span><span class="count">13</span></div>
+                    <div class="repo-bar"><span class="name">CPA Event Calendar</span><span class="track"><span class="fill" data-width="2%"></span></span><span class="count">7</span></div>
+                    <div class="repo-bar"><span class="name">InventoryPro Cloud</span><span class="track"><span class="fill" data-width="2%"></span></span><span class="count">3</span></div>
+                    <div class="repo-bar"><span class="name">Portfolio sites</span><span class="track"><span class="fill" data-width="2%"></span></span><span class="count">3</span></div>
+                    <div class="repo-bar"><span class="name">Ewe Culture</span><span class="track"><span class="fill" data-width="2%"></span></span><span class="count">2</span></div>
+                    <div class="repo-bar"><span class="name">Kekeli Studios</span><span class="track"><span class="fill" data-width="2%"></span></span><span class="count">2</span></div>
+                    <div class="repo-bar"><span class="name">Edinam Hospital</span><span class="track"><span class="fill" data-width="2%"></span></span><span class="count">1</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section spotlight">
+        <div class="container">
+            <div class="split">
+                <div class="reveal">
+                    <span class="badge"><i class="fas fa-circle-check"></i>Accepted upstream &middot; August 2026</span>
+                    <h2 style="margin-top: 18px;">Linux kernel contribution</h2>
+                    <p>The mute LED on HP Laptop 15-dy0xxx machines (Realtek ALC236 codec) never lit because the model had no entry in the sound driver's quirk table. I traced the LED to codec register COEF 0x07, bit 0, using hda-verb, verified it on the hardware, and submitted a one-line fix that reuses an existing driver routine. It was reviewed and applied by Takashi Iwai, the Linux sound subsystem maintainer.</p>
+                    <div class="spot-links">
+                        <a href="https://lore.kernel.org/all/CAOtcGaxXndKxTK5MVSEcmF-LUy+V51K7fhE=qvLA+VvW5ZyCNA@mail.gmail.com/" target="_blank" rel="noopener" class="btn btn-primary">Read the patch <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://lore.kernel.org/all/87mruzeg0o.wl-tiwai@suse.de/" target="_blank" rel="noopener" class="btn btn-ghost">Maintainer's reply</a>
+                    </div>
+                </div>
+                <div class="terminal reveal d2">
+                    <div class="terminal-bar"><span></span><span></span><span></span></div>
+<pre><span class="k">Subject:</span> [PATCH] ALSA: hda/realtek: Enable mute LED on HP Laptop 15-dy0xxx
+
+<span class="d">The LED is controlled by COEF index 0x07, bit 0.
 This was verified on the hardware with hda-verb.
 
 Tested on an HP Laptop 15-dy0xxx
 (SKU 7FU54UA#ABA, board 864F, BIOS F.40).</span>
 
-<span class="key">Signed-off-by:</span> Carl Quist
-<span class="reply">Applied now.
-<span class="dim">Takashi Iwai, Linux sound subsystem maintainer</span></span></pre>
+<span class="k">Signed-off-by:</span> Carl Quist
+<span class="ok">Applied now.
+<span class="d">Takashi Iwai, Linux sound subsystem maintainer</span></span></pre>
                 </div>
-            </section>
-            
-            <!-- Public service -->
-            <section class="section">
-                <h2 class="section-title">Public Service at the Ghana Revenue Authority</h2>
-                <p class="section-intro">Systems and tools I have built and support as AI Software Engineer at GRA, used by staff and the public.</p>
-                <div class="card-grid">
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-user-clock"></i></div>
-                        <h3>LateWatch</h3>
-                        <p>Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026.</p>
-                        <a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Visit LateWatch <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-calculator"></i></div>
-                        <h3>VAT, PIT &amp; PAYE Calculators</h3>
-                        <p>Public tax calculators on gra.gov.gh that help taxpayers apply the 2026 rates, bands and reliefs correctly.</p>
-                        <a href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Try them on gra.gov.gh <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-globe"></i></div>
-                        <h3>GRA Website</h3>
-                        <p>I manage and update the official GRA website together with the GRA Webmaster.</p>
-                        <a href="https://gra.gov.gh" target="_blank" rel="noopener">gra.gov.gh <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-award"></i></div>
-                        <h3>O&amp;P Awards</h3>
-                        <p>Nomination and anonymous voting system for staff awards, with vote receipts, runoffs and certified results.</p>
-                        <a href="https://op-awards.vercel.app" target="_blank" rel="noopener">Visit O&amp;P Awards <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
-                        <h3>CPA Event Calendar</h3>
-                        <p>Event planning calendar for the Communication and Public Affairs department, with role-based access.</p>
-                        <a href="https://cpa-event-calendar-gra.vercel.app" target="_blank" rel="noopener">Visit the calendar <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
-                        <h3>Equipment Request &amp; Approval</h3>
-                        <p>A web-based system for staff to request equipment and for managers to approve and track requests. In development.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Open source -->
-            <section class="section">
-                <h2 class="section-title">Open Source</h2>
-                <p class="section-intro">Tools I publish openly on GitHub for others to use and improve.</p>
-                <div class="card-grid">
-                    <div class="card">
-                        <div class="card-icon"><i class="fas fa-wifi"></i></div>
-                        <h3>Omarchy Hotspot</h3>
-                        <div class="tags">
-                            <span class="tag">MIT licence</span>
-                            <span class="tag">Linux</span>
-                            <span class="tag">Automated tests</span>
-                        </div>
-                        <p>A one-click Wi-Fi hotspot plugin for the Omarchy Linux desktop that shares your connection while keeping your own Wi-Fi connected, with a QR code to join and controls to block devices.</p>
-                        <a href="https://github.com/chillboy0101/omarchy-hotspot" target="_blank" rel="noopener">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class="fab fa-wordpress"></i></div>
-                        <h3>GRA Calculator Plugins</h3>
-                        <div class="tags">
-                            <span class="tag">WordPress</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Public sector</span>
-                        </div>
-                        <p>The VAT, PIT and PAYE calculator plugins are public repositories with documented rates, installation steps and versioned releases.</p>
-                        <a href="https://github.com/chillboy0101/gra-paye-calculator" target="_blank" rel="noopener">View on GitHub <i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- GitHub activity -->
-            <section class="section">
-                <h2 class="section-title">GitHub Activity</h2>
-                <p class="section-intro">938 commits across 81 active days between October 2025 and October 2026, counted from the commit history of my public repositories.</p>
-                <div class="github-graph">
-                    <a href="https://github.com/chillboy0101" target="_blank" rel="noopener">
-                        <img src="images/github-activity.svg" alt="Commit activity chart: 938 commits across 81 active days in the past year" loading="lazy">
-                    </a>
-                    <p><a href="https://github.com/chillboy0101" target="_blank" rel="noopener" style="color: var(--secondary); font-weight: 600; text-decoration: none;"><i class="fab fa-github"></i> github.com/chillboy0101</a></p>
-                </div>
-            </section>
-            
-            <!-- Experience -->
-            <section class="section">
-                <h2 class="section-title">Experience &amp; Education</h2>
-                <p class="section-intro">References are available on request.</p>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>AI Software Engineer</h3>
-                        <div class="timeline-meta">Ghana Revenue Authority, Accra · Nov 2025 – Present</div>
-                        <ul>
-                            <li>Built LateWatch, used daily by the Online &amp; Production Unit since May 2026.</li>
-                            <li>Developed the VAT, PIT and PAYE tax calculators on the official GRA website.</li>
-                            <li>Manage and update the GRA website with the GRA Webmaster.</li>
-                            <li>Developing a web-based Equipment Request &amp; Approval system.</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Freelance Web Developer</h3>
-                        <div class="timeline-meta">Self-employed, Accra · 2025 – Present</div>
-                        <ul>
-                            <li>Delivered websites and web systems for Rikonim Enterprise, Jovel Pharmacy and Kekeli Studios.</li>
-                            <li>Built RFID-IMS, an RFID Inventory Management System, as commissioned work for UPSA students.</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>IT Intern</h3>
-                        <div class="timeline-meta">Ga East Municipal Assembly (GEMA) · Jun – Aug 2023</div>
-                        <ul>
-                            <li>Provided IT support to staff, and handled data entry and analysis in Microsoft Excel.</li>
-                            <li>Made and terminated Ethernet (RJ45) network cables for office connections.</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>General Secretary</h3>
-                        <div class="timeline-meta">Yaa Asantewaa Hall, UPSA · 2024 – 2025</div>
-                        <ul>
-                            <li>Managed hall records, official correspondence and meeting minutes, reporting to the Hall Tutor.</li>
-                            <li>Coordinated meetings and hall events for residents and hall administration.</li>
-                        </ul>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>BSc Information Technology Management</h3>
-                        <div class="timeline-meta">University of Professional Studies, Accra (UPSA) · 2021 – 2025 · Second Class</div>
-                        <p style="margin: 0;">WASSCE, Ghana National College, Cape Coast.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <div class="cta-section">
-                <h2>Let's build something reliable together</h2>
-                <p>Whether you need a website, an internal system or IT support, I'd like to hear about it.</p>
-                <a href="contact.html" class="cta-btn">Get in Touch</a>
             </div>
         </div>
-    </main>
-    
-    <footer>
-        <p>&copy; 2026 Carl Christian Quist. All rights reserved.</p>
-        <div style="margin-top: 15px;">
-            <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub" style="color: white; margin: 0 10px;"><i class="fab fa-github"></i></a>
-            <a href="mailto:equalizerjr@gmail.com" aria-label="Email" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+233257679050" aria-label="Phone" style="color: white; margin: 0 10px;"><i class="fas fa-phone"></i></a>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Public service</span>
+                <h2>At the Ghana Revenue Authority</h2>
+                <p>Systems and tools I have built and support as AI Software Engineer at GRA, used by staff and the public.</p>
+            </div>
+            <div class="cards">
+                <div class="card reveal"><div class="card-icon"><i class="fas fa-user-clock"></i></div><h3>LateWatch</h3><p>Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026.</p><a class="card-link" href="https://latewatch.vercel.app" target="_blank" rel="noopener">Visit LateWatch <i class="fas fa-arrow-right"></i></a></div>
+                <div class="card reveal d1"><div class="card-icon"><i class="fas fa-calculator"></i></div><h3>VAT, PIT &amp; PAYE calculators</h3><p>Public tax calculators on gra.gov.gh that help taxpayers apply the 2026 rates, bands and reliefs.</p><a class="card-link" href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Try them <i class="fas fa-arrow-right"></i></a></div>
+                <div class="card reveal d2"><div class="card-icon"><i class="fas fa-globe"></i></div><h3>GRA website</h3><p>I manage and update the official GRA website together with the GRA Webmaster.</p><a class="card-link" href="https://gra.gov.gh" target="_blank" rel="noopener">gra.gov.gh <i class="fas fa-arrow-right"></i></a></div>
+                <div class="card reveal"><div class="card-icon"><i class="fas fa-award"></i></div><h3>O&amp;P Awards</h3><p>Nomination and anonymous voting for staff awards, with vote receipts, runoffs and certified results.</p><a class="card-link" href="https://op-awards.vercel.app" target="_blank" rel="noopener">Visit O&amp;P Awards <i class="fas fa-arrow-right"></i></a></div>
+                <div class="card reveal d1"><div class="card-icon"><i class="fas fa-calendar-days"></i></div><h3>CPA Event Calendar</h3><p>Event planning for the Communication and Public Affairs department, with role-based access.</p><a class="card-link" href="https://cpa-event-calendar-gra.vercel.app" target="_blank" rel="noopener">Visit the calendar <i class="fas fa-arrow-right"></i></a></div>
+                <div class="card reveal d2"><div class="card-icon"><i class="fas fa-clipboard-check"></i></div><h3>Equipment Request &amp; Approval</h3><p>A web system for staff to request equipment and for managers to approve and track requests. In development.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section alt">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Open source</span>
+                <h2>Public code others use</h2>
+            </div>
+            <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div class="card reveal">
+                    <div class="card-icon"><i class="fas fa-wifi"></i></div>
+                    <h3>Omarchy Hotspot <span class="tag" style="vertical-align: middle;">Maintainer</span></h3>
+                    <p>A one-click Wi-Fi hotspot plugin for the Omarchy Linux desktop, originally created by Shivam Narkar. I now maintain it and wrote 62 of its 101 commits, adding device identification and naming, client disconnect and blocking, a hardened privilege boundary, verified installs and Wi-Fi fixes.</p>
+                    <a class="card-link" href="https://github.com/chillboy0101/omarchy-hotspot" target="_blank" rel="noopener">View on GitHub <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card reveal d1">
+                    <div class="card-icon"><i class="fab fa-wordpress"></i></div>
+                    <h3>GRA calculator plugins</h3>
+                    <p>The VAT, PIT and PAYE calculator plugins are public repositories with documented rates, installation steps and versioned releases.</p>
+                    <a class="card-link" href="https://github.com/chillboy0101/gra-paye-calculator" target="_blank" rel="noopener">View on GitHub <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">Experience &amp; education</span>
+                <h2>Where I've worked</h2>
+                <p>References are available on request.</p>
+            </div>
+            <div class="timeline">
+                <div class="t-item reveal"><h3>AI Software Engineer</h3><div class="t-meta">Ghana Revenue Authority, Accra &middot; Nov 2025 &ndash; Present</div><ul><li>Built LateWatch, used daily by the Online &amp; Production Unit since May 2026.</li><li>Developed the VAT, PIT and PAYE tax calculators on the official GRA website.</li><li>Manage and update the GRA website with the GRA Webmaster.</li><li>Developing a web-based Equipment Request &amp; Approval system.</li></ul></div>
+                <div class="t-item reveal"><h3>Freelance Web Developer</h3><div class="t-meta">Self-employed, Accra &middot; 2025 &ndash; Present</div><ul><li>Delivered websites and web systems for Rikonim Enterprise, Jovel Pharmacy and Kekeli Studios.</li><li>Built RFID-IMS, an RFID Inventory Management System, as commissioned work for UPSA students.</li></ul></div>
+                <div class="t-item reveal"><h3>IT Intern</h3><div class="t-meta">Ga East Municipal Assembly (GEMA) &middot; Jun &ndash; Aug 2023</div><ul><li>Provided IT support to staff, and handled data entry and analysis in Microsoft Excel.</li><li>Made and terminated Ethernet (RJ45) network cables for office connections.</li></ul></div>
+                <div class="t-item reveal"><h3>General Secretary</h3><div class="t-meta">Yaa Asantewaa Hall, UPSA &middot; 2024 &ndash; 2025</div><ul><li>Managed hall records, official correspondence and meeting minutes, reporting to the Hall Tutor.</li><li>Coordinated meetings and hall events for residents and hall administration.</li></ul></div>
+                <div class="t-item reveal"><h3>BSc Information Technology Management</h3><div class="t-meta">University of Professional Studies, Accra (UPSA) &middot; 2021 &ndash; 2025 &middot; Second Class</div><ul><li>WASSCE, Ghana National College, Cape Coast.</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section tight">
+        <div class="container">
+            <div class="cta reveal">
+                <h2>Let's build something reliable together</h2>
+                <p>Whether you need a website, an internal system or IT support, I'd like to hear about it.</p>
+                <a href="contact.html" class="btn btn-ghost">Get in Touch <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="brand"><span class="brand-mark">CQ</span>Carl Quist</a>
+                    <p>IT Officer and Software Developer in Accra, Ghana. Building and supporting systems people rely on every day.</p>
+                    <div class="socials">
+                        <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Pages</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Work</a></li>
+                        <li><a href="contributions.html">Contributions</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a></li>
+                        <li><a href="tel:+233257679050">+233 25 767 9050</a></li>
+                        <li>Accra, Ghana</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; <span id="year">2026</span> Carl Christian Quist. All rights reserved.</span>
+                <span>Built in Accra, Ghana.</span>
+            </div>
         </div>
     </footer>
+    <script src="assets/js/site.js"></script>
 </body>
 </html>

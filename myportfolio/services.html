@@ -4,348 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | Carl Christian Quist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2a4365;
-            --secondary: #c05621;
-            --light: #f7fafc;
-            --dark: #1a202c;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--dark);
-            line-height: 1.6;
-            background-color: var(--light);
-        }
-        
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .nav-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-        
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        
-        .services-container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        
-        .services-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .services-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .services-header p {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin: 0 0 15px;
-            color: var(--primary);
-        }
-        
-        .service-card p {
-            margin: 0 0 20px;
-            color: var(--dark);
-        }
-        
-        .service-features {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .service-features li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 25px;
-        }
-        
-        .service-features li::before {
-            content: "✓";
-            color: var(--secondary);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        
-        .cta-section {
-            text-align: center;
-            margin-top: 60px;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(42, 67, 101, 0.05) 0%, rgba(192, 86, 33, 0.05) 100%);
-            border-radius: 10px;
-        }
-        
-        .cta-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            color: white;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            background-size: 200% auto;
-            box-shadow: 0 4px 15px rgba(42, 67, 101, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .cta-btn:hover {
-            background-position: right center;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 67, 101, 0.4);
-        }
-        
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 80px;
-        }
-        
-        @media (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .services-header h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .nav-links {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 10px 18px;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Web development, web systems, website management, IT support, networking and Excel data services from Carl Christian Quist in Accra.">
+    <meta name="theme-color" content="#13233a">
+    <link rel="icon" href="profile.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo">Carl Quist</a>
-            <div class="nav-links">
+    <header class="site-nav">
+        <div class="container">
+            <a href="index.html" class="brand" aria-label="Carl Christian Quist, home"><span class="brand-mark">CQ</span>Carl Quist</a>
+            <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav class="nav-links" aria-label="Main">
                 <a href="index.html">Home</a>
-                <a href="services.html" class="active">Services</a>
+                <a href="services.html" class="active" aria-current="page">Services</a>
                 <a href="portfolio.html">Work</a>
                 <a href="contributions.html">Contributions</a>
-                <a href="contact.html">Contact</a>
-            </div>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </nav>
         </div>
     </header>
-    
-    <main>
-        <div class="services-container">
-            <div class="services-header">
-                <h1>My Services</h1>
-                <p>IT support and software solutions that keep your organisation's technology secure, efficient and reliable.</p>
-            </div>
-            
-            <div class="services-grid">
-                <!-- Service 1 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
+    <section class="page-hero">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="container">
+            <span class="eyebrow reveal">Services</span>
+            <h1 class="reveal d1">How I Can Help</h1>
+            <p class="reveal d2">IT support and software that keep your organisation's technology secure, efficient and reliable.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="cards">
+                <div class="card reveal d0">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
                     <h3>Web Design &amp; Development</h3>
                     <p>Fast, responsive websites that present your business clearly and work on every device.</p>
-                    <ul class="service-features">
-                        <li>Business and company websites</li>
-                        <li>Responsive, mobile-first design</li>
-                        <li>Next.js, React and TypeScript</li>
-                        <li>Content management with Sanity CMS</li>
-                        <li>Hosting and deployment on Vercel</li>
-                    </ul>
+                    <ul><li>Business and company websites</li><li>Responsive, mobile-first design</li><li>Next.js, React and TypeScript</li><li>Content management with Sanity CMS</li><li>Hosting and deployment on Vercel</li></ul>
                 </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-server"></i>
-                    </div>
+                <div class="card reveal d1">
+                    <div class="card-icon"><i class="fas fa-server"></i></div>
                     <h3>Web Systems &amp; Applications</h3>
                     <p>Custom systems that replace manual office routines, like LateWatch at the Ghana Revenue Authority.</p>
-                    <ul class="service-features">
-                        <li>Attendance and staff management</li>
-                        <li>Inventory management (RFID-IMS)</li>
-                        <li>Request and approval workflows</li>
-                        <li>Role-based access and audit trails</li>
-                        <li>Automated Excel and PDF reports</li>
-                    </ul>
+                    <ul><li>Attendance and staff management</li><li>Inventory and RFID tracking</li><li>Request and approval workflows</li><li>Role-based access and audit trails</li><li>Automated Excel and PDF reports</li></ul>
                 </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
+                <div class="card reveal d2">
+                    <div class="card-icon"><i class="fas fa-globe"></i></div>
                     <h3>Website Management</h3>
                     <p>Keeping public websites accurate, current and working, as I do with the GRA Webmaster.</p>
-                    <ul class="service-features">
-                        <li>Content and page updates</li>
-                        <li>WordPress plugins and tools</li>
-                        <li>Online tax calculators (VAT, PIT, PAYE)</li>
-                        <li>Performance and broken-link fixes</li>
-                        <li>Ongoing maintenance</li>
-                    </ul>
+                    <ul><li>Content and page updates</li><li>WordPress plugins and tools</li><li>Online calculators and forms</li><li>Performance and broken-link fixes</li><li>Ongoing maintenance</li></ul>
                 </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
+                <div class="card reveal d0">
+                    <div class="card-icon"><i class="fas fa-headset"></i></div>
                     <h3>End-User IT Support</h3>
                     <p>Practical support that keeps staff productive and their equipment running.</p>
-                    <ul class="service-features">
-                        <li>Desktop and laptop troubleshooting</li>
-                        <li>Software installation and setup</li>
-                        <li>User accounts and access</li>
-                        <li>Printer and peripheral support</li>
-                        <li>Staff guidance and training</li>
-                    </ul>
+                    <ul><li>Desktop and laptop troubleshooting</li><li>Software installation and setup</li><li>User accounts and access</li><li>Printer and peripheral support</li><li>Staff guidance and training</li></ul>
                 </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
+                <div class="card reveal d1">
+                    <div class="card-icon"><i class="fas fa-network-wired"></i></div>
                     <h3>Networking &amp; Cabling</h3>
                     <p>Reliable wired connections for offices, from cable to working network point.</p>
-                    <ul class="service-features">
-                        <li>Making and terminating RJ45 cables</li>
-                        <li>Office network connections</li>
-                        <li>Connectivity troubleshooting</li>
-                        <li>Wi-Fi and hotspot setup</li>
-                        <li>Linux system configuration</li>
-                    </ul>
+                    <ul><li>Making and terminating RJ45 cables</li><li>Office network connections</li><li>Connectivity troubleshooting</li><li>Wi-Fi and hotspot setup</li><li>Linux system configuration</li></ul>
                 </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-table"></i>
-                    </div>
+                <div class="card reveal d2">
+                    <div class="card-icon"><i class="fas fa-table"></i></div>
                     <h3>Data &amp; Microsoft Excel</h3>
                     <p>Accurate data entry, analysis and reporting for informed decisions.</p>
-                    <ul class="service-features">
-                        <li>Data entry and cleaning</li>
-                        <li>Analysis in Microsoft Excel</li>
-                        <li>Reports and summaries</li>
-                        <li>Microsoft Office documents</li>
-                        <li>Spreadsheet templates</li>
+                    <ul><li>Data entry and cleaning</li><li>Analysis in Microsoft Excel</li><li>Reports and summaries</li><li>Microsoft Office documents</li><li>Spreadsheet templates</li></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section spotlight">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="kicker">How I work</span>
+                <h2>From first conversation to ongoing support</h2>
+            </div>
+            <div class="process">
+                <div class="step reveal"><div class="step-num">01</div><h3>Understand</h3><p>We agree what the system or website must do, who uses it and how success is measured.</p></div>
+                <div class="step reveal d1"><div class="step-num">02</div><h3>Build</h3><p>I design and build in short steps, sharing a live preview link so you can see progress.</p></div>
+                <div class="step reveal d2"><div class="step-num">03</div><h3>Launch</h3><p>I deploy, test on real devices, and train the people who will use it.</p></div>
+                <div class="step reveal d3"><div class="step-num">04</div><h3>Support</h3><p>I stay on hand for fixes, updates and improvements as your needs grow.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section tight">
+        <div class="container">
+            <div class="cta reveal">
+                <h2>Need reliable IT or a new website?</h2>
+                <p>Tell me what you need and I'll get back to you with how I can help.</p>
+                <a href="contact.html" class="btn btn-ghost">Get in Touch <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="brand"><span class="brand-mark">CQ</span>Carl Quist</a>
+                    <p>IT Officer and Software Developer in Accra, Ghana. Building and supporting systems people rely on every day.</p>
+                    <div class="socials">
+                        <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Pages</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Work</a></li>
+                        <li><a href="contributions.html">Contributions</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a></li>
+                        <li><a href="tel:+233257679050">+233 25 767 9050</a></li>
+                        <li>Accra, Ghana</li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="cta-section">
-                <h2>Need reliable IT or a new website?</h2>
-                <p>Let's discuss how I can help your team or business.</p>
-                <a href="contact.html" class="cta-btn">Get in Touch</a>
+            <div class="footer-bottom">
+                <span>&copy; <span id="year">2026</span> Carl Christian Quist. All rights reserved.</span>
+                <span>Built in Accra, Ghana.</span>
             </div>
         </div>
-    </main>
-    
-    <footer>
-        <p>&copy; 2026 Carl Christian Quist. All rights reserved.</p>
-        <div style="margin-top: 15px;">
-            <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub" style="color: white; margin: 0 10px;"><i class="fab fa-github"></i></a>
-            <a href="mailto:equalizerjr@gmail.com" aria-label="Email" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+233257679050" aria-label="Phone" style="color: white; margin: 0 10px;"><i class="fas fa-phone"></i></a>
-        </div>
     </footer>
+    <script src="assets/js/site.js"></script>
 </body>
 </html>

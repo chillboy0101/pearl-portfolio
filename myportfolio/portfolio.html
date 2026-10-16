@@ -4,485 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Work | Carl Christian Quist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2a4365;
-            --secondary: #c05621;
-            --light: #f7fafc;
-            --dark: #1a202c;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--dark);
-            line-height: 1.6;
-            background-color: var(--light);
-        }
-        
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-        }
-        
-        .back-btn {
-            display: inline-block;
-            padding: 8px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            color: var(--primary);
-            background: transparent;
-            border: 2px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-        
-        .back-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .portfolio-container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        
-        .portfolio-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .portfolio-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .portfolio-header p {
-            font-size: 1.2rem;
-            color: var(--secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .portfolio-item {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .portfolio-image {
-            aspect-ratio: 1200 / 693;
-            overflow: hidden;
-            border-bottom: 1px solid rgba(42, 67, 101, 0.08);
-        }
-        
-        .portfolio-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            transition: transform 0.5s ease;
-        }
-        
-        .portfolio-item:hover .portfolio-image img {
-            transform: scale(1.05);
-        }
-        
-        .portfolio-info {
-            padding: 20px;
-        }
-        
-        .portfolio-info h3 {
-            margin: 0 0 10px;
-            color: var(--primary);
-        }
-        
-        .portfolio-info p {
-            margin: 0 0 15px;
-            color: var(--dark);
-        }
-        
-        .portfolio-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(42, 67, 101, 0.1);
-            color: var(--primary);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .project-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .project-links a {
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-        }
-        
-        .project-links a:hover {
-            color: var(--primary);
-        }
-        
-        .project-links i {
-            font-size: 0.75rem;
-        }
-        
-        .more-work {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 50px;
-        }
-        
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 80px;
-        }
-        
-        @media (max-width: 768px) {
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .portfolio-header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Twelve live projects by Carl Christian Quist: Ghana Revenue Authority systems, client websites and web applications.">
+    <meta name="theme-color" content="#13233a">
+    <link rel="icon" href="profile.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo">Carl Quist</a>
-            <a href="index.html" class="back-btn">← Back to Home</a>
+    <header class="site-nav">
+        <div class="container">
+            <a href="index.html" class="brand" aria-label="Carl Christian Quist, home"><span class="brand-mark">CQ</span>Carl Quist</a>
+            <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            <nav class="nav-links" aria-label="Main">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="portfolio.html" class="active" aria-current="page">Work</a>
+                <a href="contributions.html">Contributions</a>
+                <a href="contact.html" class="nav-cta">Hire Me</a>
+            </nav>
         </div>
     </header>
-    
-    <main>
-        <div class="portfolio-container">
-            <div class="portfolio-header">
-                <h1>My Work</h1>
-                <p>Systems, tools and websites I have built for the Ghana Revenue Authority and for clients across Accra. Every image is a screenshot of the real, working project.</p>
+    <section class="page-hero">
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="container">
+            <span class="eyebrow reveal">My Work</span>
+            <h1 class="reveal d1">Projects &amp; Live Systems</h1>
+            <p class="reveal d2">Systems, tools and websites I have built for the Ghana Revenue Authority and for clients across Accra. Every screenshot is from the real, working project.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="filters reveal" role="group" aria-label="Filter projects">
+                <button class="filter active" type="button" data-filter="all" aria-pressed="true">All projects</button>
+                <button class="filter" type="button" data-filter="gra" aria-pressed="false">Ghana Revenue Authority</button>
+                <button class="filter" type="button" data-filter="client" aria-pressed="false">Client websites</button>
+                <button class="filter" type="button" data-filter="apps" aria-pressed="false">Apps &amp; systems</button>
             </div>
-            
-            <div class="portfolio-grid">
-                <!-- Project 1 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/latewatch.jpg" alt="LateWatch website screenshot" loading="lazy">
+            <div class="projects-grid">
+                <article class="project reveal" data-tilt data-cat="gra">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>latewatch.vercel.app</em></div>
+                        <div class="shot"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Ghana Revenue Authority</span>
                         <h3>LateWatch</h3>
-                        <p>Attendance and lateness tracking system with automated reports, used daily by the Online &amp; Production Unit at the Ghana Revenue Authority since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">Ghana Revenue Authority</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span></div>
+                        <div class="links"><a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/gra-calculators.jpg" alt="GRA Tax Calculators website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d1" data-tilt data-cat="gra">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>gra.gov.gh/online-tools/tax-calculators</em></div>
+                        <div class="shot"><img src="images/gra-calculators.jpg" alt="Screenshot of GRA Tax Calculators" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Ghana Revenue Authority</span>
                         <h3>GRA Tax Calculators</h3>
-                        <p>VAT, PIT and PAYE calculators live on the official Ghana Revenue Authority website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">WordPress</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">gra.gov.gh</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Use it on gra.gov.gh <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>VAT, PIT and PAYE calculators live on the official GRA website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
+                        <div class="tags"><span class="tag">WordPress</span><span class="tag">JavaScript</span><span class="tag">Public service</span></div>
+                        <div class="links"><a href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Use it on gra.gov.gh <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/cpa-calendar.jpg" alt="CPA Event Calendar website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d2" data-tilt data-cat="gra">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>cpa-event-calendar-gra.vercel.app</em></div>
+                        <div class="shot"><img src="images/cpa-calendar.jpg" alt="Screenshot of CPA Event Calendar" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Ghana Revenue Authority</span>
                         <h3>CPA Event Calendar</h3>
-                        <p>Event planning calendar for the Communication and Public Affairs department at GRA, with role-based sign-in, event status tracking and private storage for event evidence.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">Ghana Revenue Authority</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://cpa-event-calendar-gra.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/cpa-event-calendar" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>Event planning calendar for the Communication and Public Affairs department, with role-based sign-in, event status tracking and private storage for event evidence.</p>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">PostgreSQL</span><span class="tag">Drizzle</span></div>
+                        <div class="links"><a href="https://cpa-event-calendar-gra.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/cpa-event-calendar" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/op-awards.jpg" alt="O&P Awards website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal" data-tilt data-cat="gra">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>op-awards.vercel.app</em></div>
+                        <div class="shot"><img src="images/op-awards.jpg" alt="Screenshot of O&P Awards" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Ghana Revenue Authority</span>
                         <h3>O&amp;P Awards</h3>
-                        <p>Nomination and anonymous voting system for the 2026 Online &amp; Production staff awards, with phase-gated nominations and ballots, vote receipts, runoffs and certified results.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">Clerk</span>
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">Ghana Revenue Authority</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://op-awards.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/op-awards" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>Nomination and anonymous voting system for the 2026 Online &amp; Production staff awards, with phase-gated ballots, vote receipts, runoffs and certified results.</p>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">Clerk</span><span class="tag">PostgreSQL</span></div>
+                        <div class="links"><a href="https://op-awards.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/op-awards" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 5 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/jovel.jpg" alt="Jovel Pharmacy website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d1" data-tilt data-cat="client">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>jovelpharmacy.com</em></div>
+                        <div class="shot"><img src="images/jovel.jpg" alt="Screenshot of Jovel Pharmacy" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Client website</span>
                         <h3>Jovel Pharmacy</h3>
-                        <p>Full online pharmacy for Jovel Pharmacy: product shop with cart, prescription transfer, pharmacist consultations, customer accounts and an admin dashboard.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">Prisma</span>
-                            <span class="tag">PostgreSQL</span>
-                            <span class="tag">E-commerce</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://jovelpharmacy.com" target="_blank" rel="noopener">jovelpharmacy.com <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/jovel-pharmacy" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>Full online pharmacy: product shop with cart, prescription transfer, pharmacist consultations, customer accounts and an admin dashboard.</p>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">Prisma</span><span class="tag">E-commerce</span></div>
+                        <div class="links"><a href="https://jovelpharmacy.com" target="_blank" rel="noopener">jovelpharmacy.com <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/jovel-pharmacy" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 6 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/rikonim.jpg" alt="Rikonim Enterprise website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d2" data-tilt data-cat="client">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>rikonim.com</em></div>
+                        <div class="shot"><img src="images/rikonim.jpg" alt="Screenshot of Rikonim Enterprise" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Client website</span>
                         <h3>Rikonim Enterprise</h3>
                         <p>Website for a building and civil engineering company, with a project gallery and a Sanity CMS page builder so the team can update every page and preview changes before publishing.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">Sanity CMS</span>
-                            <span class="tag">SEO</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://rikonim.com" target="_blank" rel="noopener">rikonim.com <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/rikonim-enterprise" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">Sanity CMS</span><span class="tag">SEO</span></div>
+                        <div class="links"><a href="https://rikonim.com" target="_blank" rel="noopener">rikonim.com <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/rikonim-enterprise" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 7 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/kekeli.jpg" alt="Kekeli Studios website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal" data-tilt data-cat="client">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>kekelis-studio.vercel.app</em></div>
+                        <div class="shot"><img src="images/kekeli.jpg" alt="Screenshot of Kekeli Studios" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Client website</span>
                         <h3>Kekeli Studios</h3>
                         <p>Portfolio and booking website for a professional videographer and photographer serving brands, events and people.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Tailwind CSS</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://kekelis-studio.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/kekelis-studio" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span></div>
+                        <div class="links"><a href="https://kekelis-studio.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/kekelis-studio" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 8 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/rfid-ims.jpg" alt="RFID-IMS website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d1" data-tilt data-cat="apps">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>rfid-ims.vercel.app</em></div>
+                        <div class="shot"><img src="images/rfid-ims.jpg" alt="Screenshot of RFID-IMS" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Commissioned system</span>
                         <h3>RFID-IMS</h3>
-                        <p>RFID Inventory Management System commissioned by UPSA students and running as VDL Fulfilment Ops: RFID tag assignment, pickup authorisation and token-verified item exit, with a mobile app for stock, orders and vendors.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">React Native</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">RFID</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://rfid-ims.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/RFID-IMS" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>RFID Inventory Management System commissioned by UPSA students, running as VDL Fulfilment Ops: tag assignment, pickup authorisation and token-verified item exit, with a mobile app for stock, orders and vendors.</p>
+                        <div class="tags"><span class="tag">TypeScript</span><span class="tag">React Native</span><span class="tag">MongoDB</span></div>
+                        <div class="links"><a href="https://rfid-ims.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/RFID-IMS" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 9 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/samrej.jpg" alt="SAM-ReJ Company Limited website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d2" data-tilt data-cat="client">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>amenuveve-portfolio.vercel.app</em></div>
+                        <div class="shot"><img src="images/samrej.jpg" alt="Screenshot of SAM-ReJ Company Limited" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Client website</span>
                         <h3>SAM-ReJ Company Limited</h3>
-                        <p>Multipage website for a civil engineering and construction company, with a photo and video gallery of building, site and agriculture projects and an online quote form.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://amenuveve-portfolio.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/amenuveve-portfolio" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>Multipage website for a civil engineering and construction company, with a photo and video gallery of its projects and an online quote form.</p>
+                        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                        <div class="links"><a href="https://amenuveve-portfolio.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/amenuveve-portfolio" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 10 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/edinam.jpg" alt="Edinam Hospital website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal" data-tilt data-cat="apps">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>edinam-hospital.vercel.app</em></div>
+                        <div class="shot"><img src="images/edinam.jpg" alt="Screenshot of Edinam Hospital" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Web application</span>
                         <h3>Edinam Hospital</h3>
-                        <p>Hospital website with online appointment booking, an FAQ, a 3D virtual tour, a pharmacy catalogue with cart, and a chat assistant that hands over to a doctor.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Three.js</span>
-                            <span class="tag">Healthcare</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://edinam-hospital.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/Edinam-Hospital" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>Hospital website with online appointment booking, a 3D virtual tour, a pharmacy catalogue with cart, and a chat assistant that hands over to a doctor.</p>
+                        <div class="tags"><span class="tag">Next.js</span><span class="tag">Three.js</span><span class="tag">Healthcare</span></div>
+                        <div class="links"><a href="https://edinam-hospital.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/Edinam-Hospital" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 11 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/inventorypro.jpg" alt="InventoryPro Cloud website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d1" data-tilt data-cat="apps">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>InventoryPro Cloud</em></div>
+                        <div class="shot"><img src="images/inventorypro.jpg" alt="Screenshot of InventoryPro Cloud" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Web application</span>
                         <h3>InventoryPro Cloud</h3>
-                        <p>Cloud inventory management app with products, supplier orders, stock adjustments, low-stock alerts and analytics, secured with Supabase authentication.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Supabase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/chillboy0101/InventoryPro-Cloud" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <p>Cloud inventory management with products, supplier orders, stock adjustments, low-stock alerts and analytics, secured with Supabase authentication.</p>
+                        <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Supabase</span></div>
+                        <div class="links"><a href="https://github.com/chillboy0101/InventoryPro-Cloud" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
                     </div>
-                </div>
-                
-                <!-- Project 12 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="images/ewe.jpg" alt="Ewe Culture website screenshot" loading="lazy">
+                </article>
+                <article class="project reveal d2" data-tilt data-cat="client">
+                    <div class="browser">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>ewe-culture.vercel.app</em></div>
+                        <div class="shot"><img src="images/ewe.jpg" alt="Screenshot of Ewe Culture" loading="lazy"></div>
                     </div>
-                    <div class="portfolio-info">
+                    <div class="project-body">
+                        <span class="project-meta">Culture &amp; tourism</span>
                         <h3>Ewe Culture</h3>
                         <p>Informational website about Ghana's Ewe people, with pages on festivals, dance, language, dressing, food, tourism and a Learn Ewe section.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">Culture &amp; Tourism</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://ewe-culture.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/ewe-culture" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
+                        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Tourism</span></div>
+                        <div class="links"><a href="https://ewe-culture.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/ewe-culture" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
+                    </div>
+                </article>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 50px;" class="reveal">
+                <a href="contributions.html" class="btn btn-outline">Contributions &amp; experience</a>
+                <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" class="btn btn-outline"><i class="fab fa-github"></i> GitHub profile</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section tight">
+        <div class="container">
+            <div class="cta reveal">
+                <h2>Have a project like one of these?</h2>
+                <p>I build websites and systems that are fast, secure and easy for your team to use.</p>
+                <a href="contact.html" class="btn btn-ghost">Get in Touch <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="brand"><span class="brand-mark">CQ</span>Carl Quist</a>
+                    <p>IT Officer and Software Developer in Accra, Ghana. Building and supporting systems people rely on every day.</p>
+                    <div class="socials">
+                        <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
                     </div>
                 </div>
+                <div>
+                    <h4>Pages</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Work</a></li>
+                        <li><a href="contributions.html">Contributions</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a></li>
+                        <li><a href="tel:+233257679050">+233 25 767 9050</a></li>
+                        <li>Accra, Ghana</li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="more-work">
-                <a href="contributions.html" class="back-btn">View my contributions &amp; experience</a>
-                <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" class="back-btn"><i class="fab fa-github"></i> See more on GitHub</a>
+            <div class="footer-bottom">
+                <span>&copy; <span id="year">2026</span> Carl Christian Quist. All rights reserved.</span>
+                <span>Built in Accra, Ghana.</span>
             </div>
-        </div>
-    </main>
-    
-    <footer>
-        <p>&copy; 2026 Carl Christian Quist. All rights reserved.</p>
-        <div style="margin-top: 15px;">
-            <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub" style="color: white; margin: 0 10px;"><i class="fab fa-github"></i></a>
-            <a href="mailto:equalizerjr@gmail.com" aria-label="Email" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
-            <a href="tel:+233257679050" aria-label="Phone" style="color: white; margin: 0 10px;"><i class="fas fa-phone"></i></a>
         </div>
     </footer>
+    <script src="assets/js/site.js"></script>
 </body>
 </html>
