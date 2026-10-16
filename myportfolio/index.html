@@ -210,6 +210,30 @@
             transform: translateY(1px);
         }
         
+        .highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+        
+        .highlight i {
+            color: var(--secondary);
+        }
+        
         .social-links {
             margin-top: 30px;
         }
@@ -233,6 +257,10 @@
                 text-align: center;
             }
             
+            .hero {
+                padding-top: 80px;
+            }
+            
             .hero-image {
                 order: -1;
                 margin-bottom: 40px;
@@ -244,6 +272,10 @@
             
             .tagline {
                 font-size: 1.2rem;
+            }
+            
+            .highlights {
+                justify-content: center;
             }
             
             .btn-work, .btn-contact {
@@ -273,6 +305,9 @@
     <!-- Navigation Buttons -->
     <div class="nav-buttons">
         <a href="services.html" class="nav-btn">Services</a>
+        <a href="portfolio.html" class="nav-btn">Work</a>
+        <a href="contributions.html" class="nav-btn">Contributions</a>
+        <a href="contact.html" class="nav-btn">Contact</a>
        
     </div>
 
@@ -285,6 +320,11 @@
                 <div class="hero-buttons">
                     <a href="portfolio.html" class="btn-work">View My Work</a>
                     <a href="contact.html" class="btn-contact">Get In Touch</a>
+                </div>
+                <div class="highlights">
+                    <span class="highlight"><i class="fab fa-linux"></i> Linux kernel contributor</span>
+                    <span class="highlight"><i class="fas fa-landmark"></i> Systems in daily use at GRA</span>
+                    <span class="highlight"><i class="fas fa-globe"></i> 10+ live websites &amp; systems</span>
                 </div>
                 <div class="social-links">
                     <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>

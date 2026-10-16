@@ -52,6 +52,7 @@ Deployed on Vercel - [Coming Soon]
 ## Carl Christian Quist portfolio
 
 [`myportfolio/`](myportfolio/) is a copy of this site with Carl Christian Quist's details
-(IT Officer | Software Developer). It is served at `/myportfolio/` and has the same pages:
-Home, Services, Work and Contact. To use a photo, add it to `myportfolio/` and change the
-`profile.svg` image path in `myportfolio/index.html`.
+(IT Officer | Software Developer), served at `/myportfolio/`. Pages: Home, Services, Work,
+Contributions and Contact. Project images in `myportfolio/images/` are screenshots of the real
+sites or are built from each project's own logos, photos and app screens. To use a personal
+photo, add it to `myportfolio/` and change the `profile.svg` image path in `myportfolio/index.html`.

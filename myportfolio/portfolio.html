@@ -119,6 +119,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top center;
             transition: transform 0.5s ease;
         }
         
@@ -179,7 +180,10 @@
         }
         
         .more-work {
-            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
             margin-top: 50px;
         }
         
@@ -215,22 +219,23 @@
         <div class="portfolio-container">
             <div class="portfolio-header">
                 <h1>My Work</h1>
-                <p>Systems, tools and websites I have built for the Ghana Revenue Authority and for clients across Accra.</p>
+                <p>Systems, tools and websites I have built for the Ghana Revenue Authority and for clients across Accra. Every image is from the real project.</p>
             </div>
             
             <div class="portfolio-grid">
                 <!-- Project 1 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="LateWatch">
+                        <img src="images/latewatch.jpg" alt="LateWatch" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>LateWatch</h3>
-                        <p>Attendance and lateness tracking system with automated reports, used daily by the Online &amp; Production Unit at the Ghana Revenue Authority since May 2026.</p>
+                        <p>Attendance and lateness tracking system with automated reports, used daily by the Online &amp; Production Unit at the Ghana Revenue Authority since May 2026. Staff check in from verified phones; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
                         <div class="portfolio-tags">
                             <span class="tag">Next.js</span>
                             <span class="tag">TypeScript</span>
                             <span class="tag">PostgreSQL</span>
+                            <span class="tag">Ghana Revenue Authority</span>
                         </div>
                         <div class="project-links">
                             <a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
@@ -242,15 +247,15 @@
                 <!-- Project 2 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="GRA Tax Calculators">
+                        <img src="images/gra-calculators.jpg" alt="GRA Tax Calculators" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>GRA Tax Calculators</h3>
-                        <p>VAT, PIT and PAYE calculators on the official Ghana Revenue Authority website, applying the 2026 rates and bands for taxpayers.</p>
+                        <p>VAT, PIT and PAYE calculators on the official Ghana Revenue Authority website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
                         <div class="portfolio-tags">
                             <span class="tag">WordPress</span>
                             <span class="tag">JavaScript</span>
-                            <span class="tag">Public Service</span>
+                            <span class="tag">gra.gov.gh</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">VAT <i class="fas fa-external-link-alt"></i></a>
@@ -263,35 +268,16 @@
                 <!-- Project 3 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1636&q=80" alt="Rikonim Enterprise">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Rikonim Enterprise</h3>
-                        <p>Company website with a content management system, so the client's team can update every page and preview changes before publishing.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">Sanity CMS</span>
-                            <span class="tag">Web Design</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://rikonim.com" target="_blank" rel="noopener">rikonim.com <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/rikonim-enterprise" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Jovel Pharmacy">
+                        <img src="images/jovel.jpg" alt="Jovel Pharmacy" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>Jovel Pharmacy</h3>
-                        <p>Website for Jovel Pharmacy, giving customers an online presence for the business and its services.</p>
+                        <p>Full online pharmacy for Jovel Pharmacy: product shop with cart, prescription transfer, pharmacist consultations, customer accounts and an admin dashboard.</p>
                         <div class="portfolio-tags">
                             <span class="tag">Next.js</span>
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Web Design</span>
+                            <span class="tag">Prisma</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">E-commerce</span>
                         </div>
                         <div class="project-links">
                             <a href="https://jovelpharmacy.com" target="_blank" rel="noopener">jovelpharmacy.com <i class="fas fa-external-link-alt"></i></a>
@@ -300,18 +286,59 @@
                     </div>
                 </div>
                 
+                <!-- Project 4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/rikonim.jpg" alt="Rikonim Enterprise" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Rikonim Enterprise</h3>
+                        <p>Website for a building and civil engineering company, with a project gallery and a Sanity CMS page builder so the team can update every page and preview changes before publishing.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">Sanity CMS</span>
+                            <span class="tag">SEO</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://rikonim.com" target="_blank" rel="noopener">rikonim.com <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/rikonim-enterprise" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Project 5 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="RFID-IMS">
+                        <img src="images/kekeli.jpg" alt="Kekeli Studios" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Kekeli Studios</h3>
+                        <p>Portfolio and booking website for a professional videographer and photographer serving brands, events and people.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Next.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Tailwind CSS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://kekelistudios.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/kekelis-studio" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/rfid-ims.jpg" alt="RFID-IMS" loading="lazy">
                     </div>
                     <div class="portfolio-info">
                         <h3>RFID-IMS</h3>
-                        <p>RFID Inventory Management System built as commissioned work for students at the University of Professional Studies, Accra.</p>
+                        <p>RFID Inventory Management System commissioned by UPSA students: RFID tag assignment, pickup authorisation and token-verified item exit, with a mobile app for stock, orders and vendors.</p>
                         <div class="portfolio-tags">
                             <span class="tag">TypeScript</span>
+                            <span class="tag">React Native</span>
                             <span class="tag">MongoDB</span>
-                            <span class="tag">Inventory</span>
+                            <span class="tag">RFID</span>
                         </div>
                         <div class="project-links">
                             <a href="https://rfid-ims.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
@@ -320,29 +347,69 @@
                     </div>
                 </div>
                 
-                <!-- Project 6 -->
+                <!-- Project 7 -->
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Kekeli Studios">
+                        <img src="images/samrej.jpg" alt="SAM-ReJ Company Limited" loading="lazy">
                     </div>
                     <div class="portfolio-info">
-                        <h3>Kekeli Studios</h3>
-                        <p>Website for Kekeli Studios, delivered as freelance work and deployed on Vercel.</p>
+                        <h3>SAM-ReJ Company Limited</h3>
+                        <p>Multipage website for a civil engineering and construction company, with a photo and video gallery of building, site and agriculture projects and an online quote form.</p>
                         <div class="portfolio-tags">
-                            <span class="tag">TypeScript</span>
-                            <span class="tag">Vercel</span>
-                            <span class="tag">Web Design</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://kekelistudios.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/chillboy0101/kekelis-studio" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://amenuveve-portfolio.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/amenuveve-portfolio" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 8 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/inventorypro.jpg" alt="InventoryPro Cloud" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>InventoryPro Cloud</h3>
+                        <p>Cloud inventory management app with products, supplier orders, stock adjustments, low-stock alerts and analytics, secured with Supabase authentication.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Supabase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/chillboy0101/InventoryPro-Cloud" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 9 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="images/ewe.jpg" alt="Ewe Culture" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Ewe Culture</h3>
+                        <p>Informational website about Ghana's Ewe people, with pages on festivals, dance, language, dressing, food, tourism and a Learn Ewe section.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">Culture &amp; Tourism</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://ewe-culture.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/chillboy0101/ewe-culture" target="_blank" rel="noopener">Code <i class="fas fa-external-link-alt"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="more-work">
-                <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" class="back-btn"><i class="fab fa-github"></i> See more projects on GitHub</a>
+                <a href="contributions.html" class="back-btn">View my contributions &amp; experience</a>
+                <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" class="back-btn"><i class="fab fa-github"></i> See more on GitHub</a>
             </div>
         </div>
     </main>
