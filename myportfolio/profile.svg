@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" role="img" aria-label="Carl Christian Quist">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a4365"/>
+      <stop offset="1" stop-color="#c05621"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="500" fill="url(#g)"/>
+  <text x="250" y="292" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="170" font-weight="700" fill="#ffffff">CQ</text>
+</svg>
