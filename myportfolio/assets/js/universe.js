@@ -195,7 +195,7 @@
 
     /* Fade sections up as they arrive, and start their one-off effects. */
     function reveal() {
-        var targets = $$('.rv, [data-scramble], [data-count], .repo-list, [data-build]');
+        var targets = $$('.rv, .river-vis, [data-scramble], [data-count], .repo-list, [data-build]');
         function run(el) {
             el.classList.add('in');
             if (el.hasAttribute('data-scramble')) scramble(el);

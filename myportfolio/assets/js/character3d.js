@@ -221,9 +221,10 @@ async function mountPeek() {
     const stage = makeStage(THREE, canvas);
     const c = buildCharacter(THREE);
     stage.scene.add(c.root);
+    /* Framed like Universe's Mona peek: just the head, cut off at the chin by the bottom edge. */
     c.root.position.y = -0.75;
-    stage.camera.position.set(0, 0.9, 5.2);
-    stage.camera.lookAt(0, 0.9, 0);
+    stage.camera.position.set(0, 0.8, 4.2);
+    stage.camera.lookAt(0, 0.8, 0);
     window.cq3dPeek = true;
     game.classList.add('has-3d');
     const blink = blinker();

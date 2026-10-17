@@ -700,38 +700,160 @@ p {
     padding: 18px 24px;
 }
 
-.river-title {
-    padding: 48px 24px 64px;
-}
-
-.river-row {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.river-note {
+/* River rows follow Universe: the copy column has a label box sitting on a split heading area,
+   28px copy and a button at the foot; the photo fills the other half and rises in. */
+.river-intro {
     display: flex;
-    align-items: flex-end;
-    padding: 24px;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
 }
 
-.river-copy {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-}
-
-.river-text {
+.river-cell {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 40px;
-    padding: 24px;
-    min-height: 380px;
 }
 
-.river-text .lead {
-    max-width: 30ch;
+.river-cell + .river-cell {
+    border-left: 1px solid var(--line);
+}
+
+.river-intro h2 {
+    padding: 24px;
+}
+
+.river-gap {
+    height: 96px;
+}
+
+.river-note {
+    justify-content: flex-end;
+    padding: 24px;
+}
+
+.river-note .body {
+    max-width: 44ch;
+    color: var(--ink-soft);
+}
+
+.river-rows {
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+}
+
+.river-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.river-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+}
+
+/* The heading area takes whatever height the photo leaves, so the copy and button always fit. */
+.river-heading {
+    position: relative;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    min-height: 120px;
+    border-bottom: 1px solid var(--line);
+}
+
+.river-heading::before {
+    content: "";
+    position: absolute;
+    top: -9999px;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--line);
+}
+
+.river-label {
+    padding: 24px;
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.river-desc {
+    max-width: 600px;
+    padding: 24px;
+    font-size: 28px;
+    font-weight: 480;
+    line-height: 1.35;
+}
+
+.river-row-0 .river-desc {
+    padding-block: 8px;
+    line-height: 1.3;
+}
+
+.river-action {
+    margin-top: auto;
+    padding: 24px;
+}
+
+.river-row-0 .river-action,
+.river-row-1 .river-action {
+    padding-top: 0;
+}
+
+.river-row-1 .river-action {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.river-row-2 .river-content {
+    padding-bottom: 64px;
+}
+
+.river-visual {
+    position: relative;
+    overflow: hidden;
+    align-self: start;
+}
+
+.river-row-1 .river-visual {
+    align-self: end;
+}
+
+.river-band {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.river-vis .carousel {
+    aspect-ratio: 4 / 3;
+}
+
+.river-row-2 .river-vis .carousel {
+    aspect-ratio: 645 / 380;
+}
+
+.river-vis .carousel img {
+    filter: none;
+}
+
+.js .river-vis {
+    opacity: 0;
+    transform: translateY(20%);
+}
+
+.js .river-vis.in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.1s ease-out, transform 0.6s cubic-bezier(.3, .41, .04, 1.01);
 }
 
 .shot {
@@ -771,12 +893,14 @@ p {
 
 /* ---------- 3D character (character3d.js) ---------- */
 
-.peek3d {
+.game .peek3d {
     position: absolute;
-    right: 5%;
+    top: auto;
+    left: auto;
+    right: 4px;
     bottom: 0;
-    width: 340px;
-    height: 300px;
+    width: 300px;
+    height: 200px;
     pointer-events: none;
     animation: peek-in 0.9s cubic-bezier(.16, 1, .3, 1) both;
 }
@@ -803,9 +927,10 @@ p {
 }
 
 @media (max-width: 600px) {
-    .peek3d {
-        width: 210px;
-        height: 190px;
+    .game .peek3d {
+        right: 0;
+        width: 196px;
+        height: 130px;
     }
 }
 
@@ -834,18 +959,26 @@ p {
     margin: 0;
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.4;
+    pointer-events: none;
+}
+
+.proof-cap {
+    position: static;
     font-family: var(--sans);
     font-size: 16px;
     line-height: 1.5;
     pointer-events: none;
 }
 
-.proof-cap {
-    position: static;
-    pointer-events: none;
+/* Text cursors blink only while paused (not while typing): a block on the photo captions,
+   a thin bar on the proof caption. */
+.carousel .cap .cur {
+    width: 0.55em !important;
 }
 
-/* Thin text cursor; it blinks only while paused (not while typing). */
 .proof-cap .cur,
 .carousel .cap .cur {
     display: inline-block;
@@ -2512,6 +2645,41 @@ a.contact-cell:hover {
 }
 
 @media (max-width: 900px) {
+    /* River: photo above the copy, as on Universe's narrow layout. */
+    .river-intro {
+        flex-direction: column;
+    }
+
+    .river-cell + .river-cell {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+    }
+
+    .river-gap {
+        height: 24px;
+    }
+
+    .river-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .river-visual {
+        order: -1;
+    }
+
+    .river-heading {
+        flex: none;
+        min-height: 120px;
+    }
+
+    .river-desc {
+        font-size: 22px;
+    }
+
+    .river-row-2 .river-content {
+        padding-block: 0;
+    }
+
     :root {
         --nav-h: 60px;
     }
@@ -2620,7 +2788,6 @@ a.contact-cell:hover {
     }
 
     .hero-grid,
-    .river-row,
     .sec-head,
     .c4,
     .work-grid,
@@ -2713,7 +2880,6 @@ a.contact-cell:hover {
 
 @media (max-width: 600px) {
     .hero-grid,
-    .river-row,
     .c4,
     .work-grid,
     .footer {
@@ -2738,9 +2904,6 @@ a.contact-cell:hover {
         padding-top: 8px;
     }
 
-    .river-text {
-        min-height: 0;
-    }
 
     .day {
         grid-template-columns: 1fr;
