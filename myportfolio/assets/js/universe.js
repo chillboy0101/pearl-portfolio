@@ -133,55 +133,111 @@
 
     /* The cursor lights up 20px grid blocks in the palette colours; some carry a code character.
        Each block pops in, holds briefly and shrinks away. */
-    var TRAIL_COLOURS = ['#f73678', '#c05200', '#bba00a', '#ae85ff', '#12bf3e', '#178ffb', '#ff7ded', '#08872b'];
+    /* Cursor trail: a pool of ten 20px blocks that snap to the grid under the
+       pointer, only over the empty parts of trail areas (never over text,
+       links, buttons or anything marked .trail-ignore). */
+    var TRAIL_COLOURS = ['#ae85ff', '#f73678', '#c05200', '#583af7', '#5fed83', '#bba00a'];
+    var TRAIL_GLYPHS = ['-', '/', ')', '.', '+', '=', '>', '<', '*', '&', '('];
+
     function trail() {
         if (reduced || !finePointer) return;
         var size = 20;
-        var lastKey = '';
-        window.addEventListener('mousemove', function (e) {
-            var cx = Math.floor(e.clientX / size);
-            var cy = Math.floor(e.clientY / size);
-            var key = cx + ',' + cy;
-            if (key === lastKey) return;
-            lastKey = key;
-            var block = document.createElement('span');
+        var count = 10;
+        var pool = [];
+        for (var i = 0; i < count; i++) {
+            var block = document.createElement('div');
             block.className = 'trail';
             block.setAttribute('aria-hidden', 'true');
-            block.style.transform = 'translate(' + cx * size + 'px,' + cy * size + 'px)';
-            var colour = document.createElement('span');
-            colour.style.backgroundColor = TRAIL_COLOURS[Math.floor(Math.random() * TRAIL_COLOURS.length)];
-            if (Math.random() < 0.4) colour.textContent = GLYPHS.charAt(Math.floor(Math.random() * 10));
+            var colour = document.createElement('div');
             block.appendChild(colour);
             document.body.appendChild(block);
-            requestAnimationFrame(function () { block.classList.add('on'); });
-            setTimeout(function () { block.classList.remove('on'); }, 260);
-            setTimeout(function () { block.remove(); }, 520);
-        }, { passive: true });
+            pool.push({ el: block, colour: colour, id: -1 });
+        }
+        var lastX = 0, lastY = 0, index = 0, nextId = 0, blocked = false;
+
+        function move(e) {
+            if (blocked) return;
+            var target = e.target;
+            if (!(target instanceof Element) || target.closest('.trail-ignore')) return;
+            var area = e.currentTarget.getBoundingClientRect();
+            var cx = e.clientX, cy = e.clientY;
+            if (cx < area.left || cx > area.right || cy < area.top || cy > area.bottom) return;
+            var x = size * Math.floor(cx / size);
+            var y = size * Math.floor(cy / size);
+            var text = (target.textContent || '').trim();
+            if (target.children.length === 0 && text !== '') return;
+            if (target.tagName === 'BUTTON' || target.tagName === 'A') return;
+            if (x === lastX && y === lastY) return;
+            lastX = x;
+            lastY = y;
+            index = (index + 1) % count;
+            var slot = pool[index];
+            var id = nextId++;
+            slot.id = id;
+            slot.el.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+            slot.colour.style.backgroundColor = TRAIL_COLOURS[Math.floor(Math.random() * TRAIL_COLOURS.length)];
+            slot.colour.textContent = Math.random() < 0.3 ? ' ' : TRAIL_GLYPHS[Math.floor(Math.random() * TRAIL_GLYPHS.length)];
+            slot.el.classList.add('on');
+            setTimeout(function () {
+                if (slot.id === id) slot.el.classList.remove('on');
+            }, 100 + 300 * Math.random());
+        }
+
+        $$('.trail-area').forEach(function (area) {
+            area.addEventListener('mousemove', move, { passive: true });
+        });
+        $$('.trail-ignore').forEach(function (el) {
+            el.addEventListener('mouseenter', function () { blocked = true; });
+            el.addEventListener('mouseleave', function () { blocked = false; });
+        });
     }
 
     /* Nav links briefly unscramble on hover. */
     function navUnscramble() {
         if (reduced) return;
-        $$('.nav .link, .nav .cta').forEach(function (a) {
-            var node = a.firstChild;
-            if (!node || node.nodeType !== 3) return;
-            var text = node.textContent;
-            var timer = 0;
-            a.addEventListener('mouseenter', function () {
-                var frame = 0;
-                clearInterval(timer);
-                timer = setInterval(function () {
-                    frame++;
-                    var out = '';
-                    for (var i = 0; i < text.length; i++) {
-                        var ch = text.charAt(i);
-                        out += i < frame - 2 || ch === ' ' ? ch : GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
-                    }
-                    node.textContent = out;
-                    if (frame > text.length + 2) { clearInterval(timer); node.textContent = text; }
-                }, 30);
-            });
+        $$('.nav .link, .nav .cta').forEach(function (a) { unscrambleOnHover(a, a); });
+        /* Stack cards: the label unscrambles when the card is hovered, like Universe's speaker cards. */
+        $$('.stack-cell').forEach(function (cell) { unscrambleOnHover(cell, $('.cap > span', cell)); });
+    }
+
+    function unscrambleOnHover(trigger, el) {
+        var node = el && el.firstChild;
+        if (!node || node.nodeType !== 3) return;
+        var text = node.textContent;
+        var timer = 0;
+        trigger.addEventListener('mouseenter', function () {
+            var frame = 0;
+            clearInterval(timer);
+            timer = setInterval(function () {
+                frame++;
+                var out = '';
+                for (var i = 0; i < text.length; i++) {
+                    var ch = text.charAt(i);
+                    out += i < frame - 2 || ch === ' ' ? ch : GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+                }
+                node.textContent = out;
+                if (frame > text.length + 2) { clearInterval(timer); node.textContent = text; }
+            }, 30);
         });
+    }
+
+    /* Stack cards rise in one after another (0.15 s apart) as they reach the viewport. */
+    function stackRise() {
+        var cells = $$('.stack-cell');
+        if (reduced || !cells.length || !('IntersectionObserver' in window)) return;
+        cells.forEach(function (cell, i) {
+            cell.classList.add('rise');
+            cell.style.transitionDelay = (window.innerWidth < 768 ? 0 : 0.15 * i) + 's';
+        });
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                io.unobserve(entry.target);
+                entry.target.classList.add('risen');
+                setTimeout(function () { entry.target.style.transitionDelay = ''; }, 1400 + 150 * cells.length);
+            });
+        }, { rootMargin: '0px 0px 10% 0px' });
+        cells.forEach(function (cell) { io.observe(cell); });
     }
 
     function onVisible(el, cb) {
@@ -189,7 +245,7 @@
         new IntersectionObserver(function (entries) { cb(entries[0].isIntersecting); }).observe(el);
     }
 
-    /* Type a caption out with a blinking block cursor after it. */
+    /* Type a caption out with a thin blinking cursor after it. */
     function typeCaption(el, text) {
         clearTimeout(el._t);
         var i = 0;
@@ -252,11 +308,11 @@
             box.style.setProperty('--c', items[current].getAttribute('data-c'));
             var lbl = $('.proof-label', items[current]);
             if (lbl && !reduced) scramble(lbl);
-            if (cap && box._typed) typeCaption(cap, 'dev.proof()');
+            if (cap && box._typed) typeCaption(cap, 'dev.proof-of-work()');
         }
         if (cap) {
             cap.textContent = '';
-            onVisible(box, function (v) { if (v && !box._typed) { box._typed = true; typeCaption(cap, 'dev.proof()'); } });
+            onVisible(box, function (v) { if (v && !box._typed) { box._typed = true; typeCaption(cap, 'dev.proof-of-work()'); } });
         }
         $('[data-proof="prev"]', box).addEventListener('click', function () { show(current - 1); });
         $('[data-proof="next"]', box).addEventListener('click', function () { show(current + 1); });
@@ -347,7 +403,22 @@
         var desc = $('#pl-desc');
         var links = $('#pl-links');
         var note = $('#pl-note');
+        var playlist = $('.playlist');
+        var list = $('.pl-list');
+        var view = $('.pl-view');
         var current = 0;
+
+        /* Rows and the player rise in as they reach the viewport. */
+        buttons.concat(view).forEach(function (el) {
+            onVisible(el, function (v) { if (v) el.classList.add('shown'); });
+        });
+
+        /* Once the visitor picks a demo, the chosen row and the player take that row's colour. */
+        function pick() {
+            playlist.classList.add('picked');
+            list.classList.add('picked');
+            view.style.setProperty('--active', buttons[current].style.getPropertyValue('--fill'));
+        }
 
         function stop() {
             var v = $('video', player);
@@ -394,10 +465,10 @@
             if (started && started.catch) started.catch(function () { /* the error event above handles a missing file */ });
         }
 
-        buttons.forEach(function (b, i) { b.addEventListener('click', function () { show(i); }); });
-        $('.pl-play').addEventListener('click', play);
-        $('[data-pl="prev"]').addEventListener('click', function () { show(current - 1); });
-        $('[data-pl="next"]').addEventListener('click', function () { show(current + 1); });
+        buttons.forEach(function (b, i) { b.addEventListener('click', function () { show(i); pick(); }); });
+        $('.pl-play').addEventListener('click', function () { pick(); play(); });
+        $('[data-pl="prev"]').addEventListener('click', function () { show(current - 1); pick(); });
+        $('[data-pl="next"]').addEventListener('click', function () { show(current + 1); pick(); });
     }
 
     /* The closing art panel: pieces build in and the character slides in when it arrives; then the head
@@ -504,6 +575,7 @@
     carousels();
     ctaArt();
     navUnscramble();
+    stackRise();
     proof();
     filters();
     tabs();

@@ -278,10 +278,11 @@ async function mountArt() {
     const holder = new THREE.Group();
     holder.add(c.root);
     stage.scene.add(holder);
-    c.root.rotation.y = 0.45 * Math.PI / 2;
-    c.root.position.y = -1.1;
-    stage.camera.position.set(-0.25, 0.55, 6.6);
-    stage.camera.lookAt(-0.25, 0.55, 0);
+    /* Framed like Universe's Mona: a big head in profile facing right, filling the green tile
+       and cut off at the bottom by the edge of the panel. */
+    c.root.rotation.y = 0.42 * Math.PI;
+    stage.camera.position.set(0.32, 1.1, 6.6);
+    stage.camera.lookAt(0.32, 1.1, 0);
     art.classList.add('has-3d');
     const blink = blinker();
     const turn = { x: 0, y: 0 };
@@ -307,8 +308,15 @@ async function mountArt() {
         stage.renderer.render(stage.scene, stage.camera);
         raf = visible ? requestAnimationFrame(frame) : 0;
     }
-    sizeTo(stage, canvas);
-    addEventListener('resize', () => sizeTo(stage, canvas));
+    /* The art scales with "slice", so match the canvas to where the green tile (0–350 of 850) lands. */
+    const fit = () => {
+        const r = art.getBoundingClientRect();
+        const scale = Math.max(r.width / 850, r.height / 425);
+        canvas.style.width = Math.min(r.width, 350 * scale) + 'px';
+        sizeTo(stage, canvas);
+    };
+    fit();
+    addEventListener('resize', fit);
     watch(art, (v) => {
         visible = v;
         if (v && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
