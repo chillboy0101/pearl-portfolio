@@ -43,6 +43,114 @@
         window.addEventListener('resize', fitNow);
     }
 
+    /* Wordmark intro, timed like Universe's logo: a green cursor bar drops in at each letter 75 ms
+       apart, then the letter scales up from half size; the green slash is assembled from coloured
+       pixels that hop into place before it wipes in. */
+    var EXPO_OUT = 'cubic-bezier(.16, 1, .3, 1)';
+
+    function wordmarkIntro() {
+        var mark = $('#wordmark');
+        if (!mark) return;
+        var letters = $$('.wl:not(.sp)', mark);
+        var tick = $('.tick', mark);
+        if (reduced || !mark.animate) {
+            mark.classList.add('intro-done');
+            return;
+        }
+        /* Wait for the font so the bars and pixels land on the final letter positions. */
+        var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+        ready.then(function () { playWordmark(mark, letters, tick); });
+    }
+
+    function playWordmark(mark, letters, tick) {
+        var bars = [];
+        var box = mark.getBoundingClientRect();
+        letters.forEach(function (letter, i) {
+            var r = letter.getBoundingClientRect();
+            var bar = document.createElement('span');
+            bar.className = 'wm-bar';
+            bar.setAttribute('aria-hidden', 'true');
+            bar.style.left = ((r.left - box.left) / box.width * 100) + '%';
+            mark.appendChild(bar);
+            bars.push(bar);
+            var t = 75 * i;
+            bar.animate([{ visibility: 'visible', transform: 'scaleY(.1)' }, { visibility: 'visible', transform: 'scaleY(1)' }],
+                { duration: 200, delay: t, easing: EXPO_OUT });
+            letter.animate([{ visibility: 'visible', transform: 'scale(.5)' }, { visibility: 'visible', transform: 'scale(1)' }],
+                { duration: 700, delay: t + 200, easing: EXPO_OUT, fill: 'forwards' });
+        });
+        tickIntro(mark, tick, box);
+        setTimeout(function () {
+            bars.forEach(function (b) { b.remove(); });
+            mark.classList.add('intro-done');
+            letters.concat(tick).forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
+        }, 3200);
+    }
+
+    function tickIntro(mark, tick, box) {
+        var r = tick.getBoundingClientRect();
+        var n = 2 * Math.floor(box.width * 0.017 / 2);
+        /* Measure the slash glyph itself so the 2x2 pixel block lands on its top-right end. */
+        var cs = getComputedStyle(tick);
+        var ctx = document.createElement('canvas').getContext('2d');
+        ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+        var m = ctx.measureText('/');
+        var baseline = r.top + (r.height - m.fontBoundingBoxAscent - m.fontBoundingBoxDescent) / 2 + m.fontBoundingBoxAscent;
+        var headX = r.left + Math.min(r.width, m.actualBoundingBoxRight) - 2 * n;
+        var headY = baseline - m.actualBoundingBoxAscent;
+        var layer = document.createElement('span');
+        layer.className = 'wm-pixels';
+        layer.setAttribute('aria-hidden', 'true');
+        layer.style.left = (headX - box.left) + 'px';
+        layer.style.top = (headY - box.top) + 'px';
+        layer.style.width = layer.style.height = (2 * n) + 'px';
+        mark.appendChild(layer);
+        var GREEN = cs.color;
+        function px(colour) {
+            var p = document.createElement('span');
+            p.style.width = p.style.height = n + 'px';
+            p.style.background = colour;
+            layer.appendChild(p);
+            return p;
+        }
+        function at(s, fn) { setTimeout(fn, s * 1000); }
+        function go(p, from, to, dur, ease, start) {
+            at(start, function () {
+                p.animate([{ transform: 'translate(' + from[0] + '%,' + from[1] + '%)' }, { transform: 'translate(' + to[0] + '%,' + to[1] + '%)' }],
+                    { duration: dur * 1000, easing: ease || EXPO_OUT, fill: 'forwards' });
+            });
+        }
+        function show(p, s) { at(s, function () { p.style.visibility = 'visible'; }); }
+        function paint(p, colour, s) { at(s, function () { p.style.background = colour; }); }
+        function hide(p, s) { at(s, function () { p.style.visibility = 'hidden'; }); }
+
+        var line = document.createElement('span');
+        line.className = 'wm-bar';
+        line.style.left = (headX - box.left) / box.width * 100 + '%';
+        mark.appendChild(line);
+        line.animate([{ visibility: 'visible', transform: 'scaleY(8)' }, { visibility: 'visible', transform: 'scaleY(1)' }],
+            { duration: 300, delay: 200, easing: EXPO_OUT });
+
+        var p1 = px('#ff80f5'), p2 = px('#009cff'), p3 = px('#fd7200'), p4 = px('#c8a900'), p5 = px('#00f384');
+        show(p1, 0.4); go(p1, [0, 500], [0, 0], 0.3, null, 0.4);
+        paint(p1, '#02cb28', 0.9); paint(p1, '#fd7200', 1.7); paint(p1, '#00f384', 1.9); paint(p1, GREEN, 2.1);
+        show(p2, 0.5); go(p2, [100, 500], [100, 300], 0.3, null, 0.5); hide(p2, 0.8);
+        show(p2, 2); go(p2, [100, 300], [100, 0], 0.5, 'cubic-bezier(.34, 1.56, .64, 1)', 2); paint(p2, GREEN, 2.2);
+        show(p3, 0.6); go(p3, [0, 500], [0, 100], 0.2, null, 0.5); paint(p3, '#6a40ff', 0.8); paint(p3, GREEN, 2.2);
+        show(p4, 0.6); go(p4, [100, 500], [100, 300], 0.2, 'linear', 0.6); go(p4, [100, 300], [0, 300], 0.2, null, 0.8);
+        go(p4, [0, 300], [0, 100], 0.2, null, 1); paint(p4, '#00f384', 1.3); paint(p4, GREEN, 1.8);
+        show(p5, 1.15); go(p5, [0, 500], [0, 300], 0.2, null, 1.15); go(p5, [0, 300], [100, 300], 0.2, 'cubic-bezier(.33, 1, .68, 1)', 1.35);
+        paint(p5, '#6a40ff', 1.35); go(p5, [100, 300], [0, 300], 0.2, 'cubic-bezier(.33, 1, .68, 1)', 1.55); paint(p5, '#01b000', 1.55);
+        go(p5, [0, 300], [0, 0], 0.2, null, 1.75); paint(p5, GREEN, 1.75);
+
+        /* The slash itself wipes in from the top as the pixels settle, then the pixels go. */
+        at(1.7, function () {
+            tick.animate([{ visibility: 'visible', clipPath: 'inset(0 0 100% 0)' }, { visibility: 'visible', clipPath: 'inset(0 0 0 0)' }],
+                { duration: 1000, easing: EXPO_OUT, fill: 'forwards' });
+        });
+        at(2.6, function () { layer.remove(); line.remove(); });
+    }
+
     /* Phone menu: the nav cells fold behind a menu button. */
     function menu() {
         var nav = $('.nav');
@@ -78,8 +186,9 @@
             for (var k = 0; k < 3 && i + k < text.length; k++) tail += GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
             el.textContent = text.slice(0, i) + tail;
             if (i < text.length) setTimeout(step, 32);
-            else el.innerHTML = html;
+            else { el.innerHTML = html; el.classList.remove('scrambling'); }
         }
+        el.classList.add('scrambling');
         el.textContent = '';
         step();
     }
@@ -569,6 +678,7 @@
 
     clock();
     fitWordmarks();
+    wordmarkIntro();
     menu();
     reveal();
     trail();

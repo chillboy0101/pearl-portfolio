@@ -438,6 +438,56 @@ p {
     color: var(--green);
 }
 
+/* Intro (see wordmarkIntro in universe.js): letters and the slash start hidden until JS plays them in. */
+.wordmark h1 {
+    position: relative;
+}
+
+.wordmark .wl {
+    display: inline-block;
+}
+
+.js .wordmark h1:not(.intro-done) .wl:not(.sp),
+.js .wordmark h1:not(.intro-done) .tick {
+    visibility: hidden;
+}
+
+.wm-bar {
+    position: absolute;
+    top: 5%;
+    width: 2%;
+    height: 90%;
+    background: #01b000;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.wm-pixels {
+    position: absolute;
+    pointer-events: none;
+}
+
+.wm-pixels span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+}
+
+.hero-meta .label.scrambling {
+    color: var(--mono-green);
+}
+
+.hero-meta .label.scrambling::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 13px;
+    margin-left: 6px;
+    vertical-align: -1px;
+    background: var(--mono-green);
+}
+
 .hero-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
