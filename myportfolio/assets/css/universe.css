@@ -436,6 +436,15 @@ p {
     fill: var(--green);
 }
 
+.game-lives svg {
+    transition: transform 0.4s cubic-bezier(.3, .41, .04, 1.01), opacity 0.4s ease;
+}
+
+.game-lives svg.lost {
+    transform: scale(1.7) translateY(-4px);
+    opacity: 0;
+}
+
 .game-controls {
     display: flex;
     align-items: center;

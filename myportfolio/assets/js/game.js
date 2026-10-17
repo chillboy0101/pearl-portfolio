@@ -27,8 +27,10 @@
     var GRAVITY = 64;
     var JUMP = 30;
     var MOVE = 21;
-    var PW = 1.9;
-    var PH = 2.5;
+    var PW = 2.2;
+    var PH = 3;
+    var SPRITE_W = 3.2;
+    var STEP = 1 / 120;
     var BUG_W = 1.9;
     var BUG_H = 1.7;
     var GAME_KEYS = { ArrowLeft: 1, ArrowRight: 1, KeyA: 1, KeyD: 1, Space: 1 };
@@ -177,7 +179,9 @@
             bugs: [],
             popups: [],
             debris: [],
+            fx: [],
             trail: [],
+            shake: 0,
             rows: [
                 { nextX: 16, y: 4 + Math.floor(r() * 5), minY: 4, maxY: 12 },
                 { nextX: 24, y: 17 + Math.floor(r() * 3), minY: 17, maxY: 19 }
@@ -195,7 +199,9 @@
             over: false,
             overT: 0,
             overShown: false,
-            player: { x: 6, y: 0, vy: 0, jumps: 2, facing: 1, moving: false, inv: 0, step: 0 },
+            overShownAt: 0,
+            overDone: false,
+            player: { x: 6, y: 0, vy: 0, jumps: 2, facing: 1, moving: false, inv: 0, step: 0, land: 0 },
             duck: { state: 'hidden', x: 0, y: 0, t: 0, homeX: 0, homeY: 0 }
         };
         generate(view.cols + 12);
@@ -282,12 +288,12 @@
             x: x + (mega ? 0 : 0.2), y: y, size: mega ? 1.8 : 0.9, mega: mega,
             glyph: GLYPHS[Math.floor(G.rand() * GLYPHS.length)],
             colour: PICKUP_COLOURS[Math.floor(G.rand() * PICKUP_COLOURS.length)],
-            pulled: false, born: G.time
+            pulled: false, born: G.time, shown: null
         });
     }
 
     function addBug(x, y, minX, maxX) {
-        G.bugs.push({ x: x, y: y, vy: 0, dir: G.rand() < 0.5 ? -1 : 1, minX: minX, maxX: maxX, state: 'walk', t: 0, vx: 0 });
+        G.bugs.push({ x: x, y: y, vy: 0, dir: G.rand() < 0.5 ? -1 : 1, minX: minX, maxX: maxX, state: 'walk', t: 0, vx: 0, rot: 0, shown: null });
     }
 
     function generate(until) {
@@ -385,9 +391,8 @@
         removeBlock(b.x, b.y);
         Sound.play('bump');
         addScore(10, b.x + 0.5, b.y + 1);
-        for (var i = 0; i < 4; i++) {
-            G.debris.push({ x: b.x + 0.25 + (i % 2) * 0.5, y: b.y + 0.25 + Math.floor(i / 2) * 0.5, vx: (i % 2 ? 1 : -1) * (3 + G.rand() * 3), vy: 12 + G.rand() * 8 });
-        }
+        /* The block hops up first, then breaks into four spinning pieces. */
+        G.fx.push({ type: 'hop', x: b.x, y: b.y, t: 0 });
         if (G.rand() < 0.35) addPickup(b.x, b.y + 0.05, false);
         G.bugs.forEach(function (bug) {
             if (bug.state === 'walk' && Math.abs(bug.y - (b.y + 1)) < 0.05 && bug.x < b.x + 1 && bug.x + BUG_W > b.x) {
@@ -395,6 +400,13 @@
                 addScore(25, bug.x + 1, bug.y + BUG_H);
             }
         });
+    }
+
+    function breakBlock(x, y) {
+        for (var i = 0; i < 4; i++) {
+            G.debris.push({ x: x + 0.25 + (i % 2) * 0.5, y: y + 0.25 + Math.floor(i / 2) * 0.5, vx: (i % 2 ? 1 : -1) * (3 + G.rand() * 3),
+                vy: 12 + G.rand() * 8, rot: 0, vr: (i % 2 ? 1 : -1) * (6 + G.rand() * 6) });
+        }
     }
 
     function knockOut(bug, dir) {
@@ -420,6 +432,7 @@
         var res = moveY(p.x, p.y, PW, PH, p.y + p.vy * dt);
         p.y = res.y;
         if (res.landed) {
+            if (p.vy < -4) p.land = 0.1;
             if (p.vy < 0) { p.vy = 0; p.jumps = 2; }
         } else if (res.bumped) {
             p.vy = 0;
@@ -429,6 +442,7 @@
         }
         if (p.y + PH > ROWS + 3) { p.y = ROWS + 3 - PH; p.vy = 0; }
         if (p.inv > 0) p.inv -= dt;
+        if (p.land > 0) p.land -= dt;
 
         if (G.superT > 0) {
             G.trail.unshift({ x: p.x, y: p.y, facing: p.facing, frame: frameName(p) });
@@ -455,6 +469,7 @@
             }
             if (overlap(box, { x: k.x, y: k.y, w: k.size, h: k.size })) {
                 G.pickups.splice(i, 1);
+                G.fx.push({ type: 'collect', pickup: k, t: 0 });
                 if (k.mega) {
                     Sound.play('mega');
                     addScore(100, k.x + 1, k.y + 2);
@@ -479,6 +494,7 @@
                 continue;
             }
             if (b.state === 'out') {
+                b.rot += b.vx * 2.4 * dt;
                 b.vy -= GRAVITY * dt;
                 b.y += b.vy * dt;
                 b.x += b.vx * dt;
@@ -510,7 +526,8 @@
                 p.inv = 1.5;
                 p.vy = 0;
                 G.lives--;
-                renderLives();
+                if (!reduced) G.shake = 0.2;
+                loseHeart();
                 if (G.lives <= 0) {
                     G.over = true;
                     G.overT = 0;
@@ -572,9 +589,12 @@
 
     function update(dt) {
         G.time += dt;
+        if (state === 'over') { if (G.time - G.overShownAt > 2.2) G.overDone = true; return; }
+        if (G.shake > 0) G.shake -= dt;
         if (G.over) {
             G.overT += dt;
-            if (G.overT > 1.6 && !G.overShown) showGameOver();
+            if (G.overT > 1.65 && !G.overShown) showGameOver();
+            if (G.overShown && G.time - G.overShownAt > 2.2) G.overDone = true;
             return;
         }
         if (state === 'playing') {
@@ -600,7 +620,13 @@
         }
         updateBugs(dt);
         G.popups = G.popups.filter(function (s) { s.t += dt; return s.t < 0.8; });
+        G.fx = G.fx.filter(function (f) {
+            f.t += dt;
+            if (f.type === 'hop' && f.t >= 0.1) { breakBlock(f.x, f.y); return false; }
+            return f.t < 0.3;
+        });
         G.debris = G.debris.filter(function (d) {
+            d.rot += d.vr * dt;
             d.vy -= GRAVITY * dt;
             d.x += d.vx * dt;
             d.y += d.vy * dt;
@@ -613,21 +639,48 @@
     function sx(x) { return Math.round((x - G.scrollX) * view.cell); }
     function sy(y) { return Math.round((ROWS - y) * view.cell); }
 
-    function drawSprite(map, x, y, widthCells, flip, alpha, tint) {
-        var px = widthCells * view.cell / map[0].length;
-        var left = (x - G.scrollX) * view.cell;
-        var top = (ROWS - y) * view.cell - map.length * px;
-        ctx.globalAlpha = alpha === undefined ? 1 : alpha;
+    /* Draws a pixel map with its bottom-centre at world (x + width/2, y).
+       opt: alpha, tint, sx/sy (scale about the bottom-centre), rot (radians), centre (pivot at the middle instead). */
+    function drawSprite(map, x, y, widthCells, flip, opt) {
+        opt = opt || {};
+        var cell = view.cell;
+        var px = widthCells * cell / map[0].length;
+        var w = widthCells * cell;
+        var h = map.length * px;
+        var cx = (x - G.scrollX) * cell + w / 2;
+        var by = (ROWS - y) * cell;
+        var pivotY = opt.centre ? h / 2 : 0;
+        ctx.save();
+        ctx.globalAlpha = opt.alpha === undefined ? 1 : opt.alpha;
+        ctx.translate(cx, by - pivotY);
+        if (opt.rot) ctx.rotate(opt.rot);
+        if (opt.sx || opt.sy) ctx.scale(opt.sx || 1, opt.sy || 1);
         for (var r = 0; r < map.length; r++) {
             var row = map[r];
             for (var c = 0; c < row.length; c++) {
                 var ch = row[flip ? row.length - 1 - c : c];
                 if (ch === '.') continue;
-                ctx.fillStyle = tint || PAL[ch];
-                ctx.fillRect(Math.floor(left + c * px), Math.floor(top + r * px), Math.ceil(px), Math.ceil(px));
+                ctx.fillStyle = opt.tint || PAL[ch];
+                ctx.fillRect(-w / 2 + c * px, -h + pivotY + r * px, px + 0.6, px + 0.6);
             }
         }
-        ctx.globalAlpha = 1;
+        ctx.restore();
+    }
+
+    function easeOutBack(t) {
+        var c = 1.70158;
+        t = Math.min(1, Math.max(0, t)) - 1;
+        return 1 + (c + 1) * t * t * t + c * t * t;
+    }
+
+    /* Scale for something that pops in the first time it scrolls into view. */
+    function popIn(obj) {
+        if (reduced) return 1;
+        if (obj.shown === null) {
+            if (obj.x > G.scrollX + view.cols) return 0;
+            obj.shown = G.time;
+        }
+        return easeOutBack((G.time - obj.shown) / 0.3);
     }
 
     function frameName(p) {
@@ -743,19 +796,34 @@
         }
     }
 
+    function drawGameOver() {
+        var cell = view.cell;
+        var px = Math.max(4, Math.min(cell, Math.floor(view.w / 60)));
+        var since = G.time - G.overShownAt;
+        var word = 'GAME OVER';
+        var letters = reduced ? word.length : Math.min(word.length, Math.floor(since / 0.08) + 1);
+        var full = word.length * 6 * px - px;
+        var left = Math.round(view.w / 2 - full / 2);
+        drawPixelWord(word.slice(0, letters), left + (letters * 6 * px - px) / 2, Math.round(view.h * 0.22), px, '#14181f');
+        var count = reduced ? G.score : Math.round(G.score * Math.min(1, Math.max(0, (since - 0.8) / 0.8)));
+        if (since > 0.8 || reduced) {
+            var spx = Math.max(3, Math.floor(px * 0.6));
+            drawPixelWord('SCORE ' + count, view.w / 2, Math.round(view.h * 0.22 + px * 10), spx, '#1f883d');
+        }
+    }
+
     function draw(dt) {
         var cell = view.cell;
         if (state === 'idle') { drawIdle(dt); return; }
         ctx.clearRect(0, 0, view.w, view.h);
         drawGrid();
 
-        if (G.overShown) {
-            var px = Math.max(4, Math.min(cell, Math.floor(view.w / 60)));
-            drawPixelWord('GAME OVER', view.w / 2, Math.round(view.h * 0.22), px, '#14181f');
-            var spx = Math.max(3, Math.floor(px * 0.6));
-            drawPixelWord('SCORE ' + G.score, view.w / 2, Math.round(view.h * 0.22 + px * 10), spx, '#1f883d');
-            return;
-        }
+        if (G.overShown) { drawGameOver(); return; }
+        /* After the last life the whole world flashes six times before the game-over screen. */
+        if (G.over && (G.overT > 1.2 || Math.floor(G.overT / 0.2) % 2)) return;
+
+        ctx.save();
+        if (G.shake > 0) ctx.translate((Math.random() - 0.5) * 8 * G.shake / 0.2, (Math.random() - 0.5) * 8 * G.shake / 0.2);
 
         ctx.fillStyle = '#535d59';
         G.blockList.forEach(function (b) {
@@ -764,52 +832,108 @@
             ctx.fillRect(x + 1, sy(b.y + 1) + 1, cell - 1, cell - 1);
         });
 
-        G.debris.forEach(function (d) {
+        G.fx.forEach(function (f) {
+            if (f.type !== 'hop') return;
+            var lift = 0.3 * Math.sin(Math.PI * Math.min(1, f.t / 0.1));
             ctx.fillStyle = '#535d59';
-            ctx.fillRect(sx(d.x), sy(d.y), Math.ceil(cell / 2), Math.ceil(cell / 2));
+            ctx.fillRect(sx(f.x) + 1, sy(f.y + 1 + lift) + 1, cell - 1, cell - 1);
         });
+
+        G.debris.forEach(function (d) {
+            var half = Math.ceil(cell / 2);
+            ctx.save();
+            ctx.translate(sx(d.x) + half / 2, sy(d.y) + half / 2);
+            ctx.rotate(d.rot);
+            ctx.fillStyle = '#535d59';
+            ctx.fillRect(-half / 2, -half / 2, half, half);
+            ctx.restore();
+        });
+
+        var duck = G.duck;
+        if (duck.state === 'follow') {
+            ctx.save();
+            ctx.setLineDash([3, 4]);
+            ctx.strokeStyle = 'rgba(245, 197, 24, 0.8)';
+            ctx.lineWidth = 2;
+            G.pickups.forEach(function (k) {
+                if (!k.pulled) return;
+                ctx.beginPath();
+                ctx.moveTo(sx(duck.x + 0.9), sy(duck.y + 0.8));
+                ctx.lineTo(sx(k.x + k.size / 2), sy(k.y + k.size / 2));
+                ctx.stroke();
+            });
+            ctx.restore();
+        }
+
+        function drawPickup(k, scale, alpha) {
+            var bob = reduced ? 0 : 0.12 * Math.sin((G.time - k.born) * 4 + k.x);
+            var s = k.size * cell * scale;
+            var cxp = (k.x + k.size / 2 - G.scrollX) * cell;
+            var cyp = (ROWS - (k.y + k.size / 2 + bob)) * cell;
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = k.mega ? PICKUP_COLOURS[Math.floor(G.time * 8) % PICKUP_COLOURS.length] : k.colour;
+            ctx.fillRect(Math.round(cxp - s / 2), Math.round(cyp - s / 2), Math.round(s), Math.round(s));
+            if (s > 4) drawText(k.mega ? '*' : k.glyph, cxp, cyp + 1, '#fff', Math.round(s * (k.mega ? 0.8 : 0.85)));
+            ctx.globalAlpha = 1;
+        }
 
         G.pickups.forEach(function (k) {
             var x = sx(k.x);
-            if (x < -cell * 2 || x > view.w) return;
-            var bob = reduced ? 0 : 0.12 * Math.sin((G.time - k.born) * 4 + k.x);
-            var y = sy(k.y + k.size + bob);
-            var s = Math.round(k.size * cell);
-            if (k.mega) {
-                var hue = PICKUP_COLOURS[Math.floor(G.time * 8) % PICKUP_COLOURS.length];
-                ctx.fillStyle = hue;
-                ctx.fillRect(x, y, s, s);
-                drawText('*', x + s / 2, y + s / 2 + 1, '#fff', Math.round(s * 0.8));
-            } else {
-                ctx.fillStyle = k.colour;
-                ctx.fillRect(x, y, s, s);
-                drawText(k.glyph, x + s / 2, y + s / 2 + 1, '#fff', Math.round(s * 0.85));
-            }
+            if (x < -cell * 2 || x > view.w + cell) return;
+            var scale = popIn(k);
+            if (k.mega && !reduced) scale *= 1 + 0.08 * Math.sin(G.time * 10);
+            if (scale > 0) drawPickup(k, scale, 1);
+        });
+        G.fx.forEach(function (f) {
+            if (f.type === 'collect') drawPickup(f.pickup, 1 + f.t / 0.3 * 0.8, Math.max(0, 1 - f.t / 0.3));
         });
 
         G.bugs.forEach(function (b) {
             if (sx(b.x) < -cell * 3 || sx(b.x) > view.w + cell) return;
             var map = b.state === 'flat' ? SPRITES.bugFlat : (Math.floor(b.t * 6) % 2 ? SPRITES.bugA : SPRITES.bugB);
-            if (b.state === 'out') map = SPRITES.bugA.slice().reverse();
-            drawSprite(map, b.x - 0.1, b.y, BUG_W + 0.2, b.dir < 0);
+            var opt = {};
+            if (b.state === 'flat') opt.alpha = Math.max(0, 1 - b.t / 0.45);
+            if (b.state === 'out') { opt.rot = b.rot; opt.centre = true; }
+            if (b.state === 'walk') { var pop = popIn(b); if (pop <= 0) return; opt.sx = pop; opt.sy = pop; }
+            drawSprite(map, b.x - 0.1, b.y, BUG_W + 0.2, b.dir < 0, opt);
         });
 
-        var d = G.duck;
-        if (d.state !== 'hidden') drawSprite(SPRITES.duck, d.x, d.y, 1.8, d.state === 'follow' && G.player.facing < 0);
+        if (duck.state !== 'hidden') {
+            var wobble = duck.state === 'wait' && !reduced ? 0.15 * Math.sin(duck.t * 6) : 0;
+            drawSprite(SPRITES.duck, duck.x, duck.y, 1.8, duck.state === 'follow' && G.player.facing < 0, { rot: wobble });
+        }
 
         var p = G.player;
+        var off = (SPRITE_W - PW) / 2;
         G.trail.forEach(function (t, i) {
             if (i % 3) return;
-            drawSprite(SPRITES[t.frame], t.x - 0.35, t.y, PW + 0.7, t.facing < 0, 0.45 - i * 0.02, PICKUP_COLOURS[(i / 3) % PICKUP_COLOURS.length]);
+            drawSprite(SPRITES[t.frame], t.x - off, t.y, SPRITE_W, t.facing < 0, { alpha: 0.45 - i * 0.02, tint: PICKUP_COLOURS[(i / 3) % PICKUP_COLOURS.length] });
         });
-        var blink = (p.inv > 0 && Math.floor(p.inv * 12) % 2) || (G.over && Math.floor(G.overT * 5) % 2);
-        if (!blink) drawSprite(SPRITES[frameName(p)], p.x - 0.35, p.y, PW + 0.7, p.facing < 0);
+        var blink = p.inv > 0 && Math.floor(p.inv * 12) % 2;
+        if (!blink) {
+            var frame = frameName(p);
+            var opt = {};
+            if (!reduced) {
+                if (p.land > 0) { opt.sx = 1.15; opt.sy = 0.82; }
+                else if (frame === 'jump') {
+                    var stretch = Math.max(-0.08, Math.min(0.15, p.vy / 200));
+                    opt.sy = 1 + stretch;
+                    opt.sx = 1 - stretch * 0.6;
+                    if (p.moving) opt.rot = p.facing * 0.08;
+                }
+            }
+            drawSprite(SPRITES[frame], p.x - off, p.y, SPRITE_W, p.facing < 0, opt);
+        }
 
         G.popups.forEach(function (s) {
-            ctx.globalAlpha = 1 - s.t / 0.8;
-            drawText(s.text, sx(s.x), sy(s.y + s.t * 2.5), '#1f883d', Math.max(11, Math.round(cell * 0.85)));
+            var k = s.t / 0.8;
+            var rise = 2.5 * (1 - Math.pow(1 - k, 3));
+            var colour = G.superT > 0 ? PICKUP_COLOURS[Math.floor(G.time * 10) % PICKUP_COLOURS.length] : '#1f883d';
+            ctx.globalAlpha = 1 - k;
+            drawText(s.text, sx(s.x), sy(s.y + rise), colour, Math.max(11, Math.round(cell * 0.85)));
             ctx.globalAlpha = 1;
         });
+        ctx.restore();
     }
 
     /* ---------------------------------------------------------------- loop & sizing */
@@ -830,18 +954,27 @@
         }
     }
 
+    var acc = 0;
+
+    /* Physics runs in fixed 1/120 s steps so movement and collisions stay steady whatever the frame rate. */
     function frame(now) {
         raf = 0;
         var dt = Math.min(0.05, (now - last) / 1000 || 0);
         last = now;
-        update(dt);
+        if (state === 'idle') {
+            update(dt);
+        } else {
+            acc += dt;
+            while (acc >= STEP) { update(STEP); acc -= STEP; }
+        }
         draw(dt);
         schedule();
     }
 
     function schedule() {
         var animateIdle = state === 'idle' && !reduced;
-        if (!raf && visible && !document.hidden && (state === 'playing' || animateIdle)) {
+        var animateOver = state === 'over' && G && !G.overDone;
+        if (!raf && visible && !document.hidden && (state === 'playing' || animateIdle || animateOver)) {
             last = performance.now();
             raf = requestAnimationFrame(frame);
         }
@@ -866,6 +999,16 @@
             b.textContent = high;
             label.appendChild(b);
         }
+    }
+
+    function loseHeart() {
+        var hearts = livesEl.querySelectorAll('svg:not(.lost)');
+        var last = hearts[hearts.length - 1];
+        livesEl.setAttribute('aria-label', G.lives + (G.lives === 1 ? ' life' : ' lives'));
+        if (!last) return;
+        if (reduced) { last.remove(); return; }
+        last.classList.add('lost');
+        setTimeout(function () { last.remove(); }, 450);
     }
 
     function renderSound() {
@@ -913,6 +1056,7 @@
 
     function showGameOver() {
         G.overShown = true;
+        G.overShownAt = G.time;
         var high = parseInt(store(HIGH_KEY) || '0', 10);
         if (G.score > high) store(HIGH_KEY, String(G.score));
         renderLabel();
@@ -921,6 +1065,7 @@
         removeInput();
         setButton('Play again');
         state = 'over';
+        schedule();
     }
 
     function onKeyDown(e) {
