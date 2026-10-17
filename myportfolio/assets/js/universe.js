@@ -25,15 +25,18 @@
         setInterval(tick, 1000);
     }
 
-    /* Scale the hero wordmark so it spans the full width of its frame. */
-    function fitWordmark() {
-        var h = $('#wordmark');
-        if (!h) return;
+    /* Scale each giant wordmark so it spans the full width of its frame. */
+    function fitWordmarks() {
+        var marks = $$('[data-fit]');
+        if (!marks.length) return;
         function fitNow() {
-            h.style.fontSize = '';
-            var box = h.parentElement.clientWidth - 8;
-            var size = parseFloat(getComputedStyle(h).fontSize);
-            h.style.fontSize = (size * box / h.scrollWidth) + 'px';
+            marks.forEach(function (h) {
+                h.style.fontSize = '';
+                var cs = getComputedStyle(h.parentElement);
+                var box = h.parentElement.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 8;
+                var size = parseFloat(getComputedStyle(h).fontSize);
+                h.style.fontSize = (size * box / h.scrollWidth) + 'px';
+            });
         }
         fitNow();
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNow);
@@ -59,24 +62,23 @@
         });
     }
 
-    /* Monospace labels flicker through random characters before settling. */
+    /* Monospace labels type themselves out, with a short tail of random characters
+       running ahead of the text, then settle. */
     function scramble(el) {
+        var html = el.getAttribute('data-html') || el.innerHTML;
         var text = el.getAttribute('data-text') || el.textContent;
+        el.setAttribute('data-html', html);
         el.setAttribute('data-text', text);
-        var frame = 0;
-        var total = 14;
+        var i = 0;
         function step() {
-            frame++;
-            var settled = Math.floor(text.length * frame / total);
-            var out = '';
-            for (var i = 0; i < text.length; i++) {
-                var ch = text.charAt(i);
-                out += i < settled || ch === ' ' ? ch : GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
-            }
-            el.textContent = out;
-            if (frame < total) setTimeout(step, 38);
-            else el.textContent = text;
+            i += Math.max(1, Math.round(text.length / 28));
+            var tail = '';
+            for (var k = 0; k < 3 && i + k < text.length; k++) tail += GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+            el.textContent = text.slice(0, i) + tail;
+            if (i < text.length) setTimeout(step, 32);
+            else el.innerHTML = html;
         }
+        el.textContent = '';
         step();
     }
 
@@ -165,86 +167,6 @@
         new IntersectionObserver(function (entries) { cb(entries[0].isIntersecting); }).observe(el);
     }
 
-    /* Hero pixel field: a grid of cells that light up around the cursor and leave fading colour. */
-    function pixelField() {
-        var canvas = $('#pixel-field');
-        if (!canvas) return;
-        var box = canvas.parentElement;
-        var size = 24;
-        var cells = [];
-        var cols = 0;
-        var rows = 0;
-        var c;
-        var mouse = null;
-        var visible = true;
-        var raf = 0;
-
-        function build() {
-            c = fit(canvas);
-            cols = Math.ceil(c.w / size);
-            rows = Math.ceil(c.h / size);
-            cells = [];
-            for (var i = 0; i < cols * rows; i++) cells.push({ a: 0, col: PALETTE[i % PALETTE.length] });
-            seed();
-        }
-
-        /* A resting pattern so the field never looks empty: a stepped diagonal of lit cells. */
-        function seed() {
-            for (var x = 0; x < cols; x++) {
-                var top = Math.round(rows * 0.75 - x * rows / cols * 0.9);
-                for (var y = Math.max(0, top); y < rows; y++) {
-                    if ((x * 7 + y * 13) % 5 === 0) {
-                        var cell = cells[y * cols + x];
-                        cell.a = 0.55 + ((x + y) % 3) * 0.15;
-                        cell.base = cell.a;
-                    }
-                }
-            }
-        }
-
-        function draw() {
-            c.ctx.clearRect(0, 0, c.w, c.h);
-            for (var y = 0; y < rows; y++) {
-                for (var x = 0; x < cols; x++) {
-                    var cell = cells[y * cols + x];
-                    if (mouse) {
-                        var dx = x + 0.5 - mouse.x / size;
-                        var dy = y + 0.5 - mouse.y / size;
-                        var d = Math.sqrt(dx * dx + dy * dy);
-                        if (d < 3.2) cell.a = Math.max(cell.a, 1 - d / 3.2);
-                    }
-                    var rest = cell.base || 0;
-                    if (cell.a > rest) cell.a = Math.max(rest, cell.a - 0.012);
-                    if (cell.a > 0.02) {
-                        c.ctx.globalAlpha = cell.a;
-                        c.ctx.fillStyle = cell.col;
-                        c.ctx.fillRect(x * size + 1, y * size + 1, size - 1, size - 1);
-                    }
-                }
-            }
-            c.ctx.globalAlpha = 1;
-        }
-
-        function loop() {
-            draw();
-            raf = visible ? requestAnimationFrame(loop) : 0;
-        }
-
-        build();
-        draw();
-        window.addEventListener('resize', function () { build(); draw(); });
-        if (reduced) return;
-        box.addEventListener('pointermove', function (e) {
-            var r = canvas.getBoundingClientRect();
-            mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
-        });
-        box.addEventListener('pointerleave', function () { mouse = null; });
-        onVisible(box, function (v) {
-            visible = v;
-            if (v && !raf) raf = requestAnimationFrame(loop);
-        });
-    }
-
     /* Pixel mosaics: blocky bands of the palette that slowly reshuffle. */
     function mosaic(canvas, opts) {
         var size = opts.size;
@@ -305,6 +227,47 @@
                 mosaic(cv, { size: 24, tilt: false, colours: ['#0c8a2c', '#19c23f', '#b8a114', '#e9edec', '#b07cfa', '#f27bf2'] });
             }
         });
+    }
+
+    /* Small screenshot slideshows with square page buttons; they advance on their own while in view. */
+    function slideshows() {
+        $$('.slides').forEach(function (box) {
+            var slides = $$('.slide', box);
+            var dots = $$('.dots button', box);
+            if (slides.length < 2) return;
+            var current = 0;
+            var paused = false;
+            var visible = false;
+            function show(i) {
+                current = (i + slides.length) % slides.length;
+                slides.forEach(function (s, j) { s.classList.toggle('on', j === current); });
+                dots.forEach(function (d, j) { d.setAttribute('aria-current', j === current ? 'true' : 'false'); });
+            }
+            dots.forEach(function (d, j) { d.addEventListener('click', function () { show(j); }); });
+            box.addEventListener('mouseenter', function () { paused = true; });
+            box.addEventListener('mouseleave', function () { paused = false; });
+            if (reduced) return;
+            onVisible(box, function (v) { visible = v; });
+            setInterval(function () { if (visible && !paused) show(current + 1); }, 4500);
+        });
+    }
+
+    /* proof/ carousel: one fact at a time, each with its own colour bar. */
+    function proof() {
+        var box = $('.proof');
+        if (!box) return;
+        var items = $$('.proof-item', box);
+        var current = 0;
+        function show(i) {
+            current = (i + items.length) % items.length;
+            items.forEach(function (it, j) { it.hidden = j !== current; });
+            box.style.setProperty('--c', items[current].getAttribute('data-c'));
+            var lbl = $('.proof-label', items[current]);
+            if (lbl && !reduced) scramble(lbl);
+        }
+        $('[data-proof="prev"]', box).addEventListener('click', function () { show(current - 1); });
+        $('[data-proof="next"]', box).addEventListener('click', function () { show(current + 1); });
+        show(0);
     }
 
     /* Work filters. */
@@ -411,11 +374,12 @@
     }
 
     clock();
-    fitWordmark();
+    fitWordmarks();
     menu();
     reveal();
     trail();
-    pixelField();
+    slideshows();
+    proof();
     mosaics();
     filters();
     playlist();

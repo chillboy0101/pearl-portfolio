@@ -29,13 +29,13 @@
         <a class="link" href="#services">Services</a>
         <a class="link" href="#experience">Experience</a>
         <a class="link" href="#contact">Contact</a>
-        <span class="blank" aria-hidden="true"></span>
+        <a class="link gh" href="https://github.com/chillboy0101" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">&#8599;</span></a>
         <button class="menu-btn" type="button" aria-expanded="false">menu</button>
         <a class="cta" href="#contact">Hire me <span class="arrow" aria-hidden="true">&#8599;</span></a>
     </nav>
     <main id="main">
     <section class="frame hero" id="top">
-        <div class="wordmark"><h1 id="wordmark">CARL&nbsp;QUIST<span class="tick">/</span></h1></div>
+        <div class="wordmark"><h1 id="wordmark" data-fit>CARL&nbsp;QUIST<span class="tick">/</span></h1></div>
         <div class="cells hero-grid">
             <div class="hero-left span2">
                 <div class="hero-meta">
@@ -50,9 +50,26 @@
             <div class="hero-cta span2">
                 <a class="btn btn-green" href="#work">View my work <span class="arrow" aria-hidden="true">&#8599;</span></a>
             </div>
-            <div class="pixel-field span4">
-                <canvas id="pixel-field" aria-hidden="true"></canvas>
-                <span class="label hint">move_your_cursor_here/</span>
+            <div class="game span4" id="game">
+                <canvas role="img" aria-label="Super Carl, a platform game. Press Play, then use the arrow keys to move and Space to jump."></canvas>
+                <div class="game-hud" hidden>
+                    <span class="game-lives" role="img" aria-label="3 lives"></span>
+                    <p class="game-controls"><kbd>&larr;</kbd><kbd>&rarr;</kbd> move &middot; <kbd>Space</kbd> jump</p>
+                    <div class="game-right">
+                        <span class="game-super label" hidden></span>
+                        <p class="game-score" aria-live="polite">Your score: <b>0</b></p>
+                        <button class="game-sound" type="button" aria-pressed="true" aria-label="Turn sound off"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor"/><path class="on" d="M11 5.5a3.5 3.5 0 0 1 0 5M12.5 3.5a6 6 0 0 1 0 9" stroke="currentColor" stroke-width="1.4" fill="none"/><path class="off" d="M11 6l4 4M15 6l-4 4" stroke="currentColor" stroke-width="1.4"/></svg></button>
+                    </div>
+                </div>
+                <div class="game-pad" hidden>
+                    <button type="button" data-key="ArrowLeft" aria-label="Move left">&larr;</button>
+                    <button type="button" data-key="ArrowRight" aria-label="Move right">&rarr;</button>
+                    <button type="button" data-key="Space" aria-label="Jump">jump</button>
+                </div>
+            </div>
+            <div class="game-bar span4">
+                <span class="label" id="game-label" data-scramble>play_super-carl_while_you_wait/</span>
+                <button class="btn btn-grey btn-sm" id="game-btn" type="button">Play</button>
             </div>
         </div>
         <div class="spacer"></div>
@@ -72,10 +89,10 @@
                         <a class="btn btn-grey btn-sm" href="https://latewatch.vercel.app" target="_blank" rel="noopener">Open LateWatch <span class="arrow" aria-hidden="true">&#8599;</span></a>
                     </div>
                 </div>
-                <div class="shot span2"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy" width="1200" height="693"><span class="tagline">latewatch.vercel.app</span></div>
+                <div class="shot slides span2"><figure class="slide on"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy" width="1200" height="693"><figcaption class="tagline">latewatch.vercel.app</figcaption></figure><figure class="slide"><img src="images/op-awards.jpg" alt="Screenshot of O&P Awards" loading="lazy" width="1200" height="693"><figcaption class="tagline">op-awards.vercel.app</figcaption></figure><figure class="slide"><img src="images/cpa-calendar.jpg" alt="Screenshot of CPA Event Calendar" loading="lazy" width="1200" height="693"><figcaption class="tagline">cpa-event-calendar-gra.vercel.app</figcaption></figure><div class="dots"><button type="button" aria-label="Show LateWatch" aria-current="true"></button><button type="button" aria-label="Show O&P Awards" aria-current="false"></button><button type="button" aria-label="Show CPA Event Calendar" aria-current="false"></button></div></div>
             </div>
             <div class="cells river-row rv">
-                <div class="shot span2"><img src="images/gra-calculators.jpg" alt="Screenshot of GRA Tax Calculators" loading="lazy" width="1200" height="693"><span class="tagline">gra.gov.gh/online-tools</span></div>
+                <div class="shot slides span2"><figure class="slide on"><img src="images/gra-calculators.jpg" alt="Screenshot of GRA Tax Calculators" loading="lazy" width="1200" height="693"><figcaption class="tagline">gra.gov.gh/online-tools</figcaption></figure></div>
                 <div class="river-text span2">
                     <span class="label" data-scramble>dev.ship()</span>
                     <div class="river-copy">
@@ -92,7 +109,7 @@
                         <a class="btn btn-grey btn-sm" href="https://jovelpharmacy.com" target="_blank" rel="noopener">Visit jovelpharmacy.com <span class="arrow" aria-hidden="true">&#8599;</span></a>
                     </div>
                 </div>
-                <div class="shot span2"><img src="images/jovel.jpg" alt="Screenshot of Jovel Pharmacy" loading="lazy" width="1200" height="693"><span class="tagline">jovelpharmacy.com</span></div>
+                <div class="shot slides span2"><figure class="slide on"><img src="images/jovel.jpg" alt="Screenshot of Jovel Pharmacy" loading="lazy" width="1200" height="693"><figcaption class="tagline">jovelpharmacy.com</figcaption></figure><figure class="slide"><img src="images/rikonim.jpg" alt="Screenshot of Rikonim Enterprise" loading="lazy" width="1200" height="693"><figcaption class="tagline">rikonim.com</figcaption></figure><figure class="slide"><img src="images/kekeli.jpg" alt="Screenshot of Kekeli Studios" loading="lazy" width="1200" height="693"><figcaption class="tagline">kekelis-studio.vercel.app</figcaption></figure><div class="dots"><button type="button" aria-label="Show Jovel Pharmacy" aria-current="true"></button><button type="button" aria-label="Show Rikonim Enterprise" aria-current="false"></button><button type="button" aria-label="Show Kekeli Studios" aria-current="false"></button></div></div>
             </div>
     </section>
 
@@ -436,6 +453,38 @@ Tested on an HP Laptop 15-dy0xxx
                 <p>Data entry and cleaning, analysis, reports, summaries and reusable spreadsheet templates.</p>
             </div>
         </div>
+        <div class="spacer"></div>
+        <div class="cells c4">
+            <div class="cv-text span2">
+                <span class="label green caret" data-scramble>convince-your-team</span>
+                <h2 class="slash">get-my-cv/</h2>
+            </div>
+            <div class="cv-aside span2">
+                <p class="body">Share my CV and references with your team. It lists the systems I have shipped, where they are used every day and who can vouch for my work.</p>
+                <a class="btn btn-grey" href="mailto:equalizerjr@gmail.com?subject=CV%20request">Request my CV <span class="arrow" aria-hidden="true">&#8595;</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="frame">
+        <div class="spacer"></div>
+        <div class="cells sec-head" id="stack">
+            <div class="title">
+                <span class="label green caret" data-scramble>tools_i_ship_with</span>
+                <h2 class="slash rv">stack/</h2>
+            </div>
+            <div class="aside"><p class="body">The tools behind the projects on this page.</p></div>
+        </div>
+        <div class="cells c4 stack-grid">
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">N</div><p>Next.js / LateWatch, Jovel, Rikonim</p></div>
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">TS</div><p>TypeScript / most of my code</p></div>
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">PG</div><p>PostgreSQL / LateWatch, O&amp;P Awards</p></div>
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">RN</div><p>React Native / RFID-IMS mobile app</p></div>
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">WP</div><p>WordPress / GRA tax calculators</p></div>
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">>_</div><p>Linux / kernel patch, Omarchy</p></div>
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">SB</div><p>Supabase / InventoryPro Cloud</p></div>
+            <div class="stack-cell rv"><div class="stack-art" aria-hidden="true">{ }</div><p>Sanity CMS / Rikonim page builder</p></div>
+        </div>
     </section>
 
     <section class="frame">
@@ -449,7 +498,7 @@ Tested on an HP Laptop 15-dy0xxx
         </div>
         <div class="cells agenda">
             <div class="agenda-side">
-                <a class="btn btn-grey" href="mailto:equalizerjr@gmail.com?subject=CV%20request">Request my CV <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                <a class="btn btn-grey" href="#work">See all projects <span class="arrow" aria-hidden="true">&#8599;</span></a>
             </div>
             <div class="days">
             <div class="day rv" style="--c:var(--px-green)">
@@ -500,12 +549,53 @@ Tested on an HP Laptop 15-dy0xxx
 
     <section class="frame">
         <div class="spacer"></div>
+        <div class="cells proof" id="proof" aria-roledescription="carousel" aria-label="Proof of work">
+            <div class="proof-item" data-c="var(--px-olive)">
+                <div class="proof-text"><div class="proof-card"><span class="label proof-label">source: lore.kernel.org</span><p class="proof-quote">&ldquo;Applied now.&rdquo; Takashi Iwai, the Linux sound subsystem maintainer, replying to my patch for the HP Laptop 15-dy0xxx mute LED.</p></div></div>
+                <div class="proof-pic"><pre class="term"><span class="k">Subject:</span> [PATCH] ALSA: hda/realtek: Enable mute LED on HP Laptop 15-dy0xxx
+
+<span class="k">Signed-off-by:</span> Carl Quist
+<span class="ok">Applied now.
+<span class="d">Takashi Iwai, Linux sound subsystem maintainer</span></span></pre></div>
+            </div>
+            <div class="proof-item" data-c="var(--px-purple)" hidden>
+                <div class="proof-text"><div class="proof-card"><span class="label proof-label">source: ghana revenue authority</span><p class="proof-quote">LateWatch has tracked attendance for GRA's Online &amp; Production Unit every working day since May 2026.</p></div></div>
+                <div class="proof-pic"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy" width="1200" height="693"></div>
+            </div>
+            <div class="proof-item" data-c="var(--px-orange)" hidden>
+                <div class="proof-text"><div class="proof-card"><span class="label proof-label">source: gra.gov.gh</span><p class="proof-quote">Taxpayers use my VAT, PIT and PAYE calculators on the official Ghana Revenue Authority website.</p></div></div>
+                <div class="proof-pic"><img src="images/gra-calculators.jpg" alt="Screenshot of the GRA tax calculators" loading="lazy" width="1200" height="693"></div>
+            </div>
+            <div class="proof-item" data-c="var(--px-blue)" hidden>
+                <div class="proof-text"><div class="proof-card"><span class="label proof-label">source: git history</span><p class="proof-quote">1,007 commits across 17 repositories since April 2025, 988 of them in 2026.</p></div></div>
+                <div class="proof-pic chart-pic"><img src="images/github-activity-2026.svg" alt="Commit activity in 2026" loading="lazy" width="831" height="161"></div>
+            </div>
+            <div class="proof-ctrl"><span class="label caret">dev.proof()</span><div><button type="button" data-proof="prev" aria-label="Previous">&larr;</button><button type="button" data-proof="next" aria-label="Next">&rarr;</button></div></div>
+        </div>
+    </section>
+
+    <section class="frame">
+        <div class="spacer"></div>
         <div class="cells c4" id="contact">
-            <div class="cta-art span2"><canvas data-mosaic="cta" aria-hidden="true"></canvas></div>
+            <div class="cta-art span2"><svg viewBox="0 0 850 425" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Pixel art of Carl's game character beside code symbols">
+                <rect width="850" height="425" fill="#0c8a2c"/>
+                <g class="bob"><rect x="136" y="93" width="22" height="22" fill="#19c23f"/><rect x="158" y="93" width="22" height="22" fill="#19c23f"/><rect x="180" y="93" width="22" height="22" fill="#19c23f"/><rect x="202" y="93" width="22" height="22" fill="#19c23f"/><rect x="114" y="115" width="22" height="22" fill="#19c23f"/><rect x="136" y="115" width="22" height="22" fill="#19c23f"/><rect x="158" y="115" width="22" height="22" fill="#19c23f"/><rect x="180" y="115" width="22" height="22" fill="#19c23f"/><rect x="202" y="115" width="22" height="22" fill="#19c23f"/><rect x="224" y="115" width="22" height="22" fill="#19c23f"/><rect x="246" y="115" width="22" height="22" fill="#19c23f"/><rect x="114" y="137" width="22" height="22" fill="#8d5524"/><rect x="136" y="137" width="22" height="22" fill="#8d5524"/><rect x="158" y="137" width="22" height="22" fill="#8d5524"/><rect x="180" y="137" width="22" height="22" fill="#8d5524"/><rect x="202" y="137" width="22" height="22" fill="#8d5524"/><rect x="224" y="137" width="22" height="22" fill="#8d5524"/><rect x="92" y="159" width="22" height="22" fill="#8d5524"/><rect x="114" y="159" width="22" height="22" fill="#8d5524"/><rect x="136" y="159" width="22" height="22" fill="#14181f"/><rect x="158" y="159" width="22" height="22" fill="#8d5524"/><rect x="180" y="159" width="22" height="22" fill="#8d5524"/><rect x="202" y="159" width="22" height="22" fill="#14181f"/><rect x="224" y="159" width="22" height="22" fill="#8d5524"/><rect x="246" y="159" width="22" height="22" fill="#8d5524"/><rect x="92" y="181" width="22" height="22" fill="#8d5524"/><rect x="114" y="181" width="22" height="22" fill="#8d5524"/><rect x="136" y="181" width="22" height="22" fill="#8d5524"/><rect x="158" y="181" width="22" height="22" fill="#8d5524"/><rect x="180" y="181" width="22" height="22" fill="#8d5524"/><rect x="202" y="181" width="22" height="22" fill="#8d5524"/><rect x="224" y="181" width="22" height="22" fill="#8d5524"/><rect x="246" y="181" width="22" height="22" fill="#8d5524"/><rect x="114" y="203" width="22" height="22" fill="#8d5524"/><rect x="136" y="203" width="22" height="22" fill="#8d5524"/><rect x="158" y="203" width="22" height="22" fill="#8d5524"/><rect x="180" y="203" width="22" height="22" fill="#8d5524"/><rect x="202" y="203" width="22" height="22" fill="#8d5524"/><rect x="224" y="203" width="22" height="22" fill="#8d5524"/><rect x="136" y="225" width="22" height="22" fill="#8d5524"/><rect x="158" y="225" width="22" height="22" fill="#8d5524"/><rect x="180" y="225" width="22" height="22" fill="#8d5524"/><rect x="202" y="225" width="22" height="22" fill="#8d5524"/><rect x="92" y="247" width="22" height="22" fill="#24292f"/><rect x="114" y="247" width="22" height="22" fill="#24292f"/><rect x="136" y="247" width="22" height="22" fill="#24292f"/><rect x="158" y="247" width="22" height="22" fill="#24292f"/><rect x="180" y="247" width="22" height="22" fill="#24292f"/><rect x="202" y="247" width="22" height="22" fill="#24292f"/><rect x="224" y="247" width="22" height="22" fill="#24292f"/><rect x="246" y="247" width="22" height="22" fill="#24292f"/><rect x="70" y="269" width="22" height="22" fill="#24292f"/><rect x="92" y="269" width="22" height="22" fill="#24292f"/><rect x="114" y="269" width="22" height="22" fill="#24292f"/><rect x="136" y="269" width="22" height="22" fill="#19c23f"/><rect x="158" y="269" width="22" height="22" fill="#24292f"/><rect x="180" y="269" width="22" height="22" fill="#24292f"/><rect x="202" y="269" width="22" height="22" fill="#19c23f"/><rect x="224" y="269" width="22" height="22" fill="#24292f"/><rect x="246" y="269" width="22" height="22" fill="#24292f"/><rect x="268" y="269" width="22" height="22" fill="#24292f"/><rect x="70" y="291" width="22" height="22" fill="#8d5524"/><rect x="92" y="291" width="22" height="22" fill="#24292f"/><rect x="114" y="291" width="22" height="22" fill="#24292f"/><rect x="136" y="291" width="22" height="22" fill="#24292f"/><rect x="158" y="291" width="22" height="22" fill="#24292f"/><rect x="180" y="291" width="22" height="22" fill="#24292f"/><rect x="202" y="291" width="22" height="22" fill="#24292f"/><rect x="224" y="291" width="22" height="22" fill="#24292f"/><rect x="246" y="291" width="22" height="22" fill="#24292f"/><rect x="268" y="291" width="22" height="22" fill="#8d5524"/><rect x="92" y="313" width="22" height="22" fill="#24292f"/><rect x="114" y="313" width="22" height="22" fill="#24292f"/><rect x="136" y="313" width="22" height="22" fill="#24292f"/><rect x="158" y="313" width="22" height="22" fill="#24292f"/><rect x="180" y="313" width="22" height="22" fill="#24292f"/><rect x="202" y="313" width="22" height="22" fill="#24292f"/><rect x="224" y="313" width="22" height="22" fill="#24292f"/><rect x="246" y="313" width="22" height="22" fill="#24292f"/><rect x="92" y="335" width="22" height="22" fill="#2f4b7c"/><rect x="114" y="335" width="22" height="22" fill="#2f4b7c"/><rect x="136" y="335" width="22" height="22" fill="#2f4b7c"/><rect x="202" y="335" width="22" height="22" fill="#2f4b7c"/><rect x="224" y="335" width="22" height="22" fill="#2f4b7c"/><rect x="246" y="335" width="22" height="22" fill="#2f4b7c"/><rect x="92" y="357" width="22" height="22" fill="#2f4b7c"/><rect x="114" y="357" width="22" height="22" fill="#2f4b7c"/><rect x="136" y="357" width="22" height="22" fill="#2f4b7c"/><rect x="202" y="357" width="22" height="22" fill="#2f4b7c"/><rect x="224" y="357" width="22" height="22" fill="#2f4b7c"/><rect x="246" y="357" width="22" height="22" fill="#2f4b7c"/><rect x="70" y="379" width="22" height="22" fill="#14181f"/><rect x="92" y="379" width="22" height="22" fill="#14181f"/><rect x="114" y="379" width="22" height="22" fill="#14181f"/><rect x="224" y="379" width="22" height="22" fill="#14181f"/><rect x="246" y="379" width="22" height="22" fill="#14181f"/><rect x="268" y="379" width="22" height="22" fill="#14181f"/></g>
+                <path d="M420 20 h40 v20 h-20 v130 l-30 40 l30 40 v130 h20 v20 h-40 a20 20 0 0 1 -20 -20 v-120 l-30 -30 v-40 l30 -30 v-120 a20 20 0 0 1 20 -20z" fill="#b8a114"/>
+                <rect x="490" y="0" width="172" height="212" fill="#1f8ae8"/>
+                <rect class="blink" x="600" y="160" width="24" height="24" fill="#e9edec"/>
+                <rect x="490" y="212" width="172" height="213" fill="#b07cfa"/>
+                <rect class="dot" style="animation-delay:0.00s" x="510" y="238" width="16" height="16" fill="#5b2bd6"/><rect class="dot" style="animation-delay:0.96s" x="590" y="238" width="16" height="16" fill="#5b2bd6"/><rect class="dot" style="animation-delay:1.20s" x="550" y="282" width="16" height="16" fill="#5b2bd6"/><rect class="dot" style="animation-delay:2.16s" x="630" y="282" width="16" height="16" fill="#5b2bd6"/><rect class="dot" style="animation-delay:1.44s" x="510" y="326" width="16" height="16" fill="#5b2bd6"/><rect class="dot" style="animation-delay:0.00s" x="590" y="326" width="16" height="16" fill="#5b2bd6"/><rect class="dot" style="animation-delay:0.24s" x="550" y="370" width="16" height="16" fill="#5b2bd6"/><rect class="dot" style="animation-delay:1.20s" x="630" y="370" width="16" height="16" fill="#5b2bd6"/>
+                <rect x="662" y="0" width="188" height="212" fill="#0c8a2c"/>
+                <g class="pulse"><rect x="758" y="24" width="26" height="26" fill="#f27bf2"/><rect x="732" y="50" width="26" height="26" fill="#f27bf2"/><rect x="784" y="50" width="26" height="26" fill="#f27bf2"/><rect x="706" y="76" width="26" height="26" fill="#f27bf2"/><rect x="810" y="76" width="26" height="26" fill="#f27bf2"/><rect x="732" y="102" width="26" height="26" fill="#f27bf2"/><rect x="784" y="102" width="26" height="26" fill="#f27bf2"/><rect x="758" y="128" width="26" height="26" fill="#f27bf2"/><rect x="758" y="50" width="26" height="26" fill="#d4511d"/><rect x="732" y="76" width="26" height="26" fill="#d4511d"/><rect x="758" y="76" width="26" height="26" fill="#d4511d"/><rect x="784" y="76" width="26" height="26" fill="#d4511d"/><rect x="758" y="102" width="26" height="26" fill="#d4511d"/></g>
+                <rect x="662" y="212" width="188" height="213" fill="#5fe87f"/>
+                <path d="M690 262 l52 52 l-52 52" stroke="#19c23f" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <rect class="blink" x="760" y="352" width="66" height="22" rx="11" fill="#19c23f"/>
+            </svg></div>
             <div class="cta-title span2">
                 <span class="label green caret" data-scramble>say_hello</span>
                 <h2 class="slash">lets-build-something/</h2>
                 <p class="lead">Have a role, a website or a system in mind? Send a message and I will get back to you.</p>
+                <a class="btn btn-green" href="#contact-form">Hire me <span class="arrow" aria-hidden="true">&#8599;</span></a>
             </div>
         </div>
         <div class="cells c2">
@@ -540,13 +630,22 @@ Tested on an HP Laptop 15-dy0xxx
 
     <footer class="frame">
         <div class="spacer"></div>
-        <div class="cells footer">
-            <div><a class="foot-logo" href="#top">CQ<sup>/</sup></a><p class="body">Carl Christian Quist. IT Officer and Software Developer in Accra, Ghana.</p></div>
-            <div><span class="label">site/</span><a href="#work">Work</a><a href="#contributions">Contributions</a><a href="#services">Services</a><a href="#experience">Experience</a></div>
-            <div><span class="label">contact/</span><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a><a href="tel:+233257679050">+233 25 767 9050</a><a href="https://github.com/chillboy0101" target="_blank" rel="noopener">GitHub</a></div>
-            <div><span class="label">&copy; <span id="year">2026</span></span><p class="body">Built in Accra, Ghana.</p></div>
+        <div class="cells"><div class="foot-mark"><p data-fit aria-hidden="true">CARL&nbsp;QUIST<span class="tick">/</span></p></div></div>
+        <div class="cells foot-row">
+            <span>&copy; <span id="year">2026</span> Carl Christian Quist</span>
+            <a href="#work">Work</a>
+            <a href="#contributions">Contributions</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <span aria-hidden="true"></span>
+        </div>
+        <div class="foot-icons">
+            <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></a>
+            <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M3 6l9 7 9-7"/></svg></a>
+            <a href="tel:+233257679050" aria-label="Phone"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M10.5 18h3"/></svg></a>
         </div>
     </footer>
     <script src="assets/js/universe.js"></script>
+    <script src="assets/js/game.js"></script>
 </body>
 </html>

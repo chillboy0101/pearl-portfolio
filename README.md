@@ -57,6 +57,10 @@ grid of bordered cells, Mona Sans and JetBrains Mono type, code-path section tit
 clock, a code-character cursor trail, pixel mosaics and black-and-white screenshots that turn to
 colour on hover. All motion is switched off for visitors who prefer reduced motion.
 
+The hero holds Super Carl, an endless platformer drawn on a canvas (`myportfolio/assets/js/game.js`):
+arrow keys or A/D to move, Space to double jump, on-screen buttons on phones, and a high score kept
+in the browser.
+
 Styles are in `myportfolio/assets/css/universe.css` and behaviour in `myportfolio/assets/js/universe.js`.
 The old `services.html`, `portfolio.html`, `contributions.html` and `contact.html` URLs redirect to
 the matching section of `index.html`.
