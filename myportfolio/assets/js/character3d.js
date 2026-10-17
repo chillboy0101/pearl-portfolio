@@ -137,6 +137,39 @@ function buildCharacter(THREE) {
     return { root, body, head, eyes, pupils, torso };
 }
 
+/* Full-body version for the game: adds legs, shoes and arms that swing from hip and shoulder pivots. */
+function addLimbs(THREE, c) {
+    const mat = (color, rough) => new THREE.MeshPhysicalMaterial({ color, roughness: rough || 0.7 });
+    c.torso.scale.set(0.95, 0.62, 0.7);
+    c.torso.position.y = -0.35;
+    const limbs = { legs: [], arms: [] };
+    [-0.38, 0.38].forEach((x) => {
+        const hip = new THREE.Group();
+        hip.position.set(x, -1.05, 0);
+        const leg = new THREE.Mesh(new THREE.CapsuleGeometry(0.24, 0.55, 8, 16), mat(0x2f4b7c));
+        leg.position.y = -0.45;
+        const shoe = new THREE.Mesh(new THREE.SphereGeometry(0.3, 20, 12), mat(0x14181f, 0.5));
+        shoe.scale.set(1, 0.55, 1.4);
+        shoe.position.set(0, -0.88, 0.12);
+        hip.add(leg, shoe);
+        c.body.add(hip);
+        limbs.legs.push(hip);
+    });
+    [-1, 1].forEach((side) => {
+        const shoulder = new THREE.Group();
+        shoulder.position.set(side * 0.98, 0.05, 0);
+        const arm = new THREE.Mesh(new THREE.CapsuleGeometry(0.2, 0.55, 8, 16), mat(COLOURS.hoodie, 0.85));
+        arm.position.y = -0.42;
+        const hand = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 12), mat(COLOURS.skin, 0.5));
+        hand.position.y = -0.86;
+        shoulder.add(arm, hand);
+        shoulder.rotation.z = side * 0.18;
+        c.body.add(shoulder);
+        limbs.arms.push(shoulder);
+    });
+    return limbs;
+}
+
 function makeStage(THREE, canvas) {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -282,9 +315,54 @@ async function mountArt() {
     });
 }
 
+/* Game sprite: renders the full-body character into a small offscreen canvas on demand,
+   posed for standing, walking or jumping and turned toward the direction of travel.
+   game.js draws that canvas in place of the pixel sprite when window.cq3dSprite exists. */
+async function mountSprite() {
+    const THREE = await loadThree();
+    const size = 160;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const stage = makeStage(THREE, canvas);
+    stage.renderer.setPixelRatio(1);
+    stage.renderer.setSize(size, size, false);
+    const c = buildCharacter(THREE);
+    const limbs = addLimbs(THREE, c);
+    stage.scene.add(c.root);
+    c.root.scale.setScalar(0.92);
+    stage.camera.position.set(0, 0.15, 10);
+    stage.camera.lookAt(0, 0.15, 0);
+    const blink = blinker();
+    let lastT = 0;
+    window.cq3dSprite = {
+        canvas,
+        footY: 0.915,
+        render(pose) {
+            const t = pose.t || 0;
+            /* Same pose as the last call (the trail ghosts reuse the player's frame): skip re-rendering. */
+            const key = pose.frame + (pose.facing < 0 ? 'L' : 'R') + Math.round(t * 60);
+            if (key === this.lastKey) return canvas;
+            this.lastKey = key;
+            const swing = pose.frame === 'walk' ? Math.sin(t * 13) * 0.7 : 0;
+            c.root.rotation.y = (pose.facing < 0 ? -1 : 1) * 0.6;
+            c.root.position.y = pose.frame === 'walk' ? Math.abs(Math.sin(t * 13)) * 0.12 - 0.05 : 0;
+            limbs.legs[0].rotation.x = pose.frame === 'jump' ? -0.7 : swing;
+            limbs.legs[1].rotation.x = pose.frame === 'jump' ? 0.3 : -swing;
+            limbs.arms[0].rotation.x = pose.frame === 'jump' ? -2.6 : -swing * 0.9;
+            limbs.arms[1].rotation.x = pose.frame === 'jump' ? -2.6 : swing * 0.9;
+            c.head.rotation.set(pose.frame === 'jump' ? -0.15 : 0, 0, 0);
+            blink(Math.max(0, Math.min(0.05, t - lastT)), c.eyes);
+            lastT = t;
+            stage.renderer.render(stage.scene, stage.camera);
+            return canvas;
+        }
+    };
+}
+
 /* Load the library only when either place is about to scroll into view. */
 if (webglAvailable()) {
-    const targets = [['#game', mountPeek], ['.cta-art', mountArt]];
+    const targets = [['#game', mountPeek], ['#game', mountSprite], ['.cta-art', mountArt]];
     targets.forEach(([sel, mount]) => {
         const el = document.querySelector(sel);
         if (!el) return;

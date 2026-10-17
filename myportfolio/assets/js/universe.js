@@ -242,12 +242,21 @@
         if (!box) return;
         var items = $$('.proof-item', box);
         var current = 0;
+        var cap = $('.proof-cap', box);
         function show(i) {
             current = (i + items.length) % items.length;
-            items.forEach(function (it, j) { it.hidden = j !== current; });
+            items.forEach(function (it, j) {
+                it.hidden = j !== current;
+                it.classList.toggle('enter', j === current);
+            });
             box.style.setProperty('--c', items[current].getAttribute('data-c'));
             var lbl = $('.proof-label', items[current]);
             if (lbl && !reduced) scramble(lbl);
+            if (cap && box._typed) typeCaption(cap, 'dev.proof()');
+        }
+        if (cap) {
+            cap.textContent = '';
+            onVisible(box, function (v) { if (v && !box._typed) { box._typed = true; typeCaption(cap, 'dev.proof()'); } });
         }
         $('[data-proof="prev"]', box).addEventListener('click', function () { show(current - 1); });
         $('[data-proof="next"]', box).addEventListener('click', function () { show(current + 1); });

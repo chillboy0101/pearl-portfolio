@@ -679,6 +679,36 @@
         ctx.restore();
     }
 
+    /* 3D player (rendered by character3d.js) drawn with its feet on (x, y), optionally squashed or tinted. */
+    var tintCanvas = null;
+    function draw3D(pose, x, y, widthCells, opt) {
+        var img = window.cq3dSprite.render(pose);
+        opt = opt || {};
+        var w = widthCells * view.cell;
+        var feet = window.cq3dSprite.footY;
+        var cx = (x - G.scrollX) * view.cell;
+        var by = (ROWS - y) * view.cell;
+        var src = img;
+        if (opt.tint) {
+            if (!tintCanvas) { tintCanvas = document.createElement('canvas'); tintCanvas.width = img.width; tintCanvas.height = img.height; }
+            var t = tintCanvas.getContext('2d');
+            t.globalCompositeOperation = 'source-over';
+            t.clearRect(0, 0, img.width, img.height);
+            t.drawImage(img, 0, 0);
+            t.globalCompositeOperation = 'source-in';
+            t.fillStyle = opt.tint;
+            t.fillRect(0, 0, img.width, img.height);
+            src = tintCanvas;
+        }
+        ctx.save();
+        ctx.globalAlpha = opt.alpha === undefined ? 1 : opt.alpha;
+        ctx.translate(cx, by);
+        if (opt.rot) ctx.rotate(opt.rot);
+        ctx.scale(opt.sx || 1, opt.sy || 1);
+        ctx.drawImage(src, -w / 2, -w * feet, w, w);
+        ctx.restore();
+    }
+
     function easeOutBack(t) {
         var c = 1.70158;
         t = Math.min(1, Math.max(0, t)) - 1;
@@ -836,6 +866,18 @@
         ctx.fillStyle = '#dfe5e2';
         ctx.fillRect(left + n, top, w - 2 * n, h);
         ctx.fillRect(left, top + n, w, h - 2 * n);
+        if (window.cq3dSprite) {
+            var size = h * 1.05;
+            var img3 = window.cq3dSprite.render({ frame: 'walk', facing: 1, t: since });
+            var bx = left + w * 0.06;
+            var byy = top + h * 0.02 - (reduced ? 0 : Math.max(0, Math.sin(since * Math.PI / 0.45)) * 0.35 * cell);
+            for (var g3 = 4; g3 >= 1; g3--) {
+                draw3DAt(img3, bx - g3 * size * 0.09, byy, size, 0.55 - g3 * 0.08, PICKUP_COLOURS[(g3 + Math.floor(since * 10)) % PICKUP_COLOURS.length]);
+            }
+            draw3DAt(img3, bx, byy, size, 1, null);
+            drawScoreText(left, top, w, h, cell, count);
+            return;
+        }
         var px = h * 0.55 / SPRITES.stand.length;
         var hop = reduced ? 0 : Math.max(0, Math.sin(since * Math.PI / 0.45)) * 0.35 * cell;
         var frameMap = Math.floor(since * 8) % 2 ? SPRITES.walk : SPRITES.stand;
@@ -854,6 +896,28 @@
             }
         }
         ctx.globalAlpha = 1;
+        drawScoreText(left, top, w, h, cell, count);
+    }
+
+    function draw3DAt(img, x, y, size, alpha, tint) {
+        var src = img;
+        if (tint) {
+            if (!tintCanvas) { tintCanvas = document.createElement('canvas'); tintCanvas.width = img.width; tintCanvas.height = img.height; }
+            var t = tintCanvas.getContext('2d');
+            t.globalCompositeOperation = 'source-over';
+            t.clearRect(0, 0, img.width, img.height);
+            t.drawImage(img, 0, 0);
+            t.globalCompositeOperation = 'source-in';
+            t.fillStyle = tint;
+            t.fillRect(0, 0, img.width, img.height);
+            src = tintCanvas;
+        }
+        ctx.globalAlpha = alpha;
+        ctx.drawImage(src, x, y, size, size);
+        ctx.globalAlpha = 1;
+    }
+
+    function drawScoreText(left, top, w, h, cell, count) {
         ctx.textAlign = 'left';
         ctx.textBaseline = 'alphabetic';
         ctx.fillStyle = '#14181f';
@@ -1020,7 +1084,8 @@
         for (var gi = G.trail.length - 1; gi >= 1; gi -= 2) {
             var t = G.trail[gi];
             var shade = PICKUP_COLOURS[(Math.floor(G.time * 12) + (gi >> 1)) % PICKUP_COLOURS.length];
-            drawSprite(SPRITES[t.frame], t.x - off, t.y, SPRITE_W, t.facing < 0, { alpha: 0.85 - gi * 0.03, tint: shade });
+            if (window.cq3dSprite) draw3D({ frame: t.frame, facing: t.facing, t: G.time }, t.x + PW / 2, t.y, SPRITE_W * 1.15, { alpha: 0.85 - gi * 0.03, tint: shade });
+            else drawSprite(SPRITES[t.frame], t.x - off, t.y, SPRITE_W, t.facing < 0, { alpha: 0.85 - gi * 0.03, tint: shade });
         }
         var blink = p.inv > 0 && Math.floor(p.inv * 12) % 2;
         if (!blink) {
@@ -1035,7 +1100,8 @@
                     if (p.moving) opt.rot = p.facing * 0.08;
                 }
             }
-            drawSprite(SPRITES[frame], p.x - off, p.y, SPRITE_W, p.facing < 0, opt);
+            if (window.cq3dSprite) draw3D({ frame: frame, facing: p.facing, t: p.moving ? p.step : G.time }, p.x + PW / 2, p.y, SPRITE_W * 1.15, opt);
+            else drawSprite(SPRITES[frame], p.x - off, p.y, SPRITE_W, p.facing < 0, opt);
         }
 
         G.popups.forEach(function (s) {
