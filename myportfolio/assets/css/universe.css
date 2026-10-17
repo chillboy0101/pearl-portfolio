@@ -1945,12 +1945,25 @@ p {
     transform: scale(1);
 }
 
-.cta-art .head {
-    transition: transform 0.4s cubic-bezier(.3, .41, .04, 1.01);
+/* The character slides in from the left when the panel arrives (position 1.4 s, rotation 2.4 s);
+   its head then follows the cursor from JS. */
+.cta-art .char {
+    transform-box: view-box;
+    transform-origin: 180px 425px;
 }
 
-.cta-art:hover .head {
-    transform: translateY(-17px);
+.js .cta-art .char {
+    transform: translateX(-110%) rotate(-12deg);
+    transition: transform 2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.js .cta-art.in .char {
+    transform: none;
+}
+
+.cta-art .head,
+.cta-art .torso {
+    transform-box: view-box;
 }
 
 .cta-title {
@@ -2452,6 +2465,7 @@ a.contact-cell:hover {
     }
 
     .divider .dv rect + rect,
+    .js .cta-art .char,
     .js .cta-art .pc,
     .js .cells > .visual.rv > * {
         transform: none;

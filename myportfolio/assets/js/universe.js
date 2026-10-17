@@ -391,26 +391,55 @@
         $('[data-pl="next"]').addEventListener('click', function () { show(current + 1); });
     }
 
-    /* The closing art panel: pieces build in when it arrives, and the character's eyes follow the cursor. */
+    /* The closing art panel: pieces build in and the character slides in when it arrives; then the head
+       turns toward the cursor (eased each frame), the body turns slightly the other way, and the pupils follow. */
     function ctaArt() {
         var art = $('.cta-art');
         if (!art) return;
-        var pupils = $$('.pupil', art);
         var svg = $('svg', art);
+        var head = $('.head', art);
+        var torso = $('.torso', art);
+        var pupils = $$('.pupil', art);
         var step = parseFloat(svg.getAttribute('data-px')) || 16;
-        onVisible(art, function (v) { if (v) art.classList.add('in'); });
-        if (!pupils.length) return;
+        var mouse = { x: 0, y: 0 };
+        var turn = { x: 0, y: 0 };
+        var visible = false;
+        var raf = 0;
+        var last = 0;
+
+        onVisible(art, function (v) {
+            visible = v;
+            if (v) art.classList.add('in');
+            if (v && !raf && !reduced) { last = performance.now(); raf = requestAnimationFrame(tick); }
+        });
+        if (reduced || !head) return;
+
         window.addEventListener('pointermove', function (e) {
+            mouse.x = e.clientX / window.innerWidth * 2 - 1;
+            mouse.y = e.clientY / window.innerHeight * 2 - 1;
+        }, { passive: true });
+
+        function tick(now) {
+            var dt = Math.min(0.05, (now - last) / 1000);
+            last = now;
+            var k = Math.min(5 * dt, 1);
+            var targetY = -1 + (mouse.x * 0.5 + 0.5) * 1.5;
+            turn.x += (-0.2 * mouse.y - turn.x) * k;
+            turn.y += (targetY - turn.y) * k;
+            var t = turn.y + 0.25;
+            head.style.transform = 'translate(' + (t * 14).toFixed(2) + 'px,' + (-turn.x * 40).toFixed(2) + 'px) rotate(' + (t * 8).toFixed(2) + 'deg) skewY(' + (t * -3).toFixed(2) + 'deg)';
+            if (torso) torso.style.transform = 'translate(' + (t * -2.8).toFixed(2) + 'px,0) rotate(' + (t * -1.6).toFixed(2) + 'deg)';
             var r = svg.getBoundingClientRect();
             var scale = r.width / 850;
-            var cx = r.left + 180 * scale;
-            var cy = r.top + 200 * scale;
-            var dx = Math.max(-1, Math.min(1, (e.clientX - cx) / 200));
-            var dy = Math.max(-1, Math.min(1, (e.clientY - cy) / 160));
+            var cx = r.left + 190 * scale;
+            var cy = r.top + 280 * scale;
+            var px = (window.innerWidth / 2 + mouse.x * window.innerWidth / 2 - cx) / 200;
+            var py = (window.innerHeight / 2 + mouse.y * window.innerHeight / 2 - cy) / 160;
             pupils.forEach(function (p) {
-                p.setAttribute('transform', 'translate(' + Math.round(dx) * step + ' ' + Math.round(dy) * step + ')');
+                p.setAttribute('transform', 'translate(' + Math.round(Math.max(-1, Math.min(1, px))) * step + ' ' + Math.round(Math.max(-1, Math.min(1, py))) * step + ')');
             });
-        }, { passive: true });
+            raf = visible ? requestAnimationFrame(tick) : 0;
+        }
     }
 
     /* Activity year switch. */
