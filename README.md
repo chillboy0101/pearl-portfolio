@@ -52,7 +52,11 @@ Deployed on Vercel - [Coming Soon]
 ## Carl Christian Quist portfolio
 
 [`myportfolio/`](myportfolio/) is Carl Christian Quist's portfolio (IT Officer | Software Developer),
-served at `/myportfolio/`. It keeps this site's colours and fonts and adds a 3D hero (Three.js),
-scroll animations and live project screenshots. Pages: Home, Services, Work, Contributions and Contact.
-Shared styles and scripts live in `myportfolio/assets/`. To add a personal photo, place it in
-`myportfolio/images/` and put an `<img>` inside the `.avatar` element on the home page.
+served at `/myportfolio/`. It is a single page in the style of GitHub Universe: a pale grey-green
+grid of bordered cells, Mona Sans and JetBrains Mono type, code-path section titles, a live Accra
+clock, a code-character cursor trail, pixel mosaics and black-and-white screenshots that turn to
+colour on hover. All motion is switched off for visitors who prefer reduced motion.
+
+Styles are in `myportfolio/assets/css/universe.css` and behaviour in `myportfolio/assets/js/universe.js`.
+The old `services.html`, `portfolio.html`, `contributions.html` and `contact.html` URLs redirect to
+the matching section of `index.html`.

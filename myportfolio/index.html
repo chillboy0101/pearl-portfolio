@@ -4,152 +4,294 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carl Christian Quist | IT Officer &amp; Software Developer</title>
-    <meta name="description" content="Carl Christian Quist is an IT Officer and Software Developer in Accra, Ghana, building systems used daily at the Ghana Revenue Authority and websites for businesses.">
-    <meta name="theme-color" content="#13233a">
+    <meta name="description" content="Carl Christian Quist is an IT Officer and Software Developer in Accra, Ghana. He builds systems used daily at the Ghana Revenue Authority, websites for businesses, and has a patch in the Linux kernel.">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:title" content="Carl Christian Quist | IT Officer &amp; Software Developer">
+    <meta property="og:description" content="Systems used daily at the Ghana Revenue Authority, websites for businesses across Accra, and a fix in the Linux kernel.">
+    <meta property="og:image" content="images/latewatch.jpg">
     <link rel="icon" href="profile.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/universe.css">
 </head>
 <body>
-    <header class="site-nav">
-        <div class="container">
-            <a href="index.html" class="brand" aria-label="Carl Christian Quist, home"><span class="brand-mark">CQ</span>Carl Quist</a>
-            <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
-            <nav class="nav-links" aria-label="Main">
-                <a href="index.html" class="active" aria-current="page">Home</a>
-                <a href="services.html">Services</a>
-                <a href="portfolio.html">Work</a>
-                <a href="contributions.html">Contributions</a>
-                <a href="contact.html" class="nav-cta">Hire Me</a>
-            </nav>
-        </div>
-    </header>
-    <section class="hero" id="top">
-        <canvas id="hero-canvas" aria-hidden="true"></canvas>
-        <div class="grid-overlay"></div>
-        <div class="container">
-            <div>
-                <span class="eyebrow"><span class="pulse-dot"></span>IT Officer &middot; Software Developer &middot; Accra</span>
-                <h1>Carl Christian <span class="accent">Quist</span></h1>
-                <p class="typed-line">I build <strong><span data-typed='["attendance systems GRA staff use daily", "tax calculators on gra.gov.gh", "websites for growing businesses", "inventory and RFID platforms", "fixes for the Linux kernel"]'>attendance systems GRA staff use daily</span></strong><span class="typed-caret" aria-hidden="true"></span></p>
-                <p class="hero-lede">IT Management graduate (UPSA, 2025) and AI Software Engineer at the Ghana Revenue Authority. I build and support the systems staff rely on every day, and deliver websites and web systems for clients across Accra.</p>
-                <div class="hero-actions">
-                    <a href="portfolio.html" class="btn btn-primary">View My Work <i class="fas fa-arrow-right"></i></a>
-                    <a href="contact.html" class="btn btn-ghost">Get In Touch</a>
-                </div>
-                <div class="hero-badges">
-                    <span class="hero-badge"><i class="fab fa-linux"></i>Linux kernel contributor</span>
-                    <span class="hero-badge"><i class="fas fa-landmark"></i>Systems in daily use at GRA</span>
-                    <span class="hero-badge"><i class="fas fa-code-commit"></i>1,007 commits since 2025</span>
-                </div>
-            </div>
-            <aside class="hero-card" aria-label="Profile summary">
-                <div class="hero-card-head">
-                    <div class="avatar">CQ</div>
-                    <div>
-                        <div class="hero-card-name">Carl Christian Quist</div>
-                        <div class="hero-card-role">IT Officer | Software Developer</div>
-                    </div>
-                </div>
-                <ul>
-                    <li><i class="fas fa-briefcase"></i>AI Software Engineer, Ghana Revenue Authority</li>
-                    <li><i class="fas fa-graduation-cap"></i>BSc IT Management, UPSA (2025)</li>
-                    <li><i class="fab fa-linux"></i>Patch accepted into the Linux kernel</li>
-                    <li><i class="fas fa-location-dot"></i>Accra, Ghana</li>
-                </ul>
-                <div class="status"><span class="pulse-dot"></span>Open to IT roles and freelance projects</div>
-            </aside>
-        </div>
-        <a href="#stats" class="scroll-cue" aria-label="Scroll down"></a>
-    </section>
-
-    <section class="stats" id="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat reveal"><div class="stat-number"><span data-count="1007">1,007</span></div><div class="stat-label">Commits since April 2025</div></div>
-                <div class="stat reveal d1"><div class="stat-number"><span data-count="12">12</span></div><div class="stat-label">Live projects</div></div>
-                <div class="stat reveal d2"><div class="stat-number"><span data-count="3">3</span></div><div class="stat-label">Calculators on gra.gov.gh</div></div>
-                <div class="stat reveal d3"><div class="stat-number"><span data-count="1">1</span></div><div class="stat-label">Linux kernel patch accepted</div></div>
-            </div>
-        </div>
-    </section>
-
-    <div class="marquee" aria-label="Technologies I work with">
-        <div class="marquee-track"><span class="chip"><i class="fab fa-react"></i>React</span><span class="chip"><i class="fas fa-n"></i>Next.js</span><span class="chip"><i class="fas fa-code"></i>TypeScript</span><span class="chip"><i class="fab fa-js"></i>JavaScript</span><span class="chip"><i class="fas fa-database"></i>PostgreSQL</span><span class="chip"><i class="fas fa-layer-group"></i>Prisma &amp; Drizzle</span><span class="chip"><i class="fas fa-wind"></i>Tailwind CSS</span><span class="chip"><i class="fab fa-wordpress"></i>WordPress</span><span class="chip"><i class="fas fa-cube"></i>Three.js</span><span class="chip"><i class="fab fa-linux"></i>Linux</span><span class="chip"><i class="fas fa-cloud"></i>Vercel</span><span class="chip"><i class="fab fa-git-alt"></i>Git &amp; GitHub</span><span class="chip"><i class="fas fa-table"></i>Microsoft Excel</span><span class="chip"><i class="fas fa-network-wired"></i>Networking</span><span class="chip"><i class="fas fa-robot"></i>AI-assisted development</span><span class="chip"><i class="fab fa-react"></i>React</span><span class="chip"><i class="fas fa-n"></i>Next.js</span><span class="chip"><i class="fas fa-code"></i>TypeScript</span><span class="chip"><i class="fab fa-js"></i>JavaScript</span><span class="chip"><i class="fas fa-database"></i>PostgreSQL</span><span class="chip"><i class="fas fa-layer-group"></i>Prisma &amp; Drizzle</span><span class="chip"><i class="fas fa-wind"></i>Tailwind CSS</span><span class="chip"><i class="fab fa-wordpress"></i>WordPress</span><span class="chip"><i class="fas fa-cube"></i>Three.js</span><span class="chip"><i class="fab fa-linux"></i>Linux</span><span class="chip"><i class="fas fa-cloud"></i>Vercel</span><span class="chip"><i class="fab fa-git-alt"></i>Git &amp; GitHub</span><span class="chip"><i class="fas fa-table"></i>Microsoft Excel</span><span class="chip"><i class="fas fa-network-wired"></i>Networking</span><span class="chip"><i class="fas fa-robot"></i>AI-assisted development</span></div>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="strip">
+        <span>carl-quist/</span>
+        <span class="clock" id="clock" aria-label="Time in Accra">00 : 00 : 00</span>
+        <span class="right"><span class="dot"></span>open_to_work</span>
     </div>
+    <nav class="nav" aria-label="Main">
+        <a class="logo" href="#top" aria-label="Carl Quist, back to top">CQ<sup>/</sup></a>
+        <a class="link" href="#work">Work</a>
+        <a class="link" href="#contributions">Contributions</a>
+        <a class="link" href="#services">Services</a>
+        <a class="link" href="#experience">Experience</a>
+        <a class="link" href="#contact">Contact</a>
+        <span class="blank" aria-hidden="true"></span>
+        <button class="menu-btn" type="button" aria-expanded="false">menu</button>
+        <a class="cta" href="#contact">Hire me <span class="arrow" aria-hidden="true">&#8599;</span></a>
+    </nav>
+    <main id="main">
+    <section class="frame hero" id="top">
+        <div class="wordmark"><h1 id="wordmark">CARL&nbsp;QUIST<span class="tick">/</span></h1></div>
+        <div class="cells hero-grid">
+            <div class="hero-left span2">
+                <div class="hero-meta">
+                    <span class="label" data-scramble>accra, ghana / it officer &amp; software developer</span>
+                    <span class="label" data-scramble>on-site &amp; remote</span>
+                </div>
+                <h2 class="slash hero-title">open-to-work/</h2>
+            </div>
+            <div class="hero-intro span2">
+                <p class="lead">I build and support the systems people rely on every day, from attendance and tax tools at the Ghana Revenue Authority to websites for businesses across Accra.</p>
+            </div>
+            <div class="hero-cta span2">
+                <a class="btn btn-green" href="#work">View my work <span class="arrow" aria-hidden="true">&#8599;</span></a>
+            </div>
+            <div class="pixel-field span4">
+                <canvas id="pixel-field" aria-hidden="true"></canvas>
+                <span class="label hint">move_your_cursor_here/</span>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="cells c4">
+            <div class="river-head span4">
+                <span class="label green caret" data-scramble>building_since_2021/</span>
+                <a class="btn btn-grey btn-sm" href="https://github.com/chillboy0101" target="_blank" rel="noopener">GitHub <span class="arrow" aria-hidden="true">&#8599;</span></a>
+            </div>
+            <div class="river-title span2"><h2 class="h-river rv">I build the systems people rely on every day</h2></div>
+            <div class="river-note span2"><p class="body rv">IT Management graduate (UPSA, 2025) and AI Software Engineer at the Ghana Revenue Authority. Every screenshot on this page is from the live project.</p></div>
+        </div>
+            <div class="cells river-row rv">
+                <div class="river-text span2">
+                    <span class="label" data-scramble>dev.build()</span>
+                    <div class="river-copy">
+                        <p class="lead">I build internal systems that replace manual office routines. LateWatch has tracked attendance for GRA's Online &amp; Production Unit every working day since May 2026.</p>
+                        <a class="btn btn-grey btn-sm" href="https://latewatch.vercel.app" target="_blank" rel="noopener">Open LateWatch <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    </div>
+                </div>
+                <div class="shot span2"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy" width="1200" height="693"><span class="tagline">latewatch.vercel.app</span></div>
+            </div>
+            <div class="cells river-row rv">
+                <div class="shot span2"><img src="images/gra-calculators.jpg" alt="Screenshot of GRA Tax Calculators" loading="lazy" width="1200" height="693"><span class="tagline">gra.gov.gh/online-tools</span></div>
+                <div class="river-text span2">
+                    <span class="label" data-scramble>dev.ship()</span>
+                    <div class="river-copy">
+                        <p class="lead">I ship public tools that taxpayers use. The VAT, PIT and PAYE calculators on gra.gov.gh apply the 2026 rates and show the tax on every band.</p>
+                        <a class="btn btn-grey btn-sm" href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Try the calculators <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="cells river-row rv">
+                <div class="river-text span2">
+                    <span class="label" data-scramble>dev.support()</span>
+                    <div class="river-copy">
+                        <p class="lead">I deliver and look after websites for businesses, from Jovel Pharmacy's online shop to Rikonim's CMS-driven site, and I stay on hand once they launch.</p>
+                        <a class="btn btn-grey btn-sm" href="https://jovelpharmacy.com" target="_blank" rel="noopener">Visit jovelpharmacy.com <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    </div>
+                </div>
+                <div class="shot span2"><img src="images/jovel.jpg" alt="Screenshot of Jovel Pharmacy" loading="lazy" width="1200" height="693"><span class="tagline">jovelpharmacy.com</span></div>
+            </div>
+    </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="section-head reveal">
-                <span class="kicker">Selected work</span>
-                <h2>Systems people use every day</h2>
-                <p>From internal tools at the Ghana Revenue Authority to e-commerce for local businesses. Every screenshot is from the live project.</p>
+    <div class="mosaic"><canvas data-mosaic="divider" aria-hidden="true"></canvas></div>
+
+    <section class="frame">
+        <div class="cells sec-head" id="work">
+            <div class="title">
+                <span class="label green caret" data-scramble>twelve_live_projects</span>
+                <h2 class="slash rv">work/</h2>
             </div>
-            <div class="projects-grid">
-                <article class="project reveal" data-tilt data-cat="gra">
-                    <div class="browser">
-                        <div class="browser-bar"><span></span><span></span><span></span><em>latewatch.vercel.app</em></div>
-                        <div class="shot"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy"></div>
-                    </div>
-                    <div class="project-body">
-                        <span class="project-meta">Ghana Revenue Authority</span>
-                        <h3>LateWatch</h3>
-                        <p>Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
-                        <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span></div>
-                        <div class="links"><a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
-                    </div>
-                </article>
-                <article class="project reveal d1" data-tilt data-cat="gra">
-                    <div class="browser">
-                        <div class="browser-bar"><span></span><span></span><span></span><em>gra.gov.gh/online-tools/tax-calculators</em></div>
-                        <div class="shot"><img src="images/gra-calculators.jpg" alt="Screenshot of GRA Tax Calculators" loading="lazy"></div>
-                    </div>
-                    <div class="project-body">
-                        <span class="project-meta">Ghana Revenue Authority</span>
-                        <h3>GRA Tax Calculators</h3>
-                        <p>VAT, PIT and PAYE calculators live on the official GRA website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
-                        <div class="tags"><span class="tag">WordPress</span><span class="tag">JavaScript</span><span class="tag">Public service</span></div>
-                        <div class="links"><a href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Use it on gra.gov.gh <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
-                    </div>
-                </article>
-                <article class="project reveal d2" data-tilt data-cat="client">
-                    <div class="browser">
-                        <div class="browser-bar"><span></span><span></span><span></span><em>jovelpharmacy.com</em></div>
-                        <div class="shot"><img src="images/jovel.jpg" alt="Screenshot of Jovel Pharmacy" loading="lazy"></div>
-                    </div>
-                    <div class="project-body">
-                        <span class="project-meta">Client website</span>
-                        <h3>Jovel Pharmacy</h3>
-                        <p>Full online pharmacy: product shop with cart, prescription transfer, pharmacist consultations, customer accounts and an admin dashboard.</p>
-                        <div class="tags"><span class="tag">Next.js</span><span class="tag">Prisma</span><span class="tag">E-commerce</span></div>
-                        <div class="links"><a href="https://jovelpharmacy.com" target="_blank" rel="noopener">jovelpharmacy.com <i class="fas fa-arrow-up-right-from-square"></i></a><a href="https://github.com/chillboy0101/jovel-pharmacy" target="_blank" rel="noopener">Code <i class="fas fa-arrow-up-right-from-square"></i></a></div>
-                    </div>
-                </article>
-            </div>
-            <div style="text-align: center; margin-top: 46px;" class="reveal">
-                <a href="portfolio.html" class="btn btn-outline">See all 12 projects <i class="fas fa-arrow-right"></i></a>
-            </div>
+            <div class="aside"><p class="body">Systems for the Ghana Revenue Authority, client websites and web applications. Hover a screenshot to see it in colour.</p>
+                <div class="filters" role="group" aria-label="Filter projects">
+                    <button class="filter on" type="button" data-filter="all" aria-pressed="true">all</button>
+                    <button class="filter" type="button" data-filter="gra" aria-pressed="false">gra</button>
+                    <button class="filter" type="button" data-filter="client" aria-pressed="false">clients</button>
+                    <button class="filter" type="button" data-filter="apps" aria-pressed="false">apps</button>
+                </div></div>
+        </div>
+        <div class="cells work-grid">
+            <article class="work-card rv" data-cat="gra">
+                <div class="shot"><img src="images/latewatch.jpg" alt="Screenshot of LateWatch" loading="lazy" width="1200" height="693"><span class="tagline">latewatch.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">ghana_revenue_authority</span>
+                    <h3>LateWatch</h3>
+                    <p>Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
+                    <p class="label">Next.js / TypeScript / PostgreSQL</p>
+                    <div class="links"><a href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="gra">
+                <div class="shot"><img src="images/gra-calculators.jpg" alt="Screenshot of GRA Tax Calculators" loading="lazy" width="1200" height="693"><span class="tagline">gra.gov.gh/online-tools</span></div>
+                <div class="meta">
+                    <span class="label green">ghana_revenue_authority</span>
+                    <h3>GRA Tax Calculators</h3>
+                    <p>VAT, PIT and PAYE calculators live on the official GRA website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.</p>
+                    <p class="label">WordPress / JavaScript / Public service</p>
+                    <div class="links"><a href="https://gra.gov.gh/online-tools/tax-calculators/" target="_blank" rel="noopener">Use it on gra.gov.gh &#8599;</a><a href="https://github.com/chillboy0101/gra-vat-calculator" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="gra">
+                <div class="shot"><img src="images/cpa-calendar.jpg" alt="Screenshot of CPA Event Calendar" loading="lazy" width="1200" height="693"><span class="tagline">cpa-event-calendar-gra.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">ghana_revenue_authority</span>
+                    <h3>CPA Event Calendar</h3>
+                    <p>Event planning calendar for the Communication and Public Affairs department, with role-based sign-in, event status tracking and private storage for event evidence.</p>
+                    <p class="label">Next.js / PostgreSQL / Drizzle</p>
+                    <div class="links"><a href="https://cpa-event-calendar-gra.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/cpa-event-calendar" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="gra">
+                <div class="shot"><img src="images/op-awards.jpg" alt="Screenshot of O&P Awards" loading="lazy" width="1200" height="693"><span class="tagline">op-awards.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">ghana_revenue_authority</span>
+                    <h3>O&amp;P Awards</h3>
+                    <p>Nomination and anonymous voting system for the 2026 Online &amp; Production staff awards, with phase-gated ballots, vote receipts, runoffs and certified results.</p>
+                    <p class="label">Next.js / Clerk / PostgreSQL</p>
+                    <div class="links"><a href="https://op-awards.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/op-awards" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="client">
+                <div class="shot"><img src="images/jovel.jpg" alt="Screenshot of Jovel Pharmacy" loading="lazy" width="1200" height="693"><span class="tagline">jovelpharmacy.com</span></div>
+                <div class="meta">
+                    <span class="label green">client_website</span>
+                    <h3>Jovel Pharmacy</h3>
+                    <p>Full online pharmacy: product shop with cart, prescription transfer, pharmacist consultations, customer accounts and an admin dashboard.</p>
+                    <p class="label">Next.js / Prisma / E-commerce</p>
+                    <div class="links"><a href="https://jovelpharmacy.com" target="_blank" rel="noopener">jovelpharmacy.com &#8599;</a><a href="https://github.com/chillboy0101/jovel-pharmacy" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="client">
+                <div class="shot"><img src="images/rikonim.jpg" alt="Screenshot of Rikonim Enterprise" loading="lazy" width="1200" height="693"><span class="tagline">rikonim.com</span></div>
+                <div class="meta">
+                    <span class="label green">client_website</span>
+                    <h3>Rikonim Enterprise</h3>
+                    <p>Website for a building and civil engineering company, with a project gallery and a Sanity CMS page builder so the team can update every page and preview changes before publishing.</p>
+                    <p class="label">Next.js / Sanity CMS / SEO</p>
+                    <div class="links"><a href="https://rikonim.com" target="_blank" rel="noopener">rikonim.com &#8599;</a><a href="https://github.com/chillboy0101/rikonim-enterprise" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="client">
+                <div class="shot"><img src="images/kekeli.jpg" alt="Screenshot of Kekeli Studios" loading="lazy" width="1200" height="693"><span class="tagline">kekelis-studio.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">client_website</span>
+                    <h3>Kekeli Studios</h3>
+                    <p>Portfolio and booking website for a professional videographer and photographer serving brands, events and people.</p>
+                    <p class="label">Next.js / TypeScript / Tailwind CSS</p>
+                    <div class="links"><a href="https://kekelis-studio.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/kekelis-studio" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="apps">
+                <div class="shot"><img src="images/rfid-ims.jpg" alt="Screenshot of RFID-IMS" loading="lazy" width="1200" height="693"><span class="tagline">rfid-ims.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">commissioned_system</span>
+                    <h3>RFID-IMS</h3>
+                    <p>RFID Inventory Management System commissioned by UPSA students, running as VDL Fulfilment Ops: tag assignment, pickup authorisation and token-verified item exit, with a mobile app for stock, orders and vendors.</p>
+                    <p class="label">TypeScript / React Native / MongoDB</p>
+                    <div class="links"><a href="https://rfid-ims.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/RFID-IMS" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="client">
+                <div class="shot"><img src="images/samrej.jpg" alt="Screenshot of SAM-ReJ Company Limited" loading="lazy" width="1200" height="693"><span class="tagline">amenuveve-portfolio.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">client_website</span>
+                    <h3>SAM-ReJ Company Limited</h3>
+                    <p>Multipage website for a civil engineering and construction company, with a photo and video gallery of its projects and an online quote form.</p>
+                    <p class="label">HTML / CSS / JavaScript</p>
+                    <div class="links"><a href="https://amenuveve-portfolio.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/amenuveve-portfolio" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="apps">
+                <div class="shot"><img src="images/edinam.jpg" alt="Screenshot of Edinam Hospital" loading="lazy" width="1200" height="693"><span class="tagline">edinam-hospital.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">web_application</span>
+                    <h3>Edinam Hospital</h3>
+                    <p>Hospital website with online appointment booking, a 3D virtual tour, a pharmacy catalogue with cart, and a chat assistant that hands over to a doctor.</p>
+                    <p class="label">Next.js / Three.js / Healthcare</p>
+                    <div class="links"><a href="https://edinam-hospital.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/Edinam-Hospital" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="apps">
+                <div class="shot"><img src="images/inventorypro.jpg" alt="Screenshot of InventoryPro Cloud" loading="lazy" width="1200" height="693"><span class="tagline">inventorypro-cloud</span></div>
+                <div class="meta">
+                    <span class="label green">web_application</span>
+                    <h3>InventoryPro Cloud</h3>
+                    <p>Cloud inventory management with products, supplier orders, stock adjustments, low-stock alerts and analytics, secured with Supabase authentication.</p>
+                    <p class="label">React / TypeScript / Supabase</p>
+                    <div class="links"><a href="https://github.com/chillboy0101/InventoryPro-Cloud" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
+            <article class="work-card rv" data-cat="client">
+                <div class="shot"><img src="images/ewe.jpg" alt="Screenshot of Ewe Culture" loading="lazy" width="1200" height="693"><span class="tagline">ewe-culture.vercel.app</span></div>
+                <div class="meta">
+                    <span class="label green">culture_and_tourism</span>
+                    <h3>Ewe Culture</h3>
+                    <p>Informational website about Ghana's Ewe people, with pages on festivals, dance, language, dressing, food, tourism and a Learn Ewe section.</p>
+                    <p class="label">HTML / CSS / Tourism</p>
+                    <div class="links"><a href="https://ewe-culture.vercel.app" target="_blank" rel="noopener">Live site &#8599;</a><a href="https://github.com/chillboy0101/ewe-culture" target="_blank" rel="noopener">Code &#8599;</a></div>
+                </div>
+            </article>
         </div>
     </section>
 
-    <section class="section spotlight">
-        <div class="container">
-            <div class="split">
-                <div class="reveal">
-                    <span class="badge"><i class="fas fa-circle-check"></i>Accepted upstream &middot; August 2026</span>
-                    <h2 style="margin-top: 18px;">A fix in the Linux kernel</h2>
-                    <p>The mute LED on HP Laptop 15-dy0xxx machines never lit because the model was missing from the sound driver's quirk table. I traced the LED to a codec register with hda-verb, verified the fix on real hardware, and submitted the patch. The Linux sound maintainer applied it.</p>
-                    <div class="spot-links">
-                        <a href="https://lore.kernel.org/all/CAOtcGaxXndKxTK5MVSEcmF-LUy+V51K7fhE=qvLA+VvW5ZyCNA@mail.gmail.com/" target="_blank" rel="noopener" class="btn btn-primary">Read the patch <i class="fas fa-arrow-right"></i></a>
-                        <a href="https://lore.kernel.org/all/87mruzeg0o.wl-tiwai@suse.de/" target="_blank" rel="noopener" class="btn btn-ghost">Maintainer's reply</a>
+    <section class="frame">
+        <div class="spacer"></div>
+        <div class="cells sec-head" id="highlights">
+            <div class="title">
+                <span class="label green caret" data-scramble>featured</span>
+                <h2 class="slash rv">highlights/</h2>
+            </div>
+            <div class="aside"><p class="body">Five projects worth a closer look. Pick one from the list, or step through them.</p></div>
+        </div>
+        <div class="cells playlist">
+            <div class="pl-list" role="tablist" aria-label="Featured projects">
+                <button class="pl-item on" type="button" role="tab" aria-selected="true"><span class="bar" style="background:var(--px-purple)"></span><img src="images/latewatch.jpg" alt="" loading="lazy"><span>latewatch_attendance.app</span></button>
+                <button class="pl-item" type="button" role="tab" aria-selected="false"><span class="bar" style="background:var(--px-orange)"></span><img src="images/gra-calculators.jpg" alt="" loading="lazy"><span>gra_tax_calculators.js</span></button>
+                <button class="pl-item" type="button" role="tab" aria-selected="false"><span class="bar" style="background:var(--px-green)"></span><img src="images/jovel.jpg" alt="" loading="lazy"><span>jovel_pharmacy_shop.tsx</span></button>
+                <button class="pl-item" type="button" role="tab" aria-selected="false"><span class="bar" style="background:var(--px-blue)"></span><img src="images/rfid-ims.jpg" alt="" loading="lazy"><span>rfid_inventory_system.ts</span></button>
+                <button class="pl-item" type="button" role="tab" aria-selected="false"><span class="bar" style="background:var(--px-olive)"></span><img src="images/rikonim.jpg" alt="" loading="lazy"><span>rikonim_cms_site.tsx</span></button>
+                <div class="pad"><a class="btn btn-grey" href="#work">See all twelve projects <span class="arrow" aria-hidden="true">&#8599;</span></a></div>
+            </div>
+            <div class="pl-view">
+                <div class="shot"><img id="pl-img" src="images/latewatch.jpg" alt="Screenshot of LateWatch" width="1200" height="693"><span class="tagline" id="pl-tag">latewatch.vercel.app</span></div>
+                <div class="pl-body">
+                    <div class="pl-top">
+                        <h3 id="pl-title">LateWatch</h3>
+                        <div class="pl-ctrl"><button type="button" data-pl="prev" aria-label="Previous project">&larr;</button><button type="button" data-pl="next">Next &rarr;</button></div>
                     </div>
+                    <span class="label green" id="pl-meta">ghana_revenue_authority</span>
+                    <p class="body" id="pl-desc">Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.</p>
+                    <div class="pl-links" id="pl-links"><a class="btn btn-sm btn-green" href="https://latewatch.vercel.app" target="_blank" rel="noopener">Live site <span class="arrow" aria-hidden="true">&#8599;</span></a><a class="btn btn-sm btn-grey" href="https://github.com/chillboy0101/latewatch" target="_blank" rel="noopener">Code <span class="arrow" aria-hidden="true">&#8599;</span></a></div>
                 </div>
-                <div class="terminal reveal d2">
-                    <div class="terminal-bar"><span></span><span></span><span></span></div>
-<pre><span class="k">Subject:</span> [PATCH] ALSA: hda/realtek: Enable mute LED on HP Laptop 15-dy0xxx
+            </div>
+        </div>
+        <script type="application/json" id="pl-data">[{"img": "latewatch", "url": "latewatch.vercel.app", "alt": "LateWatch", "title": "LateWatch", "meta": "ghana_revenue_authority", "desc": "Attendance and lateness tracking with automated reports, used daily by the Online &amp; Production Unit since May 2026. Staff check in through the Attendance Portal; admins manage leave, penalties, payments and Excel reports with a full audit trail.", "links": [["Live site", "https://latewatch.vercel.app"], ["Code", "https://github.com/chillboy0101/latewatch"]]}, {"img": "gra-calculators", "url": "gra.gov.gh/online-tools", "alt": "GRA Tax Calculators", "title": "GRA Tax Calculators", "meta": "ghana_revenue_authority", "desc": "VAT, PIT and PAYE calculators live on the official GRA website. They apply the 2026 rates and bands, show the tax on every band, and run entirely in the visitor's browser so no income data is stored.", "links": [["Use it on gra.gov.gh", "https://gra.gov.gh/online-tools/tax-calculators/"], ["Code", "https://github.com/chillboy0101/gra-vat-calculator"]]}, {"img": "jovel", "url": "jovelpharmacy.com", "alt": "Jovel Pharmacy", "title": "Jovel Pharmacy", "meta": "client_website", "desc": "Full online pharmacy: product shop with cart, prescription transfer, pharmacist consultations, customer accounts and an admin dashboard.", "links": [["jovelpharmacy.com", "https://jovelpharmacy.com"], ["Code", "https://github.com/chillboy0101/jovel-pharmacy"]]}, {"img": "rfid-ims", "url": "rfid-ims.vercel.app", "alt": "RFID-IMS", "title": "RFID-IMS", "meta": "commissioned_system", "desc": "RFID Inventory Management System commissioned by UPSA students, running as VDL Fulfilment Ops: tag assignment, pickup authorisation and token-verified item exit, with a mobile app for stock, orders and vendors.", "links": [["Live site", "https://rfid-ims.vercel.app"], ["Code", "https://github.com/chillboy0101/RFID-IMS"]]}, {"img": "rikonim", "url": "rikonim.com", "alt": "Rikonim Enterprise", "title": "Rikonim Enterprise", "meta": "client_website", "desc": "Website for a building and civil engineering company, with a project gallery and a Sanity CMS page builder so the team can update every page and preview changes before publishing.", "links": [["rikonim.com", "https://rikonim.com"], ["Code", "https://github.com/chillboy0101/rikonim-enterprise"]]}]</script>
+    </section>
+
+    <section class="frame">
+        <div class="spacer"></div>
+        <div class="cells sec-head" id="contributions">
+            <div class="title">
+                <span class="label green caret" data-scramble>accepted_upstream</span>
+                <h2 class="slash rv">contributions/</h2>
+            </div>
+            <div class="aside"><p class="body">Open-source work, public tools and every commit since my first in April 2025.</p></div>
+        </div>
+        <div class="cells c2">
+            <div class="kernel-text">
+                <span class="label" data-scramble>linux_kernel / alsa / hda-realtek</span>
+                <div>
+                    <h3 class="h-river rv">A fix in the Linux kernel</h3>
+                    <p class="body rv" style="margin-top:18px">The mute LED on HP Laptop 15-dy0xxx machines (Realtek ALC236) never lit because the model had no entry in the sound driver's quirk table. I traced the LED to codec register COEF 0x07, bit 0, with hda-verb, verified it on the hardware, and submitted a one-line fix. Takashi Iwai, the Linux sound subsystem maintainer, applied it in August 2026.</p>
+                </div>
+                <div class="kernel-links">
+                    <a class="btn btn-green" href="https://lore.kernel.org/all/CAOtcGaxXndKxTK5MVSEcmF-LUy+V51K7fhE=qvLA+VvW5ZyCNA@mail.gmail.com/" target="_blank" rel="noopener">Read the patch <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                    <a class="btn btn-grey btn-sm" href="https://lore.kernel.org/all/87mruzeg0o.wl-tiwai@suse.de/" target="_blank" rel="noopener">Maintainer's reply <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                </div>
+            </div>
+<pre class="term"><span class="k">Subject:</span> [PATCH] ALSA: hda/realtek: Enable mute LED on HP Laptop 15-dy0xxx
 
 <span class="d">The LED is controlled by COEF index 0x07, bit 0.
 This was verified on the hardware with hda-verb.
@@ -160,89 +302,251 @@ Tested on an HP Laptop 15-dy0xxx
 <span class="k">Signed-off-by:</span> Carl Quist
 <span class="ok">Applied now.
 <span class="d">Takashi Iwai, Linux sound subsystem maintainer</span></span></pre>
-                </div>
-            </div>
         </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <div class="section-head reveal">
-                <span class="kicker">What I do</span>
-                <h2>How I can help</h2>
-            </div>
-            <div class="cards">
-                <div class="card reveal">
-                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
-                    <h3>Websites</h3>
-                    <p>Fast, responsive business websites with content you can update yourself.</p>
-                    <a class="card-link" href="services.html">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="card reveal d1">
-                    <div class="card-icon"><i class="fas fa-server"></i></div>
-                    <h3>Web systems</h3>
-                    <p>Attendance, inventory, voting and approval systems that replace manual office work.</p>
-                    <a class="card-link" href="services.html">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="card reveal d2">
-                    <div class="card-icon"><i class="fas fa-headset"></i></div>
-                    <h3>IT support</h3>
-                    <p>End-user support, networking and Excel data work that keeps teams productive.</p>
-                    <a class="card-link" href="services.html">Learn more <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section tight">
-        <div class="container">
-            <div class="cta reveal">
-                <h2>Let's build something reliable together</h2>
-                <p>Whether you need a website, an internal system or dependable IT support, I'd like to hear about it.</p>
-                <a href="contact.html" class="btn btn-ghost">Get in Touch <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <a href="index.html" class="brand"><span class="brand-mark">CQ</span>Carl Quist</a>
-                    <p>IT Officer and Software Developer in Accra, Ghana. Building and supporting systems people rely on every day.</p>
-                    <div class="socials">
-                        <a href="https://github.com/chillboy0101" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="mailto:equalizerjr@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                        <a href="tel:+233257679050" aria-label="Phone"><i class="fas fa-phone"></i></a>
+        <div class="cells">
+            <div class="activity">
+                <div class="act-top">
+                    <div data-year-panel="2026"><strong>988 commits</strong> <span class="label">in 2026 across 94 active days</span></div>
+                    <div data-year-panel="2025" hidden><strong>19 commits</strong> <span class="label">in 2025 across 8 active days</span></div>
+                    <div class="years" role="group" aria-label="Choose year">
+                        <button type="button" data-year="2026" class="on" aria-pressed="true">2026</button>
+                        <button type="button" data-year="2025" aria-pressed="false">2025</button>
                     </div>
                 </div>
-                <div>
-                    <h4>Pages</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="portfolio.html">Work</a></li>
-                        <li><a href="contributions.html">Contributions</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
+                <div class="chart" data-year-panel="2026"><img src="images/github-activity-2026.svg" alt="Commit activity in 2026: 988 commits across 94 active days" width="831" height="161"></div>
+                <div class="chart" data-year-panel="2025" hidden><img src="images/github-activity-2025.svg" alt="Commit activity in 2025: 19 commits across 8 active days" width="831" height="161"></div>
+                <p class="label" style="margin-top:14px">Counted from the full history of all 17 of my repositories, including the private GRA Equipment Operations project, up to 16 October 2026. Only commits I authored are included.</p>
+                <div class="repo-list">
+                    <div class="repo"><span class="name">LateWatch</span><span class="track"><span class="fill" data-w="100%"></span></span><span class="n">420</span></div>
+                    <div class="repo"><span class="name">Rikonim Enterprise</span><span class="track"><span class="fill" data-w="39%"></span></span><span class="n">165</span></div>
+                    <div class="repo"><span class="name">RFID-IMS</span><span class="track"><span class="fill" data-w="38%"></span></span><span class="n">160</span></div>
+                    <div class="repo"><span class="name">O&amp;P Awards</span><span class="track"><span class="fill" data-w="16%"></span></span><span class="n">67</span></div>
+                    <div class="repo"><span class="name">Omarchy Hotspot</span><span class="track"><span class="fill" data-w="15%"></span></span><span class="n">62</span></div>
+                    <div class="repo"><span class="name">GRA Equipment Ops (private)</span><span class="track"><span class="fill" data-w="9%"></span></span><span class="n">39</span></div>
+                    <div class="repo"><span class="name">SAM-ReJ website</span><span class="track"><span class="fill" data-w="6%"></span></span><span class="n">25</span></div>
+                    <div class="repo"><span class="name">GRA PAYE Calculator</span><span class="track"><span class="fill" data-w="5%"></span></span><span class="n">23</span></div>
+                    <div class="repo"><span class="name">GRA PIT Calculator</span><span class="track"><span class="fill" data-w="4%"></span></span><span class="n">15</span></div>
+                    <div class="repo"><span class="name">GRA VAT Calculator</span><span class="track"><span class="fill" data-w="3%"></span></span><span class="n">13</span></div>
+                    <div class="repo"><span class="name">CPA Event Calendar</span><span class="track"><span class="fill" data-w="2%"></span></span><span class="n">7</span></div>
+                    <div class="repo"><span class="name">InventoryPro Cloud</span><span class="track"><span class="fill" data-w="2%"></span></span><span class="n">3</span></div>
+                    <div class="repo"><span class="name">Portfolio sites</span><span class="track"><span class="fill" data-w="2%"></span></span><span class="n">3</span></div>
+                    <div class="repo"><span class="name">Ewe Culture</span><span class="track"><span class="fill" data-w="2%"></span></span><span class="n">2</span></div>
+                    <div class="repo"><span class="name">Kekeli Studios</span><span class="track"><span class="fill" data-w="2%"></span></span><span class="n">2</span></div>
+                    <div class="repo"><span class="name">Edinam Hospital</span><span class="track"><span class="fill" data-w="2%"></span></span><span class="n">1</span></div>
                 </div>
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a></li>
-                        <li><a href="tel:+233257679050">+233 25 767 9050</a></li>
-                        <li>Accra, Ghana</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span>&copy; <span id="year">2026</span> Carl Christian Quist. All rights reserved.</span>
-                <span>Built in Accra, Ghana.</span>
             </div>
         </div>
+        <div class="cells c3">
+            <div class="gra-cell rv">
+                <span class="label green">open_source / maintainer</span>
+                <h3>Omarchy Hotspot</h3>
+                <p>A one-click Wi-Fi hotspot plugin for the Omarchy Linux desktop, originally created by Shivam Narkar. I now maintain it and wrote 62 of its 101 commits: device naming, client disconnect and blocking, a hardened privilege boundary, verified installs and Wi-Fi fixes.</p>
+                <a href="https://github.com/chillboy0101/omarchy-hotspot" target="_blank" rel="noopener">github.com/chillboy0101/omarchy-hotspot &#8599;</a>
+            </div>
+            <div class="gra-cell rv">
+                <span class="label green">public_service / gra.gov.gh</span>
+                <h3>GRA website &amp; calculator plugins</h3>
+                <p>I manage and update the official GRA website with the GRA Webmaster. The VAT, PIT and PAYE calculator plugins are public repositories with documented rates, install steps and versioned releases.</p>
+                <a href="https://github.com/chillboy0101/gra-paye-calculator" target="_blank" rel="noopener">github.com/chillboy0101/gra-paye-calculator &#8599;</a>
+            </div>
+            <div class="gra-cell rv">
+                <span class="label green">in_development / gra</span>
+                <h3>Equipment Request &amp; Approval</h3>
+                <p>A web system for GRA staff to request equipment and for managers to approve and track every request. Private repository, 39 commits so far.</p>
+                <a href="#experience">See where I work &#8595;</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="frame">
+        <div class="spacer"></div>
+        <div class="cells sec-head" id="services">
+            <div class="title">
+                <span class="label green caret" data-scramble>work_with_me</span>
+                <h2 class="slash rv">services/</h2>
+            </div>
+            <div class="aside"><p class="body">Two ways to work together. Open each card to see what is included.</p></div>
+        </div>
+        <div class="cells c2">
+            <div class="pass rv">
+                <div class="pass-top">
+                    <div class="row"><h3>full-time/</h3><span class="pill">Available now</span></div>
+                    <p class="body">IT Officer, software developer and IT support roles in Accra, on-site or hybrid. References are available on request.</p>
+                    <p class="price">IT roles</p>
+                    <a class="btn btn-green" href="mailto:equalizerjr@gmail.com?subject=Job%20opportunity">Email about a role <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                </div>
+                <details class="acc" open>
+                    <summary>What you get</summary>
+                    <ol>
+                        <li>Systems already in daily use at the Ghana Revenue Authority</li>
+                        <li>Full-stack web development with Next.js, React, TypeScript and PostgreSQL</li>
+                        <li>End-user support, networking and Linux administration</li>
+                        <li>Data entry, analysis and reporting in Microsoft Excel</li>
+                        <li>A contributor to the Linux kernel and open source</li>
+                    </ol>
+                </details>
+            </div>
+            <div class="pass rv">
+                <div class="pass-top">
+                    <div class="row"><h3>freelance/</h3></div>
+                    <p class="body">Websites, web systems and IT support for businesses and organisations, from the first conversation to ongoing support.</p>
+                    <p class="price">Projects</p>
+                    <a class="btn btn-grey" href="#contact">Tell me about your project <span class="arrow" aria-hidden="true">&#8599;</span></a>
+                </div>
+                <details class="acc">
+                    <summary>How I work</summary>
+                    <ol>
+                        <li>Understand: we agree what it must do, who uses it and how success is measured</li>
+                        <li>Build: short steps, with a live preview link so you see progress</li>
+                        <li>Launch: deploy, test on real devices and train the people who will use it</li>
+                        <li>Support: fixes, updates and improvements as your needs grow</li>
+                    </ol>
+                </details>
+            </div>
+        </div>
+        <div class="cells c3">
+            <div class="gra-cell rv">
+                <span class="label green">web_design/</span>
+                <h3>Web design &amp; development</h3>
+                <p>Fast, responsive business websites built with Next.js, React and TypeScript, with content you can update yourself.</p>
+            </div>
+            <div class="gra-cell rv">
+                <span class="label green">web_systems/</span>
+                <h3>Web systems &amp; applications</h3>
+                <p>Attendance, inventory, voting and approval systems with role-based access, audit trails and automated reports.</p>
+            </div>
+            <div class="gra-cell rv">
+                <span class="label green">website_management/</span>
+                <h3>Website management</h3>
+                <p>Content updates, WordPress tools and forms, and performance fixes, as I do for gra.gov.gh.</p>
+            </div>
+            <div class="gra-cell rv">
+                <span class="label green">it_support/</span>
+                <h3>End-user IT support</h3>
+                <p>Desktop and laptop troubleshooting, software setup, user accounts, printers and staff guidance.</p>
+            </div>
+            <div class="gra-cell rv">
+                <span class="label green">networking/</span>
+                <h3>Networking &amp; cabling</h3>
+                <p>RJ45 cable making and termination, office network points, Wi-Fi and hotspot setup, Linux configuration.</p>
+            </div>
+            <div class="gra-cell rv">
+                <span class="label green">data_excel/</span>
+                <h3>Data &amp; Microsoft Excel</h3>
+                <p>Data entry and cleaning, analysis, reports, summaries and reusable spreadsheet templates.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="frame">
+        <div class="spacer"></div>
+        <div class="cells sec-head" id="experience">
+            <div class="title">
+                <span class="label green caret" data-scramble>career_log</span>
+                <h2 class="slash rv">experience/</h2>
+            </div>
+            <div class="aside"><p class="body">Where I have worked and studied. References are available on request.</p></div>
+        </div>
+        <div class="cells agenda">
+            <div class="agenda-side">
+                <a class="btn btn-grey" href="mailto:equalizerjr@gmail.com?subject=CV%20request">Request my CV <span class="arrow" aria-hidden="true">&#8599;</span></a>
+            </div>
+            <div class="days">
+            <div class="day rv" style="--c:var(--px-green)">
+                <h3>nov25_now</h3>
+                <div>
+                    <div class="slot"><span class="when">Nov 2025 &ndash; present</span><strong>AI Software Engineer, Ghana Revenue Authority</strong><p>Built LateWatch, used daily by the Online &amp; Production Unit since May 2026, and the VAT, PIT and PAYE calculators on gra.gov.gh.</p></div>
+                    <div class="slot"><span class="when">ongoing</span><strong>GRA website and new systems</strong><p>Manage and update the official GRA website with the GRA Webmaster, and develop a web-based Equipment Request &amp; Approval system.</p></div>
+                </div>
+            </div>
+            <div class="day rv" style="--c:var(--px-purple)">
+                <h3>2025_now</h3>
+                <div>
+                    <div class="slot"><span class="when">2025 &ndash; present</span><strong>Freelance Web Developer, Accra</strong><p>Delivered websites and web systems for Rikonim Enterprise, Jovel Pharmacy and Kekeli Studios, and built RFID-IMS as commissioned work for UPSA students.</p></div>
+                </div>
+            </div>
+            <div class="day rv" style="--c:var(--px-orange)">
+                <h3>jun23_aug23</h3>
+                <div>
+                    <div class="slot"><span class="when">Jun &ndash; Aug 2023</span><strong>IT Intern, Ga East Municipal Assembly (GEMA)</strong><p>Provided IT support to staff, handled data entry and analysis in Microsoft Excel, and made and terminated RJ45 network cables for office connections.</p></div>
+                </div>
+            </div>
+            <div class="day rv" style="--c:var(--px-olive)">
+                <h3>2024_25</h3>
+                <div>
+                    <div class="slot"><span class="when">2024 &ndash; 2025</span><strong>General Secretary, Yaa Asantewaa Hall, UPSA</strong><p>Managed hall records, official correspondence and meeting minutes, and coordinated meetings and hall events, reporting to the Hall Tutor.</p></div>
+                </div>
+            </div>
+            <div class="day rv" style="--c:var(--px-blue)">
+                <h3>2021_25</h3>
+                <div>
+                    <div class="slot"><span class="when">2021 &ndash; 2025</span><strong>BSc Information Technology Management, UPSA</strong><p>University of Professional Studies, Accra. Second Class. WASSCE at Ghana National College, Cape Coast.</p></div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="frame">
+        <div class="spacer"></div>
+        <div class="cells c4" id="numbers">
+            <div class="river-head span4"><span class="label green caret" data-scramble>numbers/</span></div>
+            <div class="num"><span class="label">commits since April 2025</span><span class="big" data-count="1007">1,007</span><span class="bar" style="background:var(--px-green)"></span></div>
+            <div class="num"><span class="label">active coding days</span><span class="big" data-count="102">102</span><span class="bar" style="background:var(--px-purple)"></span></div>
+            <div class="num"><span class="label">github repositories</span><span class="big" data-count="17">17</span><span class="bar" style="background:var(--px-orange)"></span></div>
+            <div class="num"><span class="label">linux kernel patch</span><span class="big" data-count="1">1</span><span class="bar" style="background:var(--px-blue)"></span></div>
+        </div>
+    </section>
+
+    <section class="frame">
+        <div class="spacer"></div>
+        <div class="cells c4" id="contact">
+            <div class="cta-art span2"><canvas data-mosaic="cta" aria-hidden="true"></canvas></div>
+            <div class="cta-title span2">
+                <span class="label green caret" data-scramble>say_hello</span>
+                <h2 class="slash">lets-build-something/</h2>
+                <p class="lead">Have a role, a website or a system in mind? Send a message and I will get back to you.</p>
+            </div>
+        </div>
+        <div class="cells c2">
+            <form class="form" id="contact-form" novalidate>
+                <div class="two">
+                    <div class="field"><label for="name">your_name</label><input type="text" id="name" name="name" autocomplete="name" required></div>
+                    <div class="field"><label for="email">email_address</label><input type="email" id="email" name="email" autocomplete="email" required></div>
+                </div>
+                <div class="field">
+                    <label for="topic">what_is_it_about</label>
+                    <select id="topic" name="topic">
+                        <option>Job opportunity</option>
+                        <option>Website project</option>
+                        <option>Web system or app</option>
+                        <option>IT support</option>
+                        <option>Something else</option>
+                    </select>
+                </div>
+                <div class="field"><label for="message">your_message</label><textarea id="message" name="message" required></textarea></div>
+                <button type="submit" class="btn btn-green">Send message <span class="arrow" aria-hidden="true">&#8599;</span></button>
+                <p class="form-status" id="form-status" role="status">this opens your email app with the message filled in.</p>
+            </form>
+            <div class="cells c2 contact-cells">
+                <a class="contact-cell" href="mailto:equalizerjr@gmail.com"><span class="label">email/</span><strong>equalizerjr@gmail.com</strong></a>
+                <a class="contact-cell" href="tel:+233257679050"><span class="label">phone/</span><strong>+233 25 767 9050</strong></a>
+                <a class="contact-cell" href="https://github.com/chillboy0101" target="_blank" rel="noopener"><span class="label">github/</span><strong>chillboy0101</strong></a>
+                <div class="contact-cell"><span class="label">location/</span><strong>Accra, Ghana</strong></div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="frame">
+        <div class="spacer"></div>
+        <div class="cells footer">
+            <div><a class="foot-logo" href="#top">CQ<sup>/</sup></a><p class="body">Carl Christian Quist. IT Officer and Software Developer in Accra, Ghana.</p></div>
+            <div><span class="label">site/</span><a href="#work">Work</a><a href="#contributions">Contributions</a><a href="#services">Services</a><a href="#experience">Experience</a></div>
+            <div><span class="label">contact/</span><a href="mailto:equalizerjr@gmail.com">equalizerjr@gmail.com</a><a href="tel:+233257679050">+233 25 767 9050</a><a href="https://github.com/chillboy0101" target="_blank" rel="noopener">GitHub</a></div>
+            <div><span class="label">&copy; <span id="year">2026</span></span><p class="body">Built in Accra, Ghana.</p></div>
+        </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="assets/js/hero3d.js"></script>
-    <script src="assets/js/site.js"></script>
+    <script src="assets/js/universe.js"></script>
 </body>
 </html>
