@@ -84,16 +84,18 @@
 
     /* Fade sections up as they arrive, and start their one-off effects. */
     function reveal() {
-        var targets = $$('.rv, [data-scramble], [data-count], .repo-list');
+        var targets = $$('.rv, [data-scramble], [data-count], .repo-list, [data-build]');
         function run(el) {
             el.classList.add('in');
             if (el.hasAttribute('data-scramble')) scramble(el);
             if (el.hasAttribute('data-count')) countUp(el);
             if (el.classList.contains('repo-list')) fillBars(el);
+            if (el.hasAttribute('data-build')) el.classList.add('built');
         }
         if (reduced || !('IntersectionObserver' in window)) {
             targets.forEach(function (el) {
                 el.classList.add('in');
+                if (el.hasAttribute('data-build')) el.classList.add('built');
                 if (el.classList.contains('repo-list')) fillBars(el);
             });
             return;
@@ -127,39 +129,57 @@
         });
     }
 
-    /* The cursor drops small green squares holding code characters. */
+    /* The cursor lights up 20px grid blocks in the palette colours; some carry a code character.
+       Each block pops in, holds briefly and shrinks away. */
+    var TRAIL_COLOURS = ['#f73678', '#c05200', '#bba00a', '#ae85ff', '#12bf3e', '#178ffb', '#ff7ded', '#08872b'];
     function trail() {
         if (reduced || !finePointer) return;
-        var last = 0;
-        var lx = 0;
-        var ly = 0;
+        var size = 20;
+        var lastKey = '';
         window.addEventListener('mousemove', function (e) {
-            var now = performance.now();
-            var dist = Math.abs(e.clientX - lx) + Math.abs(e.clientY - ly);
-            if (now - last < 45 || dist < 22) return;
-            last = now;
-            lx = e.clientX;
-            ly = e.clientY;
-            var s = document.createElement('span');
-            s.className = 'trail';
-            s.setAttribute('aria-hidden', 'true');
-            s.textContent = GLYPHS.charAt(Math.floor(Math.random() * 10));
-            s.style.left = (Math.round(e.clientX / 20) * 20 - 10) + 'px';
-            s.style.top = (Math.round(e.clientY / 20) * 20 - 10) + 'px';
-            document.body.appendChild(s);
-            setTimeout(function () { s.remove(); }, 720);
+            var cx = Math.floor(e.clientX / size);
+            var cy = Math.floor(e.clientY / size);
+            var key = cx + ',' + cy;
+            if (key === lastKey) return;
+            lastKey = key;
+            var block = document.createElement('span');
+            block.className = 'trail';
+            block.setAttribute('aria-hidden', 'true');
+            block.style.transform = 'translate(' + cx * size + 'px,' + cy * size + 'px)';
+            var colour = document.createElement('span');
+            colour.style.backgroundColor = TRAIL_COLOURS[Math.floor(Math.random() * TRAIL_COLOURS.length)];
+            if (Math.random() < 0.4) colour.textContent = GLYPHS.charAt(Math.floor(Math.random() * 10));
+            block.appendChild(colour);
+            document.body.appendChild(block);
+            requestAnimationFrame(function () { block.classList.add('on'); });
+            setTimeout(function () { block.classList.remove('on'); }, 260);
+            setTimeout(function () { block.remove(); }, 520);
         }, { passive: true });
     }
 
-    /* Size a canvas to its box at device resolution. */
-    function fit(canvas) {
-        var r = canvas.getBoundingClientRect();
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        canvas.width = Math.max(1, Math.round(r.width * dpr));
-        canvas.height = Math.max(1, Math.round(r.height * dpr));
-        var ctx = canvas.getContext('2d');
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        return { ctx: ctx, w: r.width, h: r.height };
+    /* Nav links briefly unscramble on hover. */
+    function navUnscramble() {
+        if (reduced) return;
+        $$('.nav .link, .nav .cta').forEach(function (a) {
+            var node = a.firstChild;
+            if (!node || node.nodeType !== 3) return;
+            var text = node.textContent;
+            var timer = 0;
+            a.addEventListener('mouseenter', function () {
+                var frame = 0;
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    frame++;
+                    var out = '';
+                    for (var i = 0; i < text.length; i++) {
+                        var ch = text.charAt(i);
+                        out += i < frame - 2 || ch === ' ' ? ch : GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+                    }
+                    node.textContent = out;
+                    if (frame > text.length + 2) { clearInterval(timer); node.textContent = text; }
+                }, 30);
+            });
+        });
     }
 
     function onVisible(el, cb) {
@@ -167,88 +187,50 @@
         new IntersectionObserver(function (entries) { cb(entries[0].isIntersecting); }).observe(el);
     }
 
-    /* Pixel mosaics: blocky bands of the palette that slowly reshuffle. */
-    function mosaic(canvas, opts) {
-        var size = opts.size;
-        var c;
-        var grid = [];
-        var cols = 0;
-        var rows = 0;
-        var visible = true;
-
-        function colourAt(x, y) {
-            var band = (x / cols + (opts.tilt ? y / rows * 0.35 : 0)) * opts.colours.length;
-            var i = Math.floor(band + (Math.random() - 0.5) * 1.4);
-            return opts.colours[Math.max(0, Math.min(opts.colours.length - 1, i))];
-        }
-
-        function build() {
-            c = fit(canvas);
-            cols = Math.ceil(c.w / size);
-            rows = Math.ceil(c.h / size);
-            grid = [];
-            for (var y = 0; y < rows; y++) {
-                for (var x = 0; x < cols; x++) grid.push(colourAt(x, y));
-            }
-            draw();
-        }
-
-        function draw() {
-            for (var y = 0; y < rows; y++) {
-                for (var x = 0; x < cols; x++) {
-                    c.ctx.fillStyle = grid[y * cols + x];
-                    c.ctx.fillRect(x * size, y * size, size + 0.5, size + 0.5);
-                }
-            }
-        }
-
-        function shuffle() {
-            if (!visible) return;
-            for (var n = 0; n < Math.ceil(grid.length / 40); n++) {
-                var i = Math.floor(Math.random() * grid.length);
-                grid[i] = colourAt(i % cols, Math.floor(i / cols));
-            }
-            draw();
-        }
-
-        build();
-        window.addEventListener('resize', build);
-        if (reduced) return;
-        onVisible(canvas, function (v) { visible = v; });
-        setInterval(shuffle, 140);
+    /* Type a caption out with a blinking block cursor after it. */
+    function typeCaption(el, text) {
+        clearTimeout(el._t);
+        var i = 0;
+        el.innerHTML = '<span></span><i class="cur" aria-hidden="true"></i>';
+        var span = el.firstChild;
+        if (reduced) { span.textContent = text; return; }
+        el.classList.add('typing');
+        (function step() {
+            span.textContent = text.slice(0, ++i);
+            if (i < text.length) el._t = setTimeout(step, 35);
+            else el.classList.remove('typing');
+        })();
     }
 
-    function mosaics() {
-        $$('canvas[data-mosaic]').forEach(function (cv) {
-            var kind = cv.getAttribute('data-mosaic');
-            if (kind === 'cta') {
-                mosaic(cv, { size: 24, tilt: true, colours: ['#e9edec', '#19c23f', '#0c8a2c', '#1f883d', '#0b5d22'] });
-            } else {
-                mosaic(cv, { size: 24, tilt: false, colours: ['#0c8a2c', '#19c23f', '#b8a114', '#e9edec', '#b07cfa', '#f27bf2'] });
-            }
-        });
-    }
-
-    /* Small screenshot slideshows with square page buttons; they advance on their own while in view. */
-    function slideshows() {
-        $$('.slides').forEach(function (box) {
+    /* Screenshot carousels: cross-fading slides, a typed caption and arrow buttons. */
+    function carousels() {
+        $$('.carousel').forEach(function (box) {
             var slides = $$('.slide', box);
-            var dots = $$('.dots button', box);
-            if (slides.length < 2) return;
+            var cap = $('.cap', box);
             var current = 0;
-            var paused = false;
-            var visible = false;
             function show(i) {
                 current = (i + slides.length) % slides.length;
                 slides.forEach(function (s, j) { s.classList.toggle('on', j === current); });
-                dots.forEach(function (d, j) { d.setAttribute('aria-current', j === current ? 'true' : 'false'); });
+                var img = $('img', slides[current]);
+                if (img && img.loading === 'lazy') img.loading = 'eager';
+                if (cap) typeCaption(cap, slides[current].getAttribute('data-cap'));
             }
-            dots.forEach(function (d, j) { d.addEventListener('click', function () { show(j); }); });
-            box.addEventListener('mouseenter', function () { paused = true; });
-            box.addEventListener('mouseleave', function () { paused = false; });
-            if (reduced) return;
-            onVisible(box, function (v) { visible = v; });
-            setInterval(function () { if (visible && !paused) show(current + 1); }, 4500);
+            var prev = $('[data-car="prev"]', box);
+            var next = $('[data-car="next"]', box);
+            if (prev) prev.addEventListener('click', function (e) { e.preventDefault(); show(current - 1); });
+            if (next) next.addEventListener('click', function (e) { e.preventDefault(); show(current + 1); });
+            if (cap) {
+                cap.textContent = '';
+                onVisible(box, function (v) { if (v && !box._typed) { box._typed = true; show(current); } });
+            }
+            if (box.hasAttribute('data-auto') && !reduced && slides.length > 1) {
+                var visible = false;
+                var paused = false;
+                onVisible(box, function (v) { visible = v; });
+                box.addEventListener('mouseenter', function () { paused = true; });
+                box.addEventListener('mouseleave', function () { paused = false; });
+                setInterval(function () { if (visible && !paused) show(current + 1); }, 5000);
+            }
         });
     }
 
@@ -288,44 +270,93 @@
         });
     }
 
-    /* Highlights playlist: list on the left drives the large preview on the right. */
-    function playlist() {
-        var data = $('#pl-data');
+    /* Project demos playlist: the list drives the player; a video plays when its file exists,
+       otherwise the poster says the demo is on its way. */
+    function demos() {
+        var data = $('#demo-data');
         if (!data) return;
         var items = JSON.parse(data.textContent);
         var buttons = $$('.pl-item');
-        var img = $('#pl-img');
+        var player = $('.pl-player');
+        var poster = $('#pl-poster');
         var title = $('#pl-title');
         var meta = $('#pl-meta');
         var desc = $('#pl-desc');
         var links = $('#pl-links');
-        var tag = $('#pl-tag');
+        var note = $('#pl-note');
         var current = 0;
 
+        function stop() {
+            var v = $('video', player);
+            if (v) v.remove();
+            player.classList.remove('playing');
+            note.hidden = true;
+        }
+
         function show(i) {
+            stop();
             current = (i + items.length) % items.length;
             var p = items[current];
             buttons.forEach(function (b, j) {
                 b.classList.toggle('on', j === current);
                 b.setAttribute('aria-selected', String(j === current));
             });
-            img.src = 'images/' + p.img + '.jpg';
-            img.alt = 'Screenshot of ' + p.alt;
-            tag.textContent = p.url;
+            poster.src = 'images/' + p.img + '.jpg';
+            poster.alt = 'Screenshot of ' + p.alt;
             title.innerHTML = p.title;
-            meta.textContent = p.meta;
-            meta.setAttribute('data-text', p.meta);
-            if (!reduced) scramble(meta);
+            meta.textContent = p.file;
             desc.innerHTML = p.desc;
             links.innerHTML = p.links.map(function (l, k) {
                 return '<a class="btn btn-sm ' + (k === 0 ? 'btn-green' : 'btn-grey') + '" href="' + l[1] +
-                    '" target="_blank" rel="noopener">' + l[0] + ' <span class="arrow">↗</span></a>';
+                    '" target="_blank" rel="noopener">' + l[0] + ' <span class="arrow">\u2197</span></a>';
             }).join('');
         }
 
+        function play() {
+            var p = items[current];
+            stop();
+            var v = document.createElement('video');
+            v.src = p.video;
+            v.controls = true;
+            v.playsInline = true;
+            v.poster = poster.src;
+            v.addEventListener('error', function () {
+                v.remove();
+                player.classList.remove('playing');
+                note.hidden = false;
+            });
+            player.appendChild(v);
+            player.classList.add('playing');
+            var started = v.play();
+            if (started && started.catch) started.catch(function () { /* the error event above handles a missing file */ });
+        }
+
         buttons.forEach(function (b, i) { b.addEventListener('click', function () { show(i); }); });
+        $('.pl-play').addEventListener('click', play);
         $('[data-pl="prev"]').addEventListener('click', function () { show(current - 1); });
         $('[data-pl="next"]').addEventListener('click', function () { show(current + 1); });
+    }
+
+    /* The closing art panel: pieces build in when it arrives, and the character's eyes follow the cursor. */
+    function ctaArt() {
+        var art = $('.cta-art');
+        if (!art) return;
+        var pupils = $$('.pupil', art);
+        var svg = $('svg', art);
+        var step = parseFloat(svg.getAttribute('data-px')) || 16;
+        onVisible(art, function (v) { if (v) art.classList.add('in'); });
+        if (!pupils.length) return;
+        window.addEventListener('pointermove', function (e) {
+            var r = svg.getBoundingClientRect();
+            var scale = r.width / 850;
+            var cx = r.left + 180 * scale;
+            var cy = r.top + 200 * scale;
+            var dx = Math.max(-1, Math.min(1, (e.clientX - cx) / 200));
+            var dy = Math.max(-1, Math.min(1, (e.clientY - cy) / 160));
+            pupils.forEach(function (p) {
+                p.setAttribute('transform', 'translate(' + Math.round(dx) * step + ' ' + Math.round(dy) * step + ')');
+            });
+        }, { passive: true });
     }
 
     /* Activity year switch. */
@@ -378,11 +409,12 @@
     menu();
     reveal();
     trail();
-    slideshows();
+    carousels();
+    ctaArt();
+    navUnscramble();
     proof();
-    mosaics();
     filters();
-    playlist();
+    demos();
     years();
     contactForm();
     year();

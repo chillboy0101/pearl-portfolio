@@ -61,6 +61,18 @@
         duck: ['...YYY...', '..YYYYY..', '..YKYYYOO', '..YYYYY..', 'YYYYYYYY.', 'YYYYYYYYY', '.YYYYYYY.', '..YYYYY..']
     };
 
+    /* The big peeking head shown while the game waits; pupils are drawn separately so they can follow the cursor. */
+    var PEEK = [
+        '.......GGGGGGGG.......', '.....GGGGGGGGGGGG.....', '....GGGGGGGGGGGGGG....', '...GGGGGGGGGGGGGGGGGGG',
+        '...SSSSSSSSSSSSSSSS...', '..SSSSSSSSSSSSSSSSSS..', '..SSWWWWSSSSSSWWWWSS..', '..SSWWWWSSSSSSWWWWSS..',
+        '..SSWWWWSSSSSSWWWWSS..', '..SSWWWWSSSSSSWWWWSS..', '.SSSSSSSSSSSSSSSSSSSS.', '.SSPPSSSSSSSSSSSSPPSS.',
+        '.SSSSSSSKSSSSKSSSSSSS.', '.SSSSSSSSKKKKSSSSSSSS.', '..SSSSSSSSSSSSSSSSSS..', '...HHHHHHHHHHHHHHHH...',
+        '..HHHHHHHHHHHHHHHHHH..', '.HHHHHHHGHHHHGHHHHHHH.'
+    ];
+    var PEEK_PAL = { G: '#1f883d', S: '#c68a5a', W: '#ffffff', P: '#f27bf2', K: '#14181f', H: '#24292f' };
+    var pointer = null;
+    var peek = { rise: 0, blinkAt: 2, blinkT: 0 };
+
     var HEART = ['.XX.XX.', 'XXXXXXX', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...'];
 
     var FONT = {
@@ -672,8 +684,68 @@
         }
     }
 
-    function draw() {
+    /* Waiting screen: a grid that fades out to the right and a head peeking up from the bottom edge. */
+    function drawIdle(dt) {
+        ctx.clearRect(0, 0, view.w, view.h);
+        var grad = ctx.createLinearGradient(0, 0, view.w, 0);
+        grad.addColorStop(0, 'rgba(196, 205, 200, 1)');
+        grad.addColorStop(0.45, 'rgba(196, 205, 200, 0.55)');
+        grad.addColorStop(0.75, 'rgba(196, 205, 200, 0.12)');
+        grad.addColorStop(1, 'rgba(196, 205, 200, 0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        for (var x = 0; x <= view.w; x += view.cell) {
+            ctx.moveTo(Math.round(x) + 0.5, 0);
+            ctx.lineTo(Math.round(x) + 0.5, view.h);
+        }
+        for (var y = 0; y <= view.h; y += view.cell) {
+            ctx.moveTo(0, Math.round(y) + 0.5);
+            ctx.lineTo(view.w, Math.round(y) + 0.5);
+        }
+        ctx.stroke();
+
+        var px = Math.max(5, Math.round(view.h / 52));
+        var w = PEEK[0].length * px;
+        var left = Math.round(view.w - w - Math.max(24, view.w * 0.07));
+        var r = canvas.getBoundingClientRect();
+        var near = pointer && pointer.x > r.left + left - 60 && pointer.x < r.left + left + w + 60 && pointer.y > r.top + view.h - 16 * px - 60 && pointer.y < r.bottom;
+        var target = near ? -3 * px : 0;
+        peek.rise += (target - peek.rise) * (reduced ? 1 : Math.min(1, (dt || 0.016) * 10));
+        var top = Math.round(view.h - 15.5 * px + peek.rise);
+
+        peek.blinkT += dt || 0;
+        var blinking = !reduced && peek.blinkT > peek.blinkAt && peek.blinkT < peek.blinkAt + 0.14;
+        if (peek.blinkT > peek.blinkAt + 0.14) { peek.blinkT = 0; peek.blinkAt = 2.5 + Math.random() * 3.5; }
+
+        for (var row = 0; row < PEEK.length; row++) {
+            for (var col = 0; col < PEEK[row].length; col++) {
+                var ch = PEEK[row][col];
+                if (ch === '.') continue;
+                if (blinking && ch === 'W') ch = row === 8 ? 'K' : 'S';
+                ctx.fillStyle = PEEK_PAL[ch];
+                ctx.fillRect(left + col * px, top + row * px, px, px);
+            }
+        }
+        if (!blinking) {
+            var ox = 1;
+            var oy = 1;
+            if (pointer) {
+                var dx = pointer.x - (r.left + left + w / 2);
+                var dy = pointer.y - (r.top + top + 8 * px);
+                ox = 1 + Math.max(-1, Math.min(1, Math.round(dx / 160)));
+                oy = 1 + Math.max(-1, Math.min(1, Math.round(dy / 120)));
+            }
+            ctx.fillStyle = PEEK_PAL.K;
+            [4, 14].forEach(function (ex) {
+                ctx.fillRect(left + (ex + ox) * px, top + (6 + oy) * px, 2 * px, 2 * px);
+            });
+        }
+    }
+
+    function draw(dt) {
         var cell = view.cell;
+        if (state === 'idle') { drawIdle(dt); return; }
         ctx.clearRect(0, 0, view.w, view.h);
         drawGrid();
 
@@ -763,7 +835,7 @@
         var dt = Math.min(0.05, (now - last) / 1000 || 0);
         last = now;
         update(dt);
-        draw();
+        draw(dt);
         schedule();
     }
 
@@ -925,6 +997,10 @@
         }).observe(root);
     }
     document.addEventListener('visibilitychange', schedule);
+    window.addEventListener('pointermove', function (e) {
+        pointer = { x: e.clientX, y: e.clientY };
+        if (state === 'idle' && reduced && visible) draw(0);
+    }, { passive: true });
     window.addEventListener('resize', resize);
 
     padInput();
