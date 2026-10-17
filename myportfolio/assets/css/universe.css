@@ -1537,9 +1537,23 @@ p {
     box-shadow: inset 0 0 0 1px var(--accent);
 }
 
-.stack-cell:hover .stack-art {
-    background-color: var(--accent);
-    color: #fff;
+.stack-art svg {
+    width: 38%;
+    max-width: 120px;
+    height: auto;
+    color: #2b3330;
+    transition: color 0.3s ease, transform 0.4s cubic-bezier(.3, .41, .04, 1.01);
+}
+
+.stack-cell:hover .stack-art,
+.stack-cell:focus-visible .stack-art {
+    background-color: #fff;
+}
+
+.stack-cell:hover .stack-art svg,
+.stack-cell:focus-visible .stack-art svg {
+    color: var(--brand);
+    transform: scale(1.06);
 }
 
 .stack-cell .cap {
@@ -1586,6 +1600,12 @@ p {
 
 .stack-dialog::backdrop {
     background: rgba(0, 0, 0, 0.55);
+}
+
+.sd-art svg {
+    width: 45%;
+    height: auto;
+    color: var(--brand, #2b3330);
 }
 
 .sd-art {

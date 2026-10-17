@@ -291,8 +291,9 @@
         $$('[data-stack]').forEach(function (card) {
             card.addEventListener('click', function () {
                 var it = items[parseInt(card.getAttribute('data-stack'), 10)];
-                $('#sd-art').textContent = it.art;
+                $('#sd-art').innerHTML = it.art;
                 dialog.style.setProperty('--accent', it.accent);
+                dialog.style.setProperty('--brand', it.brand);
                 $('#sd-name').innerHTML = it.name;
                 $('#sd-role').textContent = it.role;
                 $('#sd-text').innerHTML = it.body.map(function (b) { return '<p>' + b + '</p>'; }).join('');

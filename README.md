@@ -64,6 +64,8 @@ in the browser.
 Project demo videos go in `myportfolio/videos/` (see the README there for file names); each one
 plays in the `project-demos/` section as soon as its file is added. Extra live screenshots for
 the carousels are in `myportfolio/images/shots/`.
+The framework logos in `myportfolio/images/logos/` come from [Simple Icons](https://simpleicons.org)
+(CC0); each logo is a trademark of its owner.
 
 Styles are in `myportfolio/assets/css/universe.css` and behaviour in `myportfolio/assets/js/universe.js`.
 The old `services.html`, `portfolio.html`, `contributions.html` and `contact.html` URLs redirect to
