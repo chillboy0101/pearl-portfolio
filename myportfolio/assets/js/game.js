@@ -769,6 +769,8 @@
             ctx.lineTo(view.w, Math.round(y) + 0.5);
         }
         ctx.stroke();
+        /* The 3D character (character3d.js) takes over the peeking head when it loads. */
+        if (window.cq3dPeek) return;
 
         var px = Math.max(6, Math.round(view.h / 40));
         var w = PEEK[0].length * px;

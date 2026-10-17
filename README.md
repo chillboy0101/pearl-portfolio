@@ -64,6 +64,10 @@ in the browser.
 Project demo videos go in `myportfolio/videos/` (see the README there for file names); each one
 plays in the `project-demos/` section as soon as its file is added. Extra live screenshots for
 the carousels are in `myportfolio/images/shots/`.
+The 3D version of Carl's character (`myportfolio/assets/js/character3d.js`) is built from simple shapes with
+[Three.js](https://threejs.org) 0.160 (MIT), loaded from jsDelivr only when the game or the closing panel
+scrolls into view; without WebGL the pixel versions are shown instead.
+
 The framework logos in `myportfolio/images/logos/` come from [Simple Icons](https://simpleicons.org)
 (CC0); each logo is a trademark of its owner.
 
