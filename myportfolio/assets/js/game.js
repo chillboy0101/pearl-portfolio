@@ -826,8 +826,8 @@
     /* Game-over scoreboard: a notched grey panel with Carl running (with a colour trail) and the score. */
     function drawScoreboard(since, count) {
         var cell = view.cell;
-        var w = Math.min(view.w - 2 * cell, Math.round(17 * cell));
-        var h = Math.round(7.5 * cell);
+        var w = Math.min(view.w - 2 * cell, Math.round(22 * cell));
+        var h = Math.round(10 * cell);
         var left = Math.round(view.w / 2 - w / 2);
         var top = Math.round(1.2 * cell);
         var n = Math.max(3, Math.round(cell * 0.35));
@@ -855,10 +855,10 @@
         ctx.textAlign = 'left';
         ctx.textBaseline = 'alphabetic';
         ctx.fillStyle = '#14181f';
-        ctx.font = '700 ' + Math.max(9, Math.round(cell * 0.62)) + 'px "Mona Sans", sans-serif';
+        ctx.font = '700 ' + Math.max(9, Math.round(cell * 0.75)) + 'px "Mona Sans", sans-serif';
         var tx = left + w * 0.38;
         ctx.fillText('YOUR SCORE', tx, top + h * 0.38);
-        ctx.font = '600 ' + Math.max(18, Math.round(cell * 1.75)) + 'px "Mona Sans", sans-serif';
+        ctx.font = '700 ' + Math.max(20, Math.round(cell * 2.3)) + 'px "Mona Sans", sans-serif';
         ctx.fillText(String(count), tx, top + h * 0.8);
     }
 
@@ -884,11 +884,11 @@
         drawScoreboard(since, count);
         /* GAME OVER built from grid blocks, appearing letter by letter. */
         var word = 'GAME OVER';
-        var size = Math.max(1, Math.min(Math.floor((view.cols - 4) / (word.length * 6)), Math.floor(ROWS * 0.36 / 7)));
+        var size = Math.max(1, Math.min(Math.floor((view.cols - 4) / (word.length * 7)), Math.floor(ROWS * 0.36 / 7)));
         var letters = reduced ? word.length : Math.min(word.length, Math.floor(since / 0.07) + 1);
         var unit = size * cell;
-        var leftPx = Math.round((view.w - (word.length * 6 - 1) * unit) / 2 / cell) * cell;
-        var topPx = Math.round((view.h - 7 * unit - 1.5 * cell) / cell) * cell;
+        var leftPx = Math.round((view.w - (word.length * 7 - 1) * unit) / 2 / cell) * cell;
+        var topPx = Math.round((view.h - 7 * unit - 3 * cell) / cell) * cell;
         ctx.fillStyle = BLOCK;
         for (var i = 0; i < letters; i++) {
             var glyph = FONT[word[i]];
@@ -897,8 +897,8 @@
                 for (var c = 0; c < 5; c++) {
                     if (glyph[r][c] !== '#') continue;
                     for (var yy = 0; yy < size; yy++) {
-                        for (var xx = 0; xx < size; xx++) {
-                            var gx = leftPx + ((i * 6 + c) * size + xx) * cell;
+                        for (var xx = 0; xx < size * 2; xx++) {
+                            var gx = leftPx + ((i * 7 + c) * size + xx) * cell;
                             var gy = topPx + (r * size + yy) * cell;
                             ctx.fillRect(Math.round(gx) + 1, Math.round(gy) + 1, Math.ceil(cell) - 1, Math.ceil(cell) - 1);
                         }
@@ -1041,7 +1041,7 @@
             var rise = 2.5 * (1 - Math.pow(1 - k, 3));
             var colour = s.gold ? (Math.floor(G.time * 12) % 2 ? '#e1c600' : '#f5e36b') : '#9d9d9d';
             ctx.globalAlpha = 1 - k * k;
-            drawDigits(s.text, sx(s.x), sy(s.y + rise), Math.max(2, Math.round(cell * 0.2)), colour);
+            drawDigits(s.text, sx(s.x), sy(s.y + rise), Math.max(2, Math.round(cell * 0.28)), colour);
             ctx.globalAlpha = 1;
         });
         ctx.restore();
