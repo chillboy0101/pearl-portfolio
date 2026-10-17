@@ -27,15 +27,25 @@
     var GRAVITY = 64;
     var JUMP = 30;
     var MOVE = 21;
-    var PW = 2.2;
-    var PH = 3;
-    var SPRITE_W = 3.2;
+    var PW = 1.9;
+    var PH = 2.5;
+    var SPRITE_W = 2.7;
+    var BLOCK = '#57615b';
+    var GRID = '#d9dfdb';
     var STEP = 1 / 120;
     var BUG_W = 1.9;
     var BUG_H = 1.7;
     var GAME_KEYS = { ArrowLeft: 1, ArrowRight: 1, KeyA: 1, KeyD: 1, Space: 1 };
     var GLYPHS = ['/', '=', '+', '<', '>', '{', '}', ';'];
-    var PICKUP_COLOURS = ['#19c23f', '#b07cfa', '#f27bf2', '#1f8ae8', '#b8a114', '#d4511d'];
+    var PICKUP_COLOURS = ['#b07cfa', '#5b3dfa', '#f73678', '#5fed83', '#bba00a', '#c05200'];
+    var MEGA_COLOURS = ['#c05200', '#bba00a', '#f73678', '#ae85ff'];
+    /* 3x5 pixel digits for score pop-ups and the scoreboard. */
+    var DIGITS = {
+        0: ['111', '101', '101', '101', '111'], 1: ['010', '110', '010', '010', '111'], 2: ['111', '001', '111', '100', '111'],
+        3: ['111', '001', '111', '001', '111'], 4: ['101', '101', '111', '001', '001'], 5: ['111', '100', '111', '001', '111'],
+        6: ['111', '100', '111', '101', '111'], 7: ['111', '001', '001', '001', '001'], 8: ['111', '101', '111', '101', '111'],
+        9: ['111', '101', '111', '001', '111'], '+': ['000', '010', '111', '010', '000']
+    };
 
     function store(key, value) {
         try {
@@ -182,6 +192,7 @@
             fx: [],
             trail: [],
             shake: 0,
+            wipe: 0,
             rows: [
                 { nextX: 16, y: 4 + Math.floor(r() * 5), minY: 4, maxY: 12 },
                 { nextX: 24, y: 17 + Math.floor(r() * 3), minY: 17, maxY: 19 }
@@ -374,7 +385,7 @@
     function addScore(points, x, y) {
         var p = points * (G.superT > 0 ? 2 : 1);
         G.score += p;
-        G.popups.push({ text: '+' + p, x: x, y: y, t: 0 });
+        G.popups.push({ text: '+' + p, x: x, y: y, t: 0, gold: G.superT > 0 });
         scoreEl.textContent = G.score;
     }
 
@@ -446,7 +457,7 @@
 
         if (G.superT > 0) {
             G.trail.unshift({ x: p.x, y: p.y, facing: p.facing, frame: frameName(p) });
-            if (G.trail.length > 18) G.trail.pop();
+            if (G.trail.length > 20) G.trail.pop();
         } else if (G.trail.length) {
             G.trail.pop();
         }
@@ -589,6 +600,7 @@
 
     function update(dt) {
         G.time += dt;
+        if (G.wipe < 1) G.wipe = Math.min(1, G.wipe + dt / 0.5);
         if (state === 'over') { if (G.time - G.overShownAt > 2.2) G.overDone = true; return; }
         if (G.shake > 0) G.shake -= dt;
         if (G.over) {
@@ -700,7 +712,7 @@
     function drawGrid() {
         var cell = view.cell;
         var off = -((G.scrollX % 1) + 1) % 1 * cell;
-        ctx.strokeStyle = '#d2d9d4';
+        ctx.strokeStyle = GRID;
         ctx.lineWidth = 1;
         ctx.beginPath();
         for (var x = off; x <= view.w; x += cell) {
@@ -758,14 +770,14 @@
         }
         ctx.stroke();
 
-        var px = Math.max(5, Math.round(view.h / 52));
+        var px = Math.max(6, Math.round(view.h / 40));
         var w = PEEK[0].length * px;
         var left = Math.round(view.w - w - Math.max(24, view.w * 0.07));
         var r = canvas.getBoundingClientRect();
         var near = pointer && pointer.x > r.left + left - 60 && pointer.x < r.left + left + w + 60 && pointer.y > r.top + view.h - 16 * px - 60 && pointer.y < r.bottom;
         var target = near ? -3 * px : 0;
         peek.rise += (target - peek.rise) * (reduced ? 1 : Math.min(1, (dt || 0.016) * 10));
-        var top = Math.round(view.h - 15.5 * px + peek.rise);
+        var top = Math.round(view.h - 14 * px + peek.rise);
 
         peek.blinkT += dt || 0;
         var blinking = !reduced && peek.blinkT > peek.blinkAt && peek.blinkT < peek.blinkAt + 0.14;
@@ -796,19 +808,103 @@
         }
     }
 
+    /* Draws a string of 3x5 pixel digits centred on (cx, cy). */
+    function drawDigits(text, cx, cy, px, colour) {
+        var width = text.length * 4 * px - px;
+        var left = Math.round(cx - width / 2);
+        var top = Math.round(cy - 2.5 * px);
+        ctx.fillStyle = colour;
+        for (var i = 0; i < text.length; i++) {
+            var g = DIGITS[text[i]];
+            if (!g) continue;
+            for (var r = 0; r < 5; r++) {
+                for (var c = 0; c < 3; c++) if (g[r][c] === '1') ctx.fillRect(left + (i * 4 + c) * px, top + r * px, px, px);
+            }
+        }
+    }
+
+    /* Game-over scoreboard: a notched grey panel with Carl running (with a colour trail) and the score. */
+    function drawScoreboard(since, count) {
+        var cell = view.cell;
+        var w = Math.min(view.w - 2 * cell, Math.round(17 * cell));
+        var h = Math.round(7.5 * cell);
+        var left = Math.round(view.w / 2 - w / 2);
+        var top = Math.round(1.2 * cell);
+        var n = Math.max(3, Math.round(cell * 0.35));
+        ctx.fillStyle = '#dfe5e2';
+        ctx.fillRect(left + n, top, w - 2 * n, h);
+        ctx.fillRect(left, top + n, w, h - 2 * n);
+        var px = h * 0.55 / SPRITES.stand.length;
+        var hop = reduced ? 0 : Math.max(0, Math.sin(since * Math.PI / 0.45)) * 0.35 * cell;
+        var frameMap = Math.floor(since * 8) % 2 ? SPRITES.walk : SPRITES.stand;
+        var sxp = left + w * 0.12;
+        var syp = top + h * 0.2 - hop;
+        for (var t = 4; t >= 0; t--) {
+            var off = t * px * 1.4;
+            for (var r = 0; r < frameMap.length; r++) {
+                for (var c = 0; c < frameMap[r].length; c++) {
+                    var ch = frameMap[r][c];
+                    if (ch === '.') continue;
+                    ctx.globalAlpha = t ? 0.55 - t * 0.08 : 1;
+                    ctx.fillStyle = t ? PICKUP_COLOURS[(t + Math.floor(since * 10)) % PICKUP_COLOURS.length] : PAL[ch];
+                    ctx.fillRect(sxp - off + c * px, syp + r * px, px + 0.5, px + 0.5);
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = '#14181f';
+        ctx.font = '700 ' + Math.max(9, Math.round(cell * 0.62)) + 'px "Mona Sans", sans-serif';
+        var tx = left + w * 0.38;
+        ctx.fillText('YOUR SCORE', tx, top + h * 0.38);
+        ctx.font = '600 ' + Math.max(18, Math.round(cell * 1.75)) + 'px "Mona Sans", sans-serif';
+        ctx.fillText(String(count), tx, top + h * 0.8);
+    }
+
+    /* Start of play: a purple panel with a pink band sweeps up and off, revealing the level. */
+    function drawWipe() {
+        if (reduced || G.wipe >= 1) return;
+        var t = G.wipe;
+        var band = Math.round(view.cell);
+        var eased = t * t * (3 - 2 * t);
+        var top = Math.round(-eased * (view.h + band * 2));
+        ctx.fillStyle = '#ae85ff';
+        ctx.fillRect(0, top + band, view.w, view.h + band);
+        ctx.fillStyle = '#f73678';
+        ctx.fillRect(0, top, view.w, band);
+        ctx.fillStyle = '#5fed83';
+        ctx.fillRect(0, top + view.h + band, view.w, band);
+    }
+
     function drawGameOver() {
         var cell = view.cell;
-        var px = Math.max(4, Math.min(cell, Math.floor(view.w / 60)));
         var since = G.time - G.overShownAt;
+        var count = reduced ? G.score : Math.round(G.score * Math.min(1, since / 0.8));
+        drawScoreboard(since, count);
+        /* GAME OVER built from grid blocks, appearing letter by letter. */
         var word = 'GAME OVER';
-        var letters = reduced ? word.length : Math.min(word.length, Math.floor(since / 0.08) + 1);
-        var full = word.length * 6 * px - px;
-        var left = Math.round(view.w / 2 - full / 2);
-        drawPixelWord(word.slice(0, letters), left + (letters * 6 * px - px) / 2, Math.round(view.h * 0.22), px, '#14181f');
-        var count = reduced ? G.score : Math.round(G.score * Math.min(1, Math.max(0, (since - 0.8) / 0.8)));
-        if (since > 0.8 || reduced) {
-            var spx = Math.max(3, Math.floor(px * 0.6));
-            drawPixelWord('SCORE ' + count, view.w / 2, Math.round(view.h * 0.22 + px * 10), spx, '#1f883d');
+        var size = Math.max(1, Math.min(Math.floor((view.cols - 4) / (word.length * 6)), Math.floor(ROWS * 0.36 / 7)));
+        var letters = reduced ? word.length : Math.min(word.length, Math.floor(since / 0.07) + 1);
+        var unit = size * cell;
+        var leftPx = Math.round((view.w - (word.length * 6 - 1) * unit) / 2 / cell) * cell;
+        var topPx = Math.round((view.h - 7 * unit - 1.5 * cell) / cell) * cell;
+        ctx.fillStyle = BLOCK;
+        for (var i = 0; i < letters; i++) {
+            var glyph = FONT[word[i]];
+            if (!glyph) continue;
+            for (var r = 0; r < 7; r++) {
+                for (var c = 0; c < 5; c++) {
+                    if (glyph[r][c] !== '#') continue;
+                    for (var yy = 0; yy < size; yy++) {
+                        for (var xx = 0; xx < size; xx++) {
+                            var gx = leftPx + ((i * 6 + c) * size + xx) * cell;
+                            var gy = topPx + (r * size + yy) * cell;
+                            ctx.fillRect(Math.round(gx) + 1, Math.round(gy) + 1, Math.ceil(cell) - 1, Math.ceil(cell) - 1);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -825,7 +921,7 @@
         ctx.save();
         if (G.shake > 0) ctx.translate((Math.random() - 0.5) * 8 * G.shake / 0.2, (Math.random() - 0.5) * 8 * G.shake / 0.2);
 
-        ctx.fillStyle = '#535d59';
+        ctx.fillStyle = BLOCK;
         G.blockList.forEach(function (b) {
             var x = sx(b.x);
             if (x < -cell || x > view.w) return;
@@ -835,7 +931,7 @@
         G.fx.forEach(function (f) {
             if (f.type !== 'hop') return;
             var lift = 0.3 * Math.sin(Math.PI * Math.min(1, f.t / 0.1));
-            ctx.fillStyle = '#535d59';
+            ctx.fillStyle = BLOCK;
             ctx.fillRect(sx(f.x) + 1, sy(f.y + 1 + lift) + 1, cell - 1, cell - 1);
         });
 
@@ -844,7 +940,7 @@
             ctx.save();
             ctx.translate(sx(d.x) + half / 2, sy(d.y) + half / 2);
             ctx.rotate(d.rot);
-            ctx.fillStyle = '#535d59';
+            ctx.fillStyle = BLOCK;
             ctx.fillRect(-half / 2, -half / 2, half, half);
             ctx.restore();
         });
@@ -867,13 +963,26 @@
 
         function drawPickup(k, scale, alpha) {
             var bob = reduced ? 0 : 0.12 * Math.sin((G.time - k.born) * 4 + k.x);
-            var s = k.size * cell * scale;
+            var size = k.size * cell * scale;
             var cxp = (k.x + k.size / 2 - G.scrollX) * cell;
             var cyp = (ROWS - (k.y + k.size / 2 + bob)) * cell;
+            var left = Math.round(cxp - size / 2);
+            var top = Math.round(cyp - size / 2);
             ctx.globalAlpha = alpha;
-            ctx.fillStyle = k.mega ? PICKUP_COLOURS[Math.floor(G.time * 8) % PICKUP_COLOURS.length] : k.colour;
-            ctx.fillRect(Math.round(cxp - s / 2), Math.round(cyp - s / 2), Math.round(s), Math.round(s));
-            if (s > 4) drawText(k.mega ? '*' : k.glyph, cxp, cyp + 1, '#fff', Math.round(s * (k.mega ? 0.8 : 0.85)));
+            if (k.mega) {
+                var half = size / 2;
+                var turn = Math.floor(G.time * 6);
+                for (var q = 0; q < 4; q++) {
+                    ctx.fillStyle = MEGA_COLOURS[(q + turn) % 4];
+                    ctx.fillRect(left + (q % 2) * half, top + Math.floor(q / 2) * half, Math.ceil(half), Math.ceil(half));
+                }
+            } else {
+                ctx.fillStyle = k.colour;
+                ctx.fillRect(left, top, Math.round(size), Math.round(size));
+                var dot = Math.max(1, Math.round(size / 5));
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                ctx.fillRect(Math.round(cxp - dot / 2), Math.round(cyp - dot / 2), dot, dot);
+            }
             ctx.globalAlpha = 1;
         }
 
@@ -905,10 +1014,12 @@
 
         var p = G.player;
         var off = (SPRITE_W - PW) / 2;
-        G.trail.forEach(function (t, i) {
-            if (i % 3) return;
-            drawSprite(SPRITES[t.frame], t.x - off, t.y, SPRITE_W, t.facing < 0, { alpha: 0.45 - i * 0.02, tint: PICKUP_COLOURS[(i / 3) % PICKUP_COLOURS.length] });
-        });
+        /* Super mode: ten ghost copies, each a little further behind, cycling through the palette. */
+        for (var gi = G.trail.length - 1; gi >= 1; gi -= 2) {
+            var t = G.trail[gi];
+            var shade = PICKUP_COLOURS[(Math.floor(G.time * 12) + (gi >> 1)) % PICKUP_COLOURS.length];
+            drawSprite(SPRITES[t.frame], t.x - off, t.y, SPRITE_W, t.facing < 0, { alpha: 0.85 - gi * 0.03, tint: shade });
+        }
         var blink = p.inv > 0 && Math.floor(p.inv * 12) % 2;
         if (!blink) {
             var frame = frameName(p);
@@ -928,12 +1039,13 @@
         G.popups.forEach(function (s) {
             var k = s.t / 0.8;
             var rise = 2.5 * (1 - Math.pow(1 - k, 3));
-            var colour = G.superT > 0 ? PICKUP_COLOURS[Math.floor(G.time * 10) % PICKUP_COLOURS.length] : '#1f883d';
-            ctx.globalAlpha = 1 - k;
-            drawText(s.text, sx(s.x), sy(s.y + rise), colour, Math.max(11, Math.round(cell * 0.85)));
+            var colour = s.gold ? (Math.floor(G.time * 12) % 2 ? '#e1c600' : '#f5e36b') : '#9d9d9d';
+            ctx.globalAlpha = 1 - k * k;
+            drawDigits(s.text, sx(s.x), sy(s.y + rise), Math.max(2, Math.round(cell * 0.2)), colour);
             ctx.globalAlpha = 1;
         });
         ctx.restore();
+        drawWipe();
     }
 
     /* ---------------------------------------------------------------- loop & sizing */
@@ -1018,7 +1130,7 @@
     }
 
     function setButton(text) {
-        button.innerHTML = text + ' <span class="arrow" aria-hidden="true">' + (text === 'Exit game' ? '&times;' : '&#8599;') + '</span>';
+        button.textContent = text;
     }
 
     function start() {

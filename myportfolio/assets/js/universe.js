@@ -51,13 +51,15 @@
         btn.addEventListener('click', function () {
             var open = nav.classList.toggle('open');
             btn.setAttribute('aria-expanded', String(open));
-            btn.textContent = open ? 'close' : 'menu';
+            btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            document.body.classList.toggle('menu-open', open);
         });
         $$('.nav .link').forEach(function (a) {
             a.addEventListener('click', function () {
                 nav.classList.remove('open');
                 btn.setAttribute('aria-expanded', 'false');
-                btn.textContent = 'menu';
+                btn.setAttribute('aria-label', 'Open menu');
+                document.body.classList.remove('menu-open');
             });
         });
     }
@@ -252,6 +254,57 @@
         show(0);
     }
 
+    /* Services tabs: one panel at a time, with arrow-key movement between tabs. */
+    function tabs() {
+        var list = $$('.tabs .tab');
+        if (!list.length) return;
+        function select(tab, focus) {
+            list.forEach(function (t) {
+                var on = t === tab;
+                t.setAttribute('aria-selected', String(on));
+                t.tabIndex = on ? 0 : -1;
+                var panel = document.getElementById(t.getAttribute('aria-controls'));
+                panel.hidden = !on;
+                if (on) {
+                    panel.classList.remove('enter');
+                    void panel.offsetWidth;
+                    panel.classList.add('enter');
+                }
+            });
+            if (focus) tab.focus();
+        }
+        list.forEach(function (t, i) {
+            t.addEventListener('click', function () { select(t); });
+            t.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowRight') select(list[(i + 1) % list.length], true);
+                if (e.key === 'ArrowLeft') select(list[(i - 1 + list.length) % list.length], true);
+            });
+        });
+    }
+
+    /* Stack cards open a pop-up with the tool's details, like Universe's speaker cards. */
+    function stackDialog() {
+        var dialog = $('#stack-dialog');
+        var data = $('#stack-data');
+        if (!dialog || !data || typeof dialog.showModal !== 'function') return;
+        var items = JSON.parse(data.textContent);
+        $$('[data-stack]').forEach(function (card) {
+            card.addEventListener('click', function () {
+                var it = items[parseInt(card.getAttribute('data-stack'), 10)];
+                $('#sd-art').textContent = it.art;
+                dialog.style.setProperty('--accent', it.accent);
+                $('#sd-name').innerHTML = it.name;
+                $('#sd-role').textContent = it.role;
+                $('#sd-text').innerHTML = it.body.map(function (b) { return '<p>' + b + '</p>'; }).join('');
+                $('#sd-projects').innerHTML = it.projects.map(function (n) { return '<li>' + n + '</li>'; }).join('');
+                dialog.showModal();
+            });
+        });
+        $('.sd-close', dialog).addEventListener('click', function () { dialog.close(); });
+        $('#sd-link').addEventListener('click', function () { dialog.close(); });
+        dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+    }
+
     /* Work filters. */
     function filters() {
         var buttons = $$('.filter');
@@ -414,6 +467,8 @@
     navUnscramble();
     proof();
     filters();
+    tabs();
+    stackDialog();
     demos();
     years();
     contactForm();
