@@ -333,29 +333,42 @@ async function mountSprite() {
     c.root.scale.setScalar(0.92);
     stage.camera.position.set(0, 0.15, 10);
     stage.camera.lookAt(0, 0.15, 0);
-    const blink = blinker();
-    let lastT = 0;
+    /* Pose the model and render it into a 2D copy. All poses are rendered once up front,
+       so the game only draws cached images (fast even without a graphics card). */
+    const WALK_FRAMES = 8;
+    function pose(frame, facing, phase) {
+        const swing = frame === 'walk' ? Math.sin(phase) * 0.7 : 0;
+        c.root.rotation.y = (facing < 0 ? -1 : 1) * 0.6;
+        c.root.position.y = frame === 'walk' ? Math.abs(Math.sin(phase)) * 0.12 - 0.05 : 0;
+        limbs.legs[0].rotation.x = frame === 'jump' ? -0.7 : swing;
+        limbs.legs[1].rotation.x = frame === 'jump' ? 0.3 : -swing;
+        limbs.arms[0].rotation.x = frame === 'jump' ? -2.6 : -swing * 0.9;
+        limbs.arms[1].rotation.x = frame === 'jump' ? -2.6 : swing * 0.9;
+        c.head.rotation.set(frame === 'jump' ? -0.15 : 0, 0, 0);
+        stage.renderer.render(stage.scene, stage.camera);
+        const copy = document.createElement('canvas');
+        copy.width = size;
+        copy.height = size;
+        copy.getContext('2d').drawImage(canvas, 0, 0);
+        return copy;
+    }
+    const cache = {};
+    [1, -1].forEach((facing) => {
+        const dir = facing < 0 ? 'L' : 'R';
+        cache['stand' + dir] = pose('stand', facing, 0);
+        cache['jump' + dir] = pose('jump', facing, 0);
+        for (let i = 0; i < WALK_FRAMES; i++) cache['walk' + dir + i] = pose('walk', facing, i / WALK_FRAMES * Math.PI * 2);
+    });
+    stage.renderer.dispose();
     window.cq3dSprite = {
-        canvas,
         footY: 0.915,
-        render(pose) {
-            const t = pose.t || 0;
-            /* Same pose as the last call (the trail ghosts reuse the player's frame): skip re-rendering. */
-            const key = pose.frame + (pose.facing < 0 ? 'L' : 'R') + Math.round(t * 60);
-            if (key === this.lastKey) return canvas;
-            this.lastKey = key;
-            const swing = pose.frame === 'walk' ? Math.sin(t * 13) * 0.7 : 0;
-            c.root.rotation.y = (pose.facing < 0 ? -1 : 1) * 0.6;
-            c.root.position.y = pose.frame === 'walk' ? Math.abs(Math.sin(t * 13)) * 0.12 - 0.05 : 0;
-            limbs.legs[0].rotation.x = pose.frame === 'jump' ? -0.7 : swing;
-            limbs.legs[1].rotation.x = pose.frame === 'jump' ? 0.3 : -swing;
-            limbs.arms[0].rotation.x = pose.frame === 'jump' ? -2.6 : -swing * 0.9;
-            limbs.arms[1].rotation.x = pose.frame === 'jump' ? -2.6 : swing * 0.9;
-            c.head.rotation.set(pose.frame === 'jump' ? -0.15 : 0, 0, 0);
-            blink(Math.max(0, Math.min(0.05, t - lastT)), c.eyes);
-            lastT = t;
-            stage.renderer.render(stage.scene, stage.camera);
-            return canvas;
+        render(p) {
+            const dir = p.facing < 0 ? 'L' : 'R';
+            if (p.frame === 'walk') {
+                const i = Math.floor(((p.t || 0) * 13) / (Math.PI * 2) * WALK_FRAMES) % WALK_FRAMES;
+                return cache['walk' + dir + i];
+            }
+            return cache[(p.frame === 'jump' ? 'jump' : 'stand') + dir];
         }
     };
 }
